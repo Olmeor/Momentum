@@ -1,5 +1,23 @@
 // Burger handler
 
+const navBurger = document.querySelector('.header__nav-close-button');
+const headerNav = document.querySelector('.header__nav')
+
+function active() {
+  navBurger.classList.toggle('header__nav-active');
+  headerNav.classList.toggle('header__nav-active');
+}
+
+document.addEventListener('click', (event => {
+  if (event.target.classList.contains('header__nav-close-button')) {
+      active();
+  }
+  else if (!event.target.classList.contains('header__nav') &&
+      headerNav.classList.contains('header__nav-active')) {
+      active();
+  }
+}))
+
 /*(function () {
   const burger= document.querySelector('.burger');
   const menu = document.querySelector('.header__nav');
@@ -32,21 +50,3 @@
   });
 
 }());*/
-
-const navBurger = document.querySelector('.burger');
-const headerNav = document.querySelector('.header__nav')
-
-function active() {
-  navBurger.classList.toggle('header__nav-active');
-  headerNav.classList.toggle('header__nav-active');
-}
-
-document.addEventListener('click', (event => {
-  if (event.target.classList.contains('burger')) {
-      active();
-  }
-  else if (!event.target.classList.contains('header__nav') &&
-      headerNav.classList.contains('header__nav-active')) {
-      active();
-  }
-}))
