@@ -5,10 +5,19 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Travel Portal</title>
-    <link rel="icon" href="./img/travel-portal-ico.ico">
+    <link rel="apple-touch-icon" sizes="180x180" href="./img/favicons/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="./img/favicons/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="./img/favicons/favicon-16x16.png">
+    <link rel="manifest" href="./img/favicons/site.webmanifest">
+    <link rel="mask-icon" href="./img/favicons/safari-pinned-tab.svg" color="#5bbad5">
+    <link rel="shortcut icon" href="./img/favicons/favicon.ico">
+    <meta name="msapplication-TileColor" content="#da532c">
+    <meta name="msapplication-config" content="./img/favicons/browserconfig.xml">
+    <meta name="theme-color" content="#ffffff">
     <link rel="stylesheet" href="./css/normalize.css">
     <link rel="stylesheet" href="./css/style.css">
   </head>
+
   <body>
     <!-- Header start -->
     <header class="header">
@@ -33,8 +42,22 @@
             <li class="header__item">
               <a href="#stories" class="header__link">Travel Stories</a>
             </li>
+            <li class="header__item">
+              <a href="#!" class="header__link">Account</a>
+            </li>
+            <li class="header__item">
+              <a href="#social" class="header__link">Social Media</a>
+            </li>
           </ul>
+          <div class="header__nav-close">
+            <img src="./img/svg/close-buton.svg" alt="Close" class="header__nav-close-button">
+          </div>
         </nav>
+        <div class="header__burger burger">
+          <span class="burger__line burger__line_first"></span>
+          <span class="burger__line burger__line_second"></span>
+          <span class="burger__line burger__line_third"></span>
+        </div>
         <form class="header__login-form">
           <button type="submit" class="header__login-form_button">Login</button>
         </form>
@@ -45,24 +68,26 @@
     <main class="main">
       <!-- Preview start -->
       <section class="preview" id="preview">
-        <div class="preview__wrapper">
-          <h1 class="preview__title">Explore the beauty of the World</h1>
-          <p class="preview__subtitle">
-            Receive personalized recommendations for countries, hotels, activities and more
-          </p>
-          <form class="preview-form">
-            <fieldset class="preview-form__wrap">
-              <p class="preview-form__info">
-                <input
-                  type="text"
-                  name="user-like-to-do"
-                  class="preview-form__field"
-                  placeholder="What would you like to do?"
-               >
-                <button type="submit" class="preview-form__button">Start Planning</button>
-              </p>
-            </fieldset>
-          </form>
+        <div class="preview__gradient-mobile">
+          <div class="preview__wrapper">
+            <h1 class="preview__title">Explore the beauty of the World</h1>
+            <p class="preview__subtitle">
+              Receive personalized recommendations for countries, hotels, activities and more
+            </p>
+            <form class="preview-form">
+              <fieldset class="preview-form__wrap">
+                <p class="preview-form__info">
+                  <input
+                    type="text"
+                    name="user-like-to-do"
+                    class="preview-form__field"
+                    placeholder="What would you like to do?"
+                  />
+                  <button type="submit" class="preview-form__button">Start Planning</button>
+                </p>
+              </fieldset>
+            </form>
+          </div>
         </div>
       </section>
       <!-- Preview end -->
@@ -73,15 +98,15 @@
           <h2 class="steps__title">3 STEPS TO THE PERFECT TRIP</h2>
           <div class="steps__cards-wrapper">
             <div class="steps__cards-bike">
-              <div class="steps__card">
+              <div class="steps__card steps__card-bike-mobile">
                 <a href="#!" class="steps__card-pic">
                   <img src="./img/svg/bike-ico.svg" alt="Tell us what you want to do" class="steps__card-thumb">
                 </a>
-                <div class="steps__card-desc">Tell us what you want to do</div>
+                <div class="steps__card-desc steps__card-desc-bike-mobile">Tell us what you want to do</div>
               </div>
             </div>
             <div class="steps__cards-calendar">
-              <div class="steps__card">
+              <div class="steps__card steps__card-calendar-mobile">
                 <a href="#!" class="steps__card-pic">
                   <img src="./img/svg/calendar-ico.svg" alt="Share us preferable dates" class="steps__card-thumb">
                 </a>
@@ -89,7 +114,7 @@
               </div>
             </div>
             <div class="steps__cards-plane">
-              <div class="steps__card">
+              <div class="steps__card steps__card-plane-mobile">
                 <a href="#!" class="steps__card-pic">
                   <img src="./img/svg/plane-ico.svg" alt="We will give you recommendations" class="steps__card-thumb">
                 </a>
@@ -107,28 +132,60 @@
           <h2 class="destination__title">POPULAR DESTINATIONS</h2>
           <div class="destination__slider">
             <div class="destination__slider-item">
-              <div class="destination__slider-pic">
-                <img src="./img//slider_spain.jpg" alt="SPAIN" class="destination__slider-img">
+              <div class="destination__slider-pic destination__slider-pic-spain">
+                <picture>
+                  <source media="(min-width:391px)" srcset="./img/slider_spain.jpg">
+                  <img
+                    src="./img/slider_spain-m.jpg"
+                    alt="Spain"
+                    class="destination__slider-img"
+                  />
+                </picture>
                 <p class="destination__slider-desc">SPAIN</p>
               </div>
             </div>
             <div class="destination__slider-item">
-              <div class="destination__slider-pic">
-                <img src="./img/slider-japan.jpg" alt="JAPAN" class="destination__slider-img">
+              <div class="destination__slider-pic destination__slider-pic-japan">
+                <picture>
+                  <source media="(min-width:391px)" srcset="./img/slider-japan.jpg">
+                  <img
+                    src="./img/slider-japan-m.jpg"
+                    alt="Japan"
+                    class="destination__slider-img"
+                  />
+                </picture>
                 <p class="destination__slider-desc">JAPAN</p>
               </div>
             </div>
             <div class="destination__slider-item">
-              <div class="destination__slider-pic">
-                <img src="./img/slider_usa.jpg" alt="USA" class="destination__slider-img">
+              <div class="destination__slider-pic destination__slider-pic-usa">
+                <picture>
+                  <source media="(min-width:391px)" srcset="./img/slider_usa.jpg">
+                  <img
+                    src="./img/slider_usa-m.jpg"
+                    alt="USA"
+                    class="destination__slider-img"
+                  />
+                </picture>
                 <p class="destination__slider-desc">USA</p>
               </div>
             </div>
           </div>
-          <img src="./img/svg/slider-plug.svg" alt="balls" class="destination__plug">
+          <picture>
+            <source media="(min-width:391px)" srcset="./img/svg/slider-plug.svg">
+            <img
+              src="./img/svg/slider-plug-m.svg"
+              alt="balls"
+              class="destination__plug"
+            />
+          </picture>
+          <div class="destination_slider-arrows">
+            <img src="./img/svg/slider-arrow-l.svg" alt="arrow-left" class="destination_slider-arrows-left">
+            <img src="./img/svg/slider-arrow-r.svg" alt="arrow-right" class="destination_slider-arrows-right">
+          </div>
           <div class="destination__find-button-wrapper">
             <button class="destination__find-button">
-              <img src="./img/svg/bi_arrow-right.svg" alt="right-arrow-ico">Find More
+              <img src="./img/svg/bi_arrow-right.svg" alt="right-arrow-ico" class="destination__find-button-arrow">Find More
             </button>
           </div>
         </div>
@@ -143,11 +200,14 @@
             <div class="stories__cards">
               <div class="stories__card">
                 <div class="stories__card-pic">
-                  <img
-                    src="./img/stories-thailand.jpg"
-                    alt="10 Photos of Attractive Thailand"
-                    class="stories__card-tumb"
-                 >
+                  <picture>
+                    <source media="(min-width:391px)" srcset="./img/stories-thailand.jpg">
+                    <img
+                      src="./img/stories-thailand-m.jpg"
+                      alt="Thailand"
+                      class="stories__card-tumb"
+                    />
+                  </picture>
                 </div>
                 <div class="stories__card-desc">
                   <p class="stories__card-title">10 Photos of Attractive Thailand</p>
@@ -164,7 +224,14 @@
               </div>
               <div class="stories__card">
                 <div class="stories__card-pic">
-                  <img src="./img/stories-utah.jpg" alt="Canyonlands National Park, Utah" class="stories__card-tumb">
+                  <picture>
+                    <source media="(min-width:391px)" srcset="./img/stories-utah.jpg">
+                    <img
+                      src="./img/stories-utah-m.jpg"
+                      alt="Utah"
+                      class="stories__card-tumb"
+                    />
+                  </picture>
                 </div>
                 <div class="stories__card-desc">
                   <p class="stories__card-title">Canyonlands National Park, Utah</p>
@@ -181,11 +248,14 @@
               </div>
               <div class="stories__card">
                 <div class="stories__card-pic">
-                  <img
-                    src="./img/stories-mountains.jpg"
-                    alt="I left my heart in the Mountains!"
-                    class="stories__card-tumb"
-                 >*/
+                  <picture>
+                    <source media="(min-width:391px)" srcset="./img/stories-mountains.jpg">
+                    <img
+                      src="./img/stories-mountains-m.jpg"
+                      alt="Mountains"
+                      class="stories__card-tumb"
+                    />
+                  </picture>
                 </div>
                 <div class="stories__card-desc">
                   <p class="stories__card-title">I left my heart in the Mountains!</p>
@@ -202,11 +272,14 @@
               </div>
               <div class="stories__card">
                 <div class="stories__card-pic">
-                  <img
-                    src="./img/stories-journey.jpg"
-                    alt="The Longest journey in my life!"
-                    class="stories__card-tumb"
-                 >
+                  <picture>
+                    <source media="(min-width:391px)" srcset="./img/stories-journey.jpg">
+                    <img
+                      src="./img/stories-journey-m.jpg"
+                      alt="Longest journey"
+                      class="stories__card-tumb"
+                    />
+                  </picture>
                 </div>
                 <div class="stories__card-desc">
                   <p class="stories__card-title">The Longest journey in my life!</p>
@@ -224,7 +297,7 @@
             </div>
             <div class="stories__see-button-wrapper">
               <button class="stories__see-button">
-                <img src="./img/svg/bi_arrow-right.svg" alt="right-arrow-ico">See More
+                <img src="./img/svg/bi_arrow-right.svg" alt="right-arrow-ico" class="stories__see-button-arrow">See More
               </button>
             </div>
           </div>
@@ -244,7 +317,7 @@
             </a>
           </div>
           <div class="footer__copyright">All Rights Reserved © Travel Portal</div>
-          <div class="footer__social">
+          <div class="footer__social" id="social">
             <ul class="footer__social-list">
               <li class="footer__social-item">
                 <a href="https://rkn.gov.ru/" class="footer__instagram">
@@ -267,6 +340,7 @@
       </footer>
       <!-- Footer styles end -->
     </main>
-    <script src="./js/index.js"></script>
-  </body>
+    <!-- <script src="./js/index.js"></script> -->
+    <script src="./js/main.js"></script>
+  </body> 
 </html>
