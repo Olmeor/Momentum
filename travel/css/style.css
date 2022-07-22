@@ -1639,13 +1639,13 @@ footer {
 
 	@keyframes move-right {
 		to {
-			left: -365px;
+			left: -375px;
 		}
 	}
 
 	@keyframes move-left {
 		to {
-			left: 365px;
+			left: 375px;
 		}
 	}
 
@@ -1763,6 +1763,18 @@ footer {
     object-fit: cover;
     object-position: center;
   }
+
+  @keyframes move-right {
+		to {
+			left: -305px;
+		}
+	}
+
+	@keyframes move-left {
+		to {
+			left: 305px;
+		}
+	}
 }
 
 @media screen and (max-width: 359px) {
