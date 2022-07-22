@@ -19,15 +19,17 @@
   </head>
 
   <body>
+    <div class="body__shadow" id="shadow"></div>
     <!-- Header start -->
     <header class="header">
       <div class="header__wrapper">
         <div class="header__logo">
-          <a href="/" class="header__logo-link">
+          <a href="#!" class="header__logo-link">
             <img src="./img/svg/portal-logo-ico.svg" alt="Portal Travel" class="header__logo-pic">
           </a>
           <p class="header__logo-name">Travel Portal</p>
         </div>
+        <div class="nav-box"></div>
         <nav class="header__nav">
           <ul class="header__list">
             <li class="header__item">
@@ -42,7 +44,7 @@
             <li class="header__item">
               <a href="#stories" class="header__link">Travel Stories</a>
             </li>
-            <li class="header__item">
+            <li class="header__item header__item-account">
               <a href="#!" class="header__link">Account</a>
             </li>
             <li class="header__item">
@@ -57,8 +59,66 @@
           <img src="./img/svg/open-menu-button.svg" alt="Burger menu" class="header__nav-close-button">
         </div>
         <form class="header__login-form">
-          <button type="submit" class="header__login-form_button">Login</button>
+          <button type="button" class="header__login-form_button">Login</button>
         </form>
+      </div>
+
+      <!-- Pop Up -->
+      <div class="login__pop-up">
+        <div class="login__wrapper">
+          <p class="login__caption">
+            Log in to your account
+          </p>
+          <div class="login__facebook-button-wrapper">
+            <button class="login__buttons login__facebook-button">
+              <img src="./img/svg/facebook-logo.svg" alt="Facebook logo">Sign In with Facebook
+            </button>
+          </div>
+          <div class="login__google-button-wrapper">
+            <button class="login__buttons login__google-button">
+              <img src="./img/svg/google-logo.svg" alt="Facebook logo">Sign In with Google
+            </button>
+          </div>
+          <div class="login_or-line-wrapper">
+            <p class="login_or-line">
+              or
+            </p>
+          </div>
+          <form class="login__form">
+            <p class="login__account-name">
+              E-mail
+            </p>
+            <input
+              type="email"
+              name="login_email"
+              class="login__buttons login__account-email"
+              id="login"
+            />
+            <p class="login__account-name">
+              Password
+            </p>
+            <input
+              type="password"
+              name="login_password"
+              class="login__buttons login__account-password"
+              id="password"
+            />
+            <div class="login__sign-button-wrapper">
+              <button type="submit" class="login__buttons login__sign-button">
+                <p class="login__sign-button-text">Sign In</p>
+              </button>
+            </div>            
+          </form>
+          <div class="recovery">
+            <a href="#!" class="login_forgot-url">Forgot Your Password?</a>
+          </div>
+          <div class="login__line-wrapper"></div>
+        </div>
+        
+        <p class="login__register-wrapper">
+          <span class="login__register-question">Don’t have an account?</span>
+          <a href="#!" class="login__register-url">Register</a>
+        </p>
       </div>
     </header>
     <!-- Header end -->
@@ -125,69 +185,48 @@
       <!-- Steps end -->
 
       <!-- Destination start -->
-      <section class="destination" id="destination">
-        <div class="destination__wrapper">
-          <h2 class="destination__title">POPULAR DESTINATIONS</h2>
-          <div class="destination__slider">
-            <div class="destination__slider-item">
-              <div class="destination__slider-pic destination__slider-pic-spain">
-                <picture>
-                  <source media="(min-width:391px)" srcset="./img/slider_spain.jpg">
-                  <img
-                    src="./img/slider_spain-m.jpg"
-                    alt="Spain"
-                    class="destination__slider-img"
-                  />
-                </picture>
-                <p class="destination__slider-desc">SPAIN</p>
-              </div>
-            </div>
-            <div class="destination__slider-item">
-              <div class="destination__slider-pic destination__slider-pic-japan">
-                <picture>
-                  <source media="(min-width:391px)" srcset="./img/slider-japan.jpg">
-                  <img
-                    src="./img/slider-japan-m.jpg"
-                    alt="Japan"
-                    class="destination__slider-img"
-                  />
-                </picture>
-                <p class="destination__slider-desc">JAPAN</p>
-              </div>
-            </div>
-            <div class="destination__slider-item">
-              <div class="destination__slider-pic destination__slider-pic-usa">
-                <picture>
-                  <source media="(min-width:391px)" srcset="./img/slider_usa.jpg">
-                  <img
-                    src="./img/slider_usa-m.jpg"
-                    alt="USA"
-                    class="destination__slider-img"
-                  />
-                </picture>
-                <p class="destination__slider-desc">USA</p>
-              </div>
-            </div>
-          </div>
-          <picture>
-            <source media="(min-width:391px)" srcset="./img/svg/slider-plug.svg">
-            <img
-              src="./img/svg/slider-plug-m.svg"
-              alt="balls"
-              class="destination__plug"
-            />
-          </picture>
-          <div class="destination_slider-arrows">
-            <img src="./img/svg/slider-arrow-l.svg" alt="arrow-left" class="destination_slider-arrows-left">
-            <img src="./img/svg/slider-arrow-r.svg" alt="arrow-right" class="destination_slider-arrows-right">
-          </div>
+      <section class="destination">
+				<div class="destination__wrapper">
+					<h2 id="destination" class="destination__title">POPULAR DESTINATIONS</h2>
+					<div class="destination__slider">
+						<img class="slider__arrow arrow-left" src="./img/svg/slider-arrow.svg" alt="Arrow left">
+						<img class="slider__arrow arrow-right" src="./img/svg/slider-arrow.svg" alt="Arrow right">
+						<div class="slider">
+							<div id="item-0" class="destination__slider-pic">
+								<img src="./img/slider-japan.jpg" alt="Japan" class="destination__slider-img">
+								<span class="destination__country">JAPAN</span>
+							</div>
+							<div id="item-1" class="destination__slider-pic">
+								<img src="./img/slider_usa.jpg" alt="USA" class="destination__slider-img">
+								<span class="destination__country">USA</span>
+							</div>
+							<div id="item-2" class="destination__slider-pic">
+								<img src="./img/slider_spain.jpg" alt="Spain" class="destination__slider-img">
+								<span class="destination__country">SPAIN</span>
+							</div>
+							<div id="item-3" class="destination__slider-pic">
+								<img src="./img/slider-japan.jpg" alt="Japan" class="destination__slider-img">
+								<span class="destination__country">JAPAN</span>
+							</div>
+							<div id="item-4" class="destination__slider-pic">
+								<img src="./img/slider_usa.jpg" alt="USA" class="destination__slider-img">
+								<span class="destination__country">USA</span>
+							</div>
+						</div>
+					</div>
+					<ul class="destination__slider-items">
+						<li class="slider__item slider__item_active"></li>
+						<li class="slider__item"></li>
+						<li class="slider__item"></li>
+					</ul>
           <div class="destination__find-button-wrapper">
             <button class="destination__find-button">
               <img src="./img/svg/bi_arrow-right.svg" alt="right-arrow-ico" class="destination__find-button-arrow">Find More
             </button>
           </div>
-        </div>
-      </section>
+				</div>
+			</section>
+
       <!-- Destination end -->
 
       <!-- Stories start -->
@@ -199,7 +238,7 @@
               <div class="stories__card">
                 <div class="stories__card-pic">
                   <picture>
-                    <source media="(min-width:391px)" srcset="./img/stories-thailand.jpg">
+                    <source media="(min-width:390px)" srcset="./img/stories-thailand.jpg">
                     <img
                       src="./img/stories-thailand-m.jpg"
                       alt="Thailand"
@@ -223,7 +262,7 @@
               <div class="stories__card">
                 <div class="stories__card-pic">
                   <picture>
-                    <source media="(min-width:391px)" srcset="./img/stories-utah.jpg">
+                    <source media="(min-width:390px)" srcset="./img/stories-utah.jpg">
                     <img
                       src="./img/stories-utah-m.jpg"
                       alt="Utah"
@@ -247,7 +286,7 @@
               <div class="stories__card">
                 <div class="stories__card-pic">
                   <picture>
-                    <source media="(min-width:391px)" srcset="./img/stories-mountains.jpg">
+                    <source media="(min-width:390px)" srcset="./img/stories-mountains.jpg">
                     <img
                       src="./img/stories-mountains-m.jpg"
                       alt="Mountains"
@@ -271,7 +310,7 @@
               <div class="stories__card">
                 <div class="stories__card-pic">
                   <picture>
-                    <source media="(min-width:391px)" srcset="./img/stories-journey.jpg">
+                    <source media="(min-width:390px)" srcset="./img/stories-journey.jpg">
                     <img
                       src="./img/stories-journey-m.jpg"
                       alt="Longest journey"
