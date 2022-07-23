@@ -7,7 +7,7 @@ const navItems = document.querySelectorAll('.header__item');
 const closeButton = document.querySelector('.header__nav-close');
 
 burger.addEventListener('click', e => {
-	e.stopPropagation();
+	e.stopPropagation(); //
 	nav.classList.add('header__nav-active');
 	bodyShadow.classList.add('body__shadow-active');
 });
@@ -67,6 +67,7 @@ function makePopUpInvisible(event) {
   if (popup.classList.contains('login__pop-up-visible') && !popupActive) {
       popup.classList.remove('login__pop-up-visible');
       bodyShadow.classList.remove('body__shadow-active');
+			document.body.style.overflow = '';
     }
 }
 
