@@ -48,6 +48,7 @@ const popupTitle = document.querySelector('.login__caption');
 const popupButton = document.querySelector('.login__sign-button-text');
 const popupText = document.querySelector('.login__register-question');
 const loginButton = document.querySelector('.login__sign-button');
+// const bodyShadow from Burger menu
 
 const loginWindow = {
   title: "Login to your account",
@@ -72,7 +73,7 @@ function makePopUpVisible(element){
   popupClick.innerHTML = loginWindow.link;
 	element.stopPropagation();
   popup.classList.toggle('login__pop-up-visible');
-  shadow.classList.add('body__shadow-active');
+  bodyShadow.classList.add('body__shadow-active');
   document.body.style.overflow = 'hidden';
 }
 
@@ -81,7 +82,7 @@ function makePopUpInvisible(event) {
   let popupActive = popup == target || popup.contains(target);
   if (popup.classList.contains('login__pop-up-visible') && !popupActive) {
       popup.classList.remove('login__pop-up-visible');
-      shadow.classList.remove('body__shadow-active');
+      bodyShadow.classList.remove('body__shadow-active');
     }
 }
 
@@ -92,8 +93,6 @@ function changePopUpWindow(event) {
   popupButton.innerHTML = changeWords.button;
   popupText.innerHTML = changeWords.account;
   popupClick.innerHTML = changeWords.link;
-  shadow.classList.add('body__shadow-active');
-	document.body.style.overflow = 'hidden';
 }
 
 function alertLoginPassword() {
