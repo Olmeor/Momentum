@@ -6,34 +6,19 @@ const nav = document.querySelector('.header__nav');
 const navItems = document.querySelectorAll('.header__item');
 const closeButton = document.querySelector('.header__nav-close');
 
+burger.addEventListener('click', e => {
+	e.stopPropagation();
+	nav.classList.add('header__nav-active');
+	bodyShadow.classList.add('body__shadow-active');
+});
 
-burger.onclick = function() {
-  nav.classList.toggle('header__nav-active');
-  bodyShadow.classList.toggle('body__shadow-active');
-  document.body.style.overflow = 'hidden';
-}
+document.addEventListener('click', e => {
+	let element = e.target;
+	let burgerCheck = element == nav;
 
-for (let item in navItems) {
-  navItems[item].onclick = function() {
-    nav.classList.toggle('header__nav-active');
-    bodyShadow.classList.toggle('body__shadow-active');
-    document.body.style.overflow = '';
-  }
-}
-
-closeButton.onclick = function() {
-  nav.classList.toggle('header__nav-active');
-  bodyShadow.classList.toggle('body__shadow-active');
-  document.body.style.overflow = '';
-}
-
-document.addEventListener( 'click', (element) => {
-  let target = element.target;
- 
-	if ( !target.closest('.header__wrapper') && !target.closest('.header__burger') ) {
-		nav.classList.remove('header__nav-active'); 
-    bodyShadow.classList.remove('body__shadow-active');
-    document.body.style.overflow = '';
+	if (nav.classList.contains('header__nav-active') && !burgerCheck) {
+		nav.classList.remove('header__nav-active');
+		bodyShadow.classList.remove('body__shadow-active');
 	}
 })
 
