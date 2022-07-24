@@ -34,7 +34,7 @@ const popupButton = document.querySelector('.login__sign-button-text'); //тек
 const popupText = document.querySelector('.login__register-question'); //строка Don’t have an account?
 const loginButton = document.querySelector('.login__sign-button'); // кнопка Sign In
 
-const loginWindow = { // строки для замены в Login
+const loginWindow = {
   title: "Login to your account",
   button: "Sign In",
   account: "Don't have an account?",
