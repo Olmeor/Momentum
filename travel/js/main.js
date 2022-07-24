@@ -191,12 +191,22 @@ slider.addEventListener('animationend', (animation) => { // слушаем ку�
 })
 
 //сдвиг стартового слайда на десктопе
-function shiftRight() {
-	if (document.documentElement.clientWidth > 390) { // проверка разрешения
-		moveRight(); // сдвигаем слайд
-		window.removeEventListener('resize', shiftRight); // снимаем прослушку
-	}
+const isMobile = () => document.documentElement.clientWidth > 390;
+
+let lastIsMobile = isMobile(); // сдвигаем если размер более 390px
+if (lastIsMobile === true) {
+	moveRight();
+} 
+
+// переключение при ресайзе
+const switchSize = () => {
+  if (isMobile() === lastIsMobile) return;
+  lastIsMobile = isMobile();
+  if (lastIsMobile === true) {
+    moveRight();
+  } else {
+    moveLeft();
+  }
 }
 
-window.addEventListener('resize', shiftRight); // вешаем прослушку
-shiftRight(); // запускаем сдвиг
+window.addEventListener('resize', switchSize);
