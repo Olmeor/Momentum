@@ -62,3 +62,37 @@ function getLocalStorage() {
 window.addEventListener('beforeunload', setLocalStorage);
 window.addEventListener('load', getLocalStorage);
 
+// Slider
+
+let randomNum = getRandomNum();
+const body = document.body;
+const slideNext = document.querySelector('.slide-prev');
+const slidePrev = document.querySelector('.slide-next');
+
+function getRandomNum(num = 20) { // num - количество картинок
+  return Math.floor(Math.random() * num + 1);
+}
+
+function setBg() {  
+  const img = new Image();
+  const bgNum = randomNum.toString().padStart(2, "0");
+  img.src = `https://raw.githubusercontent.com/olmeor/momentum-backgrounds/main/${getTimeOfDay()}/${bgNum}.jpg`;
+
+  img.onload = () => {      
+    body.style.backgroundImage = `url(${img.src})`
+  };
+}
+
+function getSlideNext() {
+  (randomNum == 20) ? randomNum = 1 : randomNum++;
+  setBg(randomNum);
+}
+
+function getSlidePrev() {
+  (randomNum == 1) ? randomNum = 20 : randomNum--;
+  setBg(randomNum);
+}
+
+setBg();
+slideNext.addEventListener('click', getSlideNext);
+slidePrev.addEventListener('click', getSlidePrev);
