@@ -14,8 +14,10 @@ function showTime() {
 
 function showDate() {
   let dateValue = new Date();
+  // const options = {weekday: 'long', month: 'long', day: 'numeric', /* year: 'numeric', hour: 'numeric', minute: 'numeric', timeZone: 'UTC'*/};
+  // const currentDate = dateValue.toLocaleDateString('ru-Ru', options);
   const options = {weekday: 'long', month: 'long', day: 'numeric', /* year: 'numeric', hour: 'numeric', minute: 'numeric', timeZone: 'UTC'*/};
-  const currentDate = dateValue.toLocaleDateString('ru-Ru', options);
+  const currentDate = dateValue.toLocaleDateString('en-US', options);
   date.textContent = currentDate;
 }
 
@@ -28,7 +30,8 @@ showDate();
 const greeting = document.querySelector('.greeting');
 
 function getTimeOfDay() {
-  const listTimeOfDay = ['Спокойной ночи', 'Доброе утро', 'Добрый день', 'Добрый вечер'];
+  // const listTimeOfDay = ['Спокойной ночи', 'Доброе утро', 'Добрый день', 'Добрый вечер'];
+  const listTimeOfDay = ['night', 'morning', 'afternoon', 'evening'];
   const dateValue = new Date();
   const hour = dateValue.getHours();
   return listTimeOfDay[Math.floor(hour / 6)];
@@ -36,7 +39,7 @@ function getTimeOfDay() {
 
 function showGreeting() {
   const timeOfDay = getTimeOfDay();
-  const greetingText = `${timeOfDay},`;
+  const greetingText = `Good ${timeOfDay},`;
   greeting.textContent = greetingText;
 }
 
@@ -58,3 +61,4 @@ function getLocalStorage() {
 
 window.addEventListener('beforeunload', setLocalStorage);
 window.addEventListener('load', getLocalStorage);
+
