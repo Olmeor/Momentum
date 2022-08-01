@@ -110,11 +110,11 @@ const weatherWind = document.querySelector('.wind');
 const weatherHumidity = document.querySelector('.humidity');
 const weatherError = document.querySelector('.weather-error');
 let city = document.querySelector('.city');
-
+if (!localStorage.getItem('city')) city.value = 'Minsk';
 
 async function getWeather() {
   try {
-    const url = `https://api.openweathermap.org/data/2.5/weather?q=${(city.value || localStorage.getItem('city')) ?? 'Minsk'}&lang=en&appid=7153241524dddce83603c2b94a1ad19c&units=metric`;
+    const url = `https://api.openweathermap.org/data/2.5/weather?q=${(city.value || localStorage.getItem('city'))}&lang=en&appid=7153241524dddce83603c2b94a1ad19c&units=metric`;
     const res = await fetch(url);
     const data = await res.json();
     console.log(data.weather[0].id, data.weather[0].description, data.main.temp, city.value);
@@ -126,7 +126,7 @@ async function getWeather() {
     weatherHumidity.textContent = `Humidity: ${Math.round(data.main.humidity)}%`;
     weatherDescription.textContent = data.weather[0].description;
   } catch {
-    const url = `https://api.openweathermap.org/data/2.5/weather?q=${(city.value || localStorage.getItem('city')) ?? 'Minsk'}&lang=en&appid=7153241524dddce83603c2b94a1ad19c&units=metric`;
+    const url = `https://api.openweathermap.org/data/2.5/weather?q=${(city.value || localStorage.getItem('city'))}&lang=en&appid=7153241524dddce83603c2b94a1ad19c&units=metric`;
     const res = await fetch(url);
     const data = await res.json();
     weatherIcon.className = '';
@@ -138,11 +138,7 @@ async function getWeather() {
       weatherError.textContent = `Error! City not found!`;
     } else if (data.cod == 400) {
       weatherError.textContent = `Nothing to geocode!`;
-      // window.localStorage.removeItem('city');
-      // city.value = 'Minsk';
-      if (!localStorage.getItem('city')) city.value = 'Minsk';
     }
-
   }
 }
 
