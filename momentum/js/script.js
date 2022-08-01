@@ -166,3 +166,73 @@ function getQuotes() {
 }
 
 getQuotes();
+
+// Audio
+
+const audio = new Audio();
+const audioPlayButton = document.querySelector('.play');
+const audioPlayNextButton = document.querySelector('.play-next');
+const audioPlayPrevButton = document.querySelector('.play-prev');
+
+let isPlay = false;
+let playNum = 0;
+
+function playAudio() {
+  audio.src = 'https://7oom.ru/audio/naturesounds/07%20Birds%20(7oom.ru).mp3';
+  audio.currentTime = 0;
+  if (!isPlay) {
+    isPlay = true;
+    audio.play();
+  } else {
+    isPlay = false;
+    audio.pause();
+  }
+}
+
+function toggleButton() {
+  audioPlayButton.classList.toggle('pause');
+}
+
+function addPause() {
+  audioPlayButton.classList.add('pause');
+}
+
+//audio.src = playList[playNum].src;
+
+// function getSlideNext() {
+//   (randomNum == 20) ? randomNum = 1 : randomNum++;
+//   setBg(randomNum);
+// }
+
+function playNextAudio() {
+  audio.src = 'https://7oom.ru/audio/naturesounds/07%20Birds%20(7oom.ru).mp3';
+  audio.currentTime = 0;
+  if (!isPlay) {
+    isPlay = true;
+    audio.play();
+  } else {
+    audio.play();
+  }
+  addPause();
+}
+
+function playPrevAudio() {
+  audio.src = 'https://7oom.ru/audio/naturesounds/07%20Birds%20(7oom.ru).mp3';
+  audio.currentTime = 0;
+  if (!isPlay) {
+    isPlay = true;
+    audio.play();
+  } else {
+    audio.play();
+  }
+  addPause();
+}
+
+audioPlayButton.addEventListener('click', playAudio);
+audioPlayButton.addEventListener('click', toggleButton);
+audioPlayNextButton.addEventListener('click', playNextAudio);
+audioPlayPrevButton.addEventListener('click', playPrevAudio);
+
+// Import
+
+import playList from './playList.js';
