@@ -152,7 +152,7 @@ const quoteButton = document.querySelector('.change-quote');
 const quoteText = document.querySelector('.quote');
 const quoteAuthor = document.querySelector('.author');
 
-async function getQuotes() {  
+async function changeQuotes() {  
   const quotes = './assets/quotes/quotes-eng.json';
   const res = await fetch(quotes);
   const data = await res.json();
@@ -160,9 +160,9 @@ async function getQuotes() {
   quoteAuthor.innerHTML = data[getRandomNum(data.length)].author;
 }
 
-function changeQuotes() {
-  getQuotes();
+function getQuotes() {
+  changeQuotes();
   quoteButton.addEventListener('click', getQuotes);
 }
 
-changeQuotes();
+getQuotes();
