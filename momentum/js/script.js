@@ -110,11 +110,12 @@ const weatherWind = document.querySelector('.wind');
 const weatherHumidity = document.querySelector('.humidity');
 const weatherError = document.querySelector('.weather-error');
 let city = document.querySelector('.city');
-if (!localStorage.getItem('city')) city.value = 'Minsk';
+city.value = (!localStorage.getItem('city')) ? city.value = 'Minsk' : city.value = localStorage.getItem('city');
 
 async function getWeather() {
+
   try {
-    const url = `https://api.openweathermap.org/data/2.5/weather?q=${(city.value || localStorage.getItem('city'))}&lang=en&appid=7153241524dddce83603c2b94a1ad19c&units=metric`;
+    const url = `https://api.openweathermap.org/data/2.5/weather?q=${city.value}&lang=en&appid=7153241524dddce83603c2b94a1ad19c&units=metric`;
     const res = await fetch(url);
     const data = await res.json();
     console.log(data.weather[0].id, data.weather[0].description, data.main.temp, city.value);
@@ -126,7 +127,7 @@ async function getWeather() {
     weatherHumidity.textContent = `Humidity: ${Math.round(data.main.humidity)}%`;
     weatherDescription.textContent = data.weather[0].description;
   } catch {
-    const url = `https://api.openweathermap.org/data/2.5/weather?q=${(city.value || localStorage.getItem('city'))}&lang=en&appid=7153241524dddce83603c2b94a1ad19c&units=metric`;
+    const url = `https://api.openweathermap.org/data/2.5/weather?q=${city.value}&lang=en&appid=7153241524dddce83603c2b94a1ad19c&units=metric`;
     const res = await fetch(url);
     const data = await res.json();
     weatherIcon.className = '';
