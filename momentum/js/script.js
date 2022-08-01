@@ -173,16 +173,21 @@ const audio = new Audio();
 const audioPlayButton = document.querySelector('.play');
 const audioPlayNextButton = document.querySelector('.play-next');
 const audioPlayPrevButton = document.querySelector('.play-prev');
+const audioPlayList = document.querySelector('.play-list');
+
 
 let isPlay = false;
 let playNum = 0;
+let activeSong = [];
 
 function playAudio() {
+  
   audio.src = playList[playNum].src;
   audio.currentTime = 0;
   if (!isPlay) {
     isPlay = true;
     audio.play();
+    activeSong[playNum].classList.add('item-active');
   } else {
     isPlay = false;
     audio.pause();
@@ -193,30 +198,42 @@ function toggleButton() {
   audioPlayButton.classList.toggle('pause');
 }
 
-function addPause() {
+function addPauseButton() {
   audioPlayButton.classList.add('pause');
 }
 
 function playNextAudio() {
   (playNum == playList.length-1) ? playNum = 0 : playNum++;
-  console.log(playNum);
   isPlay = false;
-  addPause();
+  addPauseButton();
   playAudio();
 }
 
 function playPrevAudio() {
   (playNum == 0) ? playNum == playList.length-1 : playNum--;
-  console.log(playNum);
   isPlay = false;
-  addPause();
+  addPauseButton();
   playAudio();
 }
 
+function createPlayList() {
+  playList.forEach(song => {
+    const li = document.createElement('li');
+    li.classList.add('play-item');
+    li.textContent = song.title;
+    audioPlayList.append(li);
+  });
+  activeSong = document.querySelectorAll('.play-item');
+}
+
+
+createPlayList();
 audioPlayButton.addEventListener('click', playAudio);
 audioPlayButton.addEventListener('click', toggleButton);
 audioPlayNextButton.addEventListener('click', playNextAudio);
 audioPlayPrevButton.addEventListener('click', playPrevAudio);
+audio.addEventListener('ended', playNextAudio);
+
 
 // Import
 
