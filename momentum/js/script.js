@@ -178,7 +178,7 @@ let isPlay = false;
 let playNum = 0;
 
 function playAudio() {
-  audio.src = 'https://7oom.ru/audio/naturesounds/07%20Birds%20(7oom.ru).mp3';
+  audio.src = playList[playNum].src;
   audio.currentTime = 0;
   if (!isPlay) {
     isPlay = true;
@@ -197,35 +197,20 @@ function addPause() {
   audioPlayButton.classList.add('pause');
 }
 
-//audio.src = playList[playNum].src;
-
-// function getSlideNext() {
-//   (randomNum == 20) ? randomNum = 1 : randomNum++;
-//   setBg(randomNum);
-// }
-
 function playNextAudio() {
-  audio.src = 'https://7oom.ru/audio/naturesounds/07%20Birds%20(7oom.ru).mp3';
-  audio.currentTime = 0;
-  if (!isPlay) {
-    isPlay = true;
-    audio.play();
-  } else {
-    audio.play();
-  }
+  (playNum == playList.length-1) ? playNum = 0 : playNum++;
+  console.log(playNum);
+  isPlay = false;
   addPause();
+  playAudio();
 }
 
 function playPrevAudio() {
-  audio.src = 'https://7oom.ru/audio/naturesounds/07%20Birds%20(7oom.ru).mp3';
-  audio.currentTime = 0;
-  if (!isPlay) {
-    isPlay = true;
-    audio.play();
-  } else {
-    audio.play();
-  }
+  (playNum == 0) ? playNum == playList.length-1 : playNum--;
+  console.log(playNum);
+  isPlay = false;
   addPause();
+  playAudio();
 }
 
 audioPlayButton.addEventListener('click', playAudio);
