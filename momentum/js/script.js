@@ -181,7 +181,8 @@ let playNum = 0;
 let activeSong = [];
 
 function playAudio() {
-  
+  const itemActive = document.querySelectorAll('li.item-active');
+  if (itemActive.length) itemActive[0].classList.remove('item-active');
   audio.src = playList[playNum].src;
   audio.currentTime = 0;
   if (!isPlay) {
