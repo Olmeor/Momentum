@@ -175,6 +175,9 @@ const audioPlayNextButton = document.querySelector('.play-next');
 const audioPlayPrevButton = document.querySelector('.play-prev');
 const audioPlayList = document.querySelector('.play-list');
 
+const soundTittle = document.querySelector(".play-title")
+
+
 
 let isPlay = false;
 let playNum = 0;
@@ -193,6 +196,9 @@ function playAudio() {
     isPlay = false;
     audio.pause();
   }
+
+  setSoundName(playList[playNum].title);
+
 }
 
 function toggleButton() {
@@ -225,6 +231,10 @@ function createPlayList() {
     audioPlayList.append(li);
   });
   activeSong = document.querySelectorAll('.play-item');
+}
+
+function setSoundName(title) {
+  soundTittle.textContent = title;
 }
 
 
