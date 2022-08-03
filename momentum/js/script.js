@@ -167,7 +167,7 @@ function getQuotes() {
 
 getQuotes();
 
-// Audio
+// Audio --------------------------------------------------->>>>
 
 const audio = new Audio();
 const audioPlayButton = document.querySelector('.play');
@@ -175,23 +175,68 @@ const audioPlayNextButton = document.querySelector('.play-next');
 const audioPlayPrevButton = document.querySelector('.play-prev');
 const audioPlayList = document.querySelector('.play-list');
 
-const soundTittle = document.querySelector(".play-title")
+const soundTittle = document.querySelector(".play-title");
+const volButton = document.querySelector(".vol-mute");
 
 
+// const audioVolume = document.querySelector('.vol-line-block'); // volume
+
+// this.audio = document.querySelector("audio"),
+// this.isPlay = !1, this.currentFileNum = -1,
+// this.playBtn = document.querySelector("button.play"),
+// this.playPrevBtn = document.querySelector("button.play-prev"),
+// this.playNextBtn = document.querySelector("button.play-next"),
+// this.timeline = document.querySelector(".all-time-line"),
+// this.soundTittle = document.querySelector(".play-title"),
+// this.playCurTime = document.querySelector(".play-cur-time"),
+// this.playDurTime = document.querySelector(".play-dur-time"),
+
+/*
+setVol(t) {
+  this.audio.volume = t, 0 == t ?
+  this.volButton.classList.add("mute-icon") :
+  this.volButton.classList.remove("mute-icon"), this.renewVol()
+}
+renewVol() {
+  let t = Math.trunc(100 * this.audio.volume);
+  document.querySelector(".vol-line").style.setProperty("width", t + "%")
+}
+
+this.renewVol(), this.wasVol = 0 != this.audio.volume ?this.audio.volume : 1, 
+this.volButton = document.querySelector(".vol-mute"),
+this.volControl = document.querySelector(".vol-line-block"),
+this.volControl.addEventListener("click", (t => {
+  const e = window.getComputedStyle(this.volControl).width,
+    r = t.offsetX / parseInt(e) * 1;
+  this.setVol(r <= .1 ? 0 : r >= .9 ? 1 : r)
+}), !1), this.volButton.onclick = () => {
+  0 != this.audio.volume ? (this.wasVol = this.audio.volume, this.setVol(0)) : this.setVol(this.wasVol)
+}
+*/
 
 let isPlay = false;
 let playNum = 0;
 let activeSong = [];
+// let currentVolume;
+let playListBtn;
+let currentTimeGlobal = 0;
 
 function playAudio() {
   const itemActive = document.querySelectorAll('li.item-active');
   if (itemActive.length) itemActive[0].classList.remove('item-active');
+
+  playListBtn.forEach(song => {
+    if (song.classList.contains('play-item-pause')) song.classList.remove('play-item-pause');
+  });
+
   audio.src = playList[playNum].src;
-  audio.currentTime = 0;
+  audio.currentTime = currentTimeGlobal;
+  //durat
   if (!isPlay) {
     isPlay = true;
     audio.play();
     activeSong[playNum].classList.add('item-active');
+    playListBtn[playNum].classList.add('play-item-pause');
   } else {
     isPlay = false;
     audio.pause();
@@ -199,6 +244,27 @@ function playAudio() {
 
   setSoundName(playList[playNum].title);
 
+}
+
+function playChoosenAudio() {
+  for (let i = 0; i < playListBtn.length; i++) {        
+    playListBtn[i].addEventListener('click', function() {
+      if (i == playNum && isPlay) {
+        isPlay = true;
+        currentTimeGlobal = audio.currentTime;
+        playAudio();
+        addPauseButton();
+      } else {
+        if (i != playNum) currentTimeGlobal = 0;
+        playListBtn.forEach((item) => item.classList.remove('play-item-pause'))
+        playListBtn[i].classList.add('play-item-pause');
+        playNum = i;
+        isPlay = false;
+        playAudio();
+        addPauseButton();
+      }
+    })
+  }
 }
 
 function toggleButton() {
@@ -212,6 +278,7 @@ function addPauseButton() {
 function playNextAudio() {
   (playNum == playList.length-1) ? playNum = 0 : playNum++;
   isPlay = false;
+  currentTimeGlobal = 0;
   addPauseButton();
   playAudio();
 }
@@ -219,6 +286,7 @@ function playNextAudio() {
 function playPrevAudio() {
   (playNum == 0) ? playNum == playList.length-1 : playNum--;
   isPlay = false;
+  currentTimeGlobal = 0;
   addPauseButton();
   playAudio();
 }
@@ -229,14 +297,36 @@ function createPlayList() {
     li.classList.add('play-item');
     li.textContent = song.title;
     audioPlayList.append(li);
+    const btn = document.createElement('span');
+    btn.classList.add('play');
+    btn.classList.add('play-item-btn');
+    li.append(btn);
   });
   activeSong = document.querySelectorAll('.play-item');
+  playListBtn = document.querySelectorAll('.play-item-btn');
 }
 
 function setSoundName(title) {
   soundTittle.textContent = title;
 }
 
+/*function muteAudio() {
+  if (audioVolume.value > 0) {
+      currentVolume = audioVolume.value;
+      audioVolume.value = 0;
+      volButton.classList.add('mute-icon');
+      setValue();
+  } else {
+      audioVolume.value = currentVolume;
+      volButton.classList.remove('mute-icon');
+      setValue();
+  }
+  volButton.classList.toggle('mute-icon');
+}
+
+function setValue() {
+  audio.volume = audioVolume.value/100;
+}*/
 
 createPlayList();
 audioPlayButton.addEventListener('click', playAudio);
@@ -244,6 +334,8 @@ audioPlayButton.addEventListener('click', toggleButton);
 audioPlayNextButton.addEventListener('click', playNextAudio);
 audioPlayPrevButton.addEventListener('click', playPrevAudio);
 audio.addEventListener('ended', playNextAudio);
+playChoosenAudio();
+//volButton.addEventListener('click', muteAudio);
 
 
 // Import
