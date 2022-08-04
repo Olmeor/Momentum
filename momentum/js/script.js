@@ -177,9 +177,11 @@ const audioPlayList = document.querySelector('.play-list');
 
 const soundTittle = document.querySelector(".play-title");
 const volButton = document.querySelector(".vol-mute");
+// const audioProgress = document.getElementById('progress__audio');
+const audioVolume = document.querySelector('.volume');
+const audioMuteButton = document.querySelector('.audio-mute');
 
 
-// const audioVolume = document.querySelector('.vol-line-block'); // volume
 
 // this.audio = document.querySelector("audio"),
 // this.isPlay = !1, this.currentFileNum = -1,
@@ -217,7 +219,7 @@ this.volControl.addEventListener("click", (t => {
 let isPlay = false;
 let playNum = 0;
 let activeSong = [];
-// let currentVolume;
+let currentVolume;
 let playListBtn;
 let currentTimeGlobal = 0;
 
@@ -235,6 +237,7 @@ function playAudio() {
   if (!isPlay) {
     isPlay = true;
     audio.play();
+    audio.volume = audioVolume.value/100;
     activeSong[playNum].classList.add('item-active');
     playListBtn[playNum].classList.add('play-item-pause');
   } else {
@@ -310,7 +313,11 @@ function setSoundName(title) {
   soundTittle.textContent = title;
 }
 
-/*function muteAudio() {
+function setValue() {
+  audio.volume = audioVolume.value/100;
+}
+
+function muteAudio() {
   if (audioVolume.value > 0) {
       currentVolume = audioVolume.value;
       audioVolume.value = 0;
@@ -321,12 +328,7 @@ function setSoundName(title) {
       volButton.classList.remove('mute-icon');
       setValue();
   }
-  volButton.classList.toggle('mute-icon');
 }
-
-function setValue() {
-  audio.volume = audioVolume.value/100;
-}*/
 
 createPlayList();
 audioPlayButton.addEventListener('click', playAudio);
@@ -335,7 +337,8 @@ audioPlayNextButton.addEventListener('click', playNextAudio);
 audioPlayPrevButton.addEventListener('click', playPrevAudio);
 audio.addEventListener('ended', playNextAudio);
 playChoosenAudio();
-//volButton.addEventListener('click', muteAudio);
+volButton.addEventListener('click', muteAudio);
+audioVolume.addEventListener('change', setValue);
 
 
 // Import
