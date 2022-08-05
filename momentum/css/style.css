@@ -20,6 +20,7 @@ body {
   background-blend-mode: multiply;
   transition: background-image 1s ease-in-out;
   background-size: cover;
+  overflow: hidden;
 }
 
 .header {
@@ -41,9 +42,6 @@ body {
 .player-controls {
   display: flex;
   align-items: center;
-  /* justify-content: space-between;
-  width: 120px;
-  margin-bottom: 28px; */
   justify-content: space-around;
   margin-bottom: 10px;
 }
@@ -149,7 +147,6 @@ body {
 .time-line {
   display: flex;
   height: 6px;
-  /* width: 180px; */
   border-radius: 3px;
   background-color: rgba(255, 255, 255, 0.5);
   z-index: 2;
@@ -168,17 +165,14 @@ body {
 
 .mute-icon {
   background-image: url("../assets/svg/mute.svg") !important;
-  /* z-index: 100; */
 }
 
 .vol-controls {
   left: 164px;
-  /* width: 32px; */
   width: 200px;
   display: flex;
   justify-self: flex-start;
   align-items: stretch;
-  /* position: fixed; */
   z-index: 10;
   transition: width 0.5s;
   padding-bottom: 10px;
@@ -191,29 +185,18 @@ body {
   justify-self: flex-start;
   min-width: 32px;
   height: 32px;
-  /* z-index: 112; */
 }
-
-/* .vol-controls:hover {
-  width: 132px !important;
-  width: 200px !important;
-} */
 
 .volume {
   width: 160px;
   align-self: center;
   height: 6px;
-  /* background-color: rgba(255, 255, 255, 0.3);
-  border-radius: 6px;
-  cursor: pointer; */
 }
 
 .vol-line-block {
   margin-left: 8px;
   justify-self: flex-start;
   align-self: center;
-  /* width: 200px;
-  height: 8px; */
   width: 160px;
   height: 6px;
   z-index: 1;
@@ -231,13 +214,10 @@ body {
   border-radius: 6px;
 }
 
-/*-------------------------------------------------------------------------------------*/
-
 .progress {
   -webkit-appearance: none;
   appearance: none;
   height: 6px;
-  /* background: #000000; */
   background: rgba(255, 255, 255, 0.5);
   width: 100%;
   border-radius: 3px;
@@ -250,7 +230,6 @@ body {
   height: 16px;
   width: 10px;
   border: 0;
-  /* background: -webkit-linear-gradient(45deg,  rgb(255, 255, 255), rgb(181, 182, 178)); */
   background: rgba(255, 255, 255);
   border-radius: 50%;
   cursor: pointer;
@@ -268,23 +247,15 @@ body {
   outline: none;
 }
 
-#progress__audio {
-  width: 100%;
-}
-
-
-/*=====================================================================================*/
-
 .play-title {
-  margin-bottom: 4px;
   text-align: center;
-  /* font-size: 0.8rem; */
   opacity: .7;
 }
 
 .play-time {
   display: flex;
   justify-content: space-between;
+  margin-top: 5px;
   margin-bottom: 8px;
 }
 

@@ -118,7 +118,7 @@ async function getWeather() {
     const url = `https://api.openweathermap.org/data/2.5/weather?q=${city.value}&lang=en&appid=7153241524dddce83603c2b94a1ad19c&units=metric`;
     const res = await fetch(url);
     const data = await res.json();
-    console.log(data.weather[0].id, data.weather[0].description, data.main.temp, city.value);
+    // console.log(data.weather[0].id, data.weather[0].description, data.main.temp, city.value);
     weatherError.textContent = ``;
     weatherIcon.className = 'weather-icon owf';
     weatherIcon.classList.add(`owf-${data.weather[0].id}`);
@@ -167,7 +167,7 @@ function getQuotes() {
 
 getQuotes();
 
-// Audio --------------------------------------------------->>>>
+// Audio
 
 const audio = new Audio();
 const audioPlayButton = document.querySelector('.play');
@@ -177,44 +177,11 @@ const audioPlayList = document.querySelector('.play-list');
 
 const soundTittle = document.querySelector(".play-title");
 const volButton = document.querySelector(".vol-mute");
-// const audioProgress = document.getElementById('progress__audio');
+const audioProgress = document.querySelector(".progress-bar");
 const audioVolume = document.querySelector('.volume');
-const audioMuteButton = document.querySelector('.audio-mute');
+const audioExactTime = document.querySelector(".play-cur-time");
+const audioDurationTime = document.querySelector(".play-dur-time");
 
-
-
-// this.audio = document.querySelector("audio"),
-// this.isPlay = !1, this.currentFileNum = -1,
-// this.playBtn = document.querySelector("button.play"),
-// this.playPrevBtn = document.querySelector("button.play-prev"),
-// this.playNextBtn = document.querySelector("button.play-next"),
-// this.timeline = document.querySelector(".all-time-line"),
-// this.soundTittle = document.querySelector(".play-title"),
-// this.playCurTime = document.querySelector(".play-cur-time"),
-// this.playDurTime = document.querySelector(".play-dur-time"),
-
-/*
-setVol(t) {
-  this.audio.volume = t, 0 == t ?
-  this.volButton.classList.add("mute-icon") :
-  this.volButton.classList.remove("mute-icon"), this.renewVol()
-}
-renewVol() {
-  let t = Math.trunc(100 * this.audio.volume);
-  document.querySelector(".vol-line").style.setProperty("width", t + "%")
-}
-
-this.renewVol(), this.wasVol = 0 != this.audio.volume ?this.audio.volume : 1, 
-this.volButton = document.querySelector(".vol-mute"),
-this.volControl = document.querySelector(".vol-line-block"),
-this.volControl.addEventListener("click", (t => {
-  const e = window.getComputedStyle(this.volControl).width,
-    r = t.offsetX / parseInt(e) * 1;
-  this.setVol(r <= .1 ? 0 : r >= .9 ? 1 : r)
-}), !1), this.volButton.onclick = () => {
-  0 != this.audio.volume ? (this.wasVol = this.audio.volume, this.setVol(0)) : this.setVol(this.wasVol)
-}
-*/
 
 let isPlay = false;
 let playNum = 0;
@@ -230,23 +197,21 @@ function playAudio() {
   playListBtn.forEach(song => {
     if (song.classList.contains('play-item-pause')) song.classList.remove('play-item-pause');
   });
-
   audio.src = playList[playNum].src;
   audio.currentTime = currentTimeGlobal;
-  //durat
+  setDurationTime(playList[playNum].duration);
   if (!isPlay) {
     isPlay = true;
     audio.play();
     audio.volume = audioVolume.value/100;
     activeSong[playNum].classList.add('item-active');
     playListBtn[playNum].classList.add('play-item-pause');
+    setExactTime();
   } else {
     isPlay = false;
     audio.pause();
   }
-
   setSoundName(playList[playNum].title);
-
 }
 
 function playChoosenAudio() {
@@ -330,6 +295,39 @@ function muteAudio() {
   }
 }
 
+function updateProgress(e) {
+  const {currentTime, duration} = e.target;
+  const currentValue = currentTime / duration * 100;
+  if (!isNaN(currentValue))  {
+      currentTimeGlobal = currentTime; 
+      audioProgress.value = currentValue;
+  }
+}
+
+function setProgress() {
+  const audioDuration = audio.duration;
+  audio.currentTime = audioProgress.value / 100 * audioDuration;
+  audio.addEventListener('timeupdate', updateProgress);
+}
+
+function convertTime(duration) {
+  let minutes, seconds, minutesString, secondsString;
+  minutes = Math.floor(duration/60);
+  seconds = Math.floor(duration%60);
+  minutesString = (minutes < 10) ? "0" + String(minutes) : String(minutes);
+  secondsString = (seconds < 10) ? "0" + String(seconds) : String(seconds);
+  return `${minutesString}:${secondsString}`;
+}
+
+function setDurationTime(duration) {
+  audioDurationTime.innerHTML = convertTime(duration);
+}
+
+function setExactTime() {
+  audioExactTime.innerHTML = convertTime(currentTimeGlobal);
+  setTimeout(setExactTime, 500);
+}
+
 createPlayList();
 audioPlayButton.addEventListener('click', playAudio);
 audioPlayButton.addEventListener('click', toggleButton);
@@ -339,7 +337,11 @@ audio.addEventListener('ended', playNextAudio);
 playChoosenAudio();
 volButton.addEventListener('click', muteAudio);
 audioVolume.addEventListener('change', setValue);
-
+audioProgress.addEventListener('change', setProgress);
+audio.addEventListener('timeupdate', updateProgress);
+audioProgress.oninput = function() {
+  audio.removeEventListener('timeupdate', updateProgress);
+}
 
 // Import
 
