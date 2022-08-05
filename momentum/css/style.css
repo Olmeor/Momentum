@@ -8,6 +8,21 @@
   margin: 0;
   padding: 0;
 }
+/* ---------------------------------- */
+
+button,
+html input[type="button"],
+input[type="reset"],
+input[type="submit"],
+input[type="range"] {
+  cursor: pointer;
+  overflow: visible;
+}
+
+button[disabled],
+html input[disabled] {
+  cursor: default;
+}
 
 body {
   min-width: 480px;
@@ -48,6 +63,7 @@ body {
 
 .play-list {
   text-align: left;
+  padding-bottom: 5px;
 }
 
 .play-item {
@@ -56,11 +72,11 @@ body {
   padding-left: 20px;
   list-style: none;
   opacity: .8;
-  cursor: pointer;
   transition: .3s;
   display: flex;
   justify-content: space-between;
   width: 200px;
+  cursor: pointer;
 }
 
 .play-item:hover {
@@ -95,7 +111,6 @@ body {
   border: 0;
   outline: 0;
   opacity: .8;
-  cursor: pointer;
   transition: .3s;  
 }
 
@@ -151,7 +166,6 @@ body {
   background-color: rgba(255, 255, 255, 0.5);
   z-index: 2;
   margin-bottom: 2px;
-  cursor: pointer;
 }
 
 .all-time-line {
@@ -187,69 +201,46 @@ body {
   height: 32px;
 }
 
-.volume {
-  width: 160px;
-  align-self: center;
-  height: 6px;
-}
-
-.vol-line-block {
-  margin-left: 8px;
-  justify-self: flex-start;
-  align-self: center;
-  width: 160px;
-  height: 6px;
-  z-index: 1;
-  background-color: rgba(255, 255, 255, 0.3);
-  border-radius: 6px;
-  z-index: 3;
-  cursor: pointer;
-}
-
 .vol-line {
-  z-index: 2;
-  height: 100%;
-  width: 0%;
-  background-color: rgba(255, 255, 255, 0.8);
-  border-radius: 6px;
+  width: 160px;
+  align-self: center;
+  height: 6px;
 }
 
-.progress {
+.progress-style {
   -webkit-appearance: none;
   appearance: none;
   height: 6px;
-  background: rgba(255, 255, 255, 0.5);
   width: 100%;
+  background: rgba(255, 255, 255, 0.5);
   border-radius: 3px;
 }
 
-.progress::-webkit-slider-thumb {
+.progress-style::-webkit-slider-thumb {
   -webkit-appearance: none;
   margin-top: -6px;
   margin-left: 0px;
   height: 16px;
   width: 10px;
-  border: 0;
+  /* border: 0; */
   background: rgba(255, 255, 255);
   border-radius: 50%;
-  cursor: pointer;
 }
 
-.progress::-webkit-slider-runnable-track {
+.progress-style::-webkit-slider-runnable-track {
   -webkit-appearance: none;
   appearance: none;
-  cursor: pointer;
   max-height: 5px;
   border-radius: 30px;
 }
 
-.progress:focus {
+.progress-style:focus {
   outline: none;
 }
 
 .play-title {
   text-align: center;
-  opacity: .7;
+  opacity: .8;
 }
 
 .play-time {
@@ -259,14 +250,14 @@ body {
   margin-bottom: 8px;
 }
 
-.play-cur-time {
+.play-current-time {
   font-size: 0.8rem;
-  opacity: .6;
+  opacity: .8;
 }
 
-.play-dur-time {
+.play-duration-time {
   font-size: 0.8rem;
-  opacity: .6;
+  opacity: .8;
 }
 
 /* Weather */
@@ -335,7 +326,6 @@ body {
   position: absolute;
   top: 50%;
   margin-top: -16px;
-  cursor: pointer;
 }
 
 .slide-prev {

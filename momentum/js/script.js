@@ -176,37 +176,35 @@ const audioPlayPrevButton = document.querySelector('.play-prev');
 const audioPlayList = document.querySelector('.play-list');
 
 const soundTittle = document.querySelector(".play-title");
-const volButton = document.querySelector(".vol-mute");
+const volumeButton = document.querySelector(".vol-mute");
 const audioProgress = document.querySelector(".progress-bar");
-const audioVolume = document.querySelector('.volume');
-const audioExactTime = document.querySelector(".play-cur-time");
-const audioDurationTime = document.querySelector(".play-dur-time");
-
+const audioVolume = document.querySelector('.vol-line');
+const audioCurrentTime = document.querySelector(".play-current-time");
+const audioDurationTime = document.querySelector(".play-duration-time");
 
 let isPlay = false;
 let playNum = 0;
 let activeSong = [];
 let currentVolume;
-let playListBtn;
-let currentTimeGlobal = 0;
+let playListItem;
+let currentTimeValue = 0;
 
 function playAudio() {
   const itemActive = document.querySelectorAll('li.item-active');
   if (itemActive.length) itemActive[0].classList.remove('item-active');
-
-  playListBtn.forEach(song => {
+  playListItem.forEach(song => {
     if (song.classList.contains('play-item-pause')) song.classList.remove('play-item-pause');
   });
   audio.src = playList[playNum].src;
-  audio.currentTime = currentTimeGlobal;
+  audio.currentTime = currentTimeValue;
   setDurationTime(playList[playNum].duration);
   if (!isPlay) {
     isPlay = true;
     audio.play();
     audio.volume = audioVolume.value/100;
     activeSong[playNum].classList.add('item-active');
-    playListBtn[playNum].classList.add('play-item-pause');
-    setExactTime();
+    playListItem[playNum].classList.add('play-item-pause');
+    setCurrentTime();
   } else {
     isPlay = false;
     audio.pause();
@@ -215,17 +213,17 @@ function playAudio() {
 }
 
 function playChoosenAudio() {
-  for (let i = 0; i < playListBtn.length; i++) {        
-    playListBtn[i].addEventListener('click', function() {
+  for (let i = 0; i < playListItem.length; i++) {        
+    playListItem[i].addEventListener('click', function() {
       if (i == playNum && isPlay) {
         isPlay = true;
-        currentTimeGlobal = audio.currentTime;
+        currentTimeValue = audio.currentTime;
         playAudio();
         addPauseButton();
       } else {
-        if (i != playNum) currentTimeGlobal = 0;
-        playListBtn.forEach((item) => item.classList.remove('play-item-pause'))
-        playListBtn[i].classList.add('play-item-pause');
+        if (i != playNum) currentTimeValue = 0;
+        playListItem.forEach((item) => item.classList.remove('play-item-pause'))
+        playListItem[i].classList.add('play-item-pause');
         playNum = i;
         isPlay = false;
         playAudio();
@@ -246,7 +244,7 @@ function addPauseButton() {
 function playNextAudio() {
   (playNum == playList.length-1) ? playNum = 0 : playNum++;
   isPlay = false;
-  currentTimeGlobal = 0;
+  currentTimeValue = 0;
   addPauseButton();
   playAudio();
 }
@@ -254,7 +252,7 @@ function playNextAudio() {
 function playPrevAudio() {
   (playNum == 0) ? playNum == playList.length-1 : playNum--;
   isPlay = false;
-  currentTimeGlobal = 0;
+  currentTimeValue = 0;
   addPauseButton();
   playAudio();
 }
@@ -265,13 +263,14 @@ function createPlayList() {
     li.classList.add('play-item');
     li.textContent = song.title;
     audioPlayList.append(li);
-    const btn = document.createElement('span');
-    btn.classList.add('play');
-    btn.classList.add('play-item-btn');
-    li.append(btn);
+    const item = document.createElement('span');
+    item.classList.add('play');
+    item.classList.add('play-item-btn');
+    li.append(item);
   });
   activeSong = document.querySelectorAll('.play-item');
-  playListBtn = document.querySelectorAll('.play-item-btn');
+  playListItem = document.querySelectorAll('.play-item-btn');
+  playChoosenAudio();
 }
 
 function setSoundName(title) {
@@ -279,41 +278,41 @@ function setSoundName(title) {
 }
 
 function setValue() {
-  audio.volume = audioVolume.value/100;
+  audio.volume = audioVolume.value / 100;
 }
 
 function muteAudio() {
   if (audioVolume.value > 0) {
       currentVolume = audioVolume.value;
       audioVolume.value = 0;
-      volButton.classList.add('mute-icon');
+      volumeButton.classList.add('mute-icon');
       setValue();
   } else {
       audioVolume.value = currentVolume;
-      volButton.classList.remove('mute-icon');
+      volumeButton.classList.remove('mute-icon');
       setValue();
   }
 }
 
-function updateProgress(e) {
-  const {currentTime, duration} = e.target;
+function renewProgress(elem) {
+  const {currentTime, duration} = elem.target;
   const currentValue = currentTime / duration * 100;
   if (!isNaN(currentValue))  {
-      currentTimeGlobal = currentTime; 
+      currentTimeValue = currentTime; 
       audioProgress.value = currentValue;
   }
 }
 
 function setProgress() {
   const audioDuration = audio.duration;
-  audio.currentTime = audioProgress.value / 100 * audioDuration;
-  audio.addEventListener('timeupdate', updateProgress);
+  if (!isNaN(audioDuration)) audio.currentTime = audioProgress.value / 100 * audioDuration;
+  audio.addEventListener('timeupdate', renewProgress);
 }
 
 function convertTime(duration) {
   let minutes, seconds, minutesString, secondsString;
-  minutes = Math.floor(duration/60);
-  seconds = Math.floor(duration%60);
+  minutes = Math.floor(duration / 60);
+  seconds = Math.floor(duration % 60);
   minutesString = (minutes < 10) ? "0" + String(minutes) : String(minutes);
   secondsString = (seconds < 10) ? "0" + String(seconds) : String(seconds);
   return `${minutesString}:${secondsString}`;
@@ -323,9 +322,9 @@ function setDurationTime(duration) {
   audioDurationTime.innerHTML = convertTime(duration);
 }
 
-function setExactTime() {
-  audioExactTime.innerHTML = convertTime(currentTimeGlobal);
-  setTimeout(setExactTime, 500);
+function setCurrentTime() {
+  audioCurrentTime.innerHTML = convertTime(currentTimeValue);
+  setTimeout(setCurrentTime, 500);
 }
 
 createPlayList();
@@ -334,13 +333,12 @@ audioPlayButton.addEventListener('click', toggleButton);
 audioPlayNextButton.addEventListener('click', playNextAudio);
 audioPlayPrevButton.addEventListener('click', playPrevAudio);
 audio.addEventListener('ended', playNextAudio);
-playChoosenAudio();
-volButton.addEventListener('click', muteAudio);
+volumeButton.addEventListener('click', muteAudio);
 audioVolume.addEventListener('change', setValue);
 audioProgress.addEventListener('change', setProgress);
-audio.addEventListener('timeupdate', updateProgress);
+audio.addEventListener('timeupdate', renewProgress);
 audioProgress.oninput = function() {
-  audio.removeEventListener('timeupdate', updateProgress);
+  audio.removeEventListener('timeupdate', renewProgress);
 }
 
 // Import
