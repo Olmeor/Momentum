@@ -406,6 +406,8 @@ body {
   opacity: .6;
 }
 
+/* Footer */
+
 .footer {
   display: flex;
   /* flex-direction: column; */
@@ -431,6 +433,44 @@ body {
   min-height: 20px;
 }
 
+.settings-wrapper {
+  display: flex;
+	gap: 20px;
+	left: 20px;
+	bottom: 20px;
+	align-items: center;
+  min-width: 140px;
+}
+
+.social-wrapper {
+  display: flex;
+	gap: 20px;
+	right: 20px;
+	bottom: 20px;
+	align-items: center;
+}
+
+.social-wrapper img {
+  display: block;
+}
+
+.settings {
+  background-image: url("../assets/svg/settings.svg");
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-color: transparent;
+  width: 35px;
+  height: 35px;
+  border: 0;
+  opacity: 0.8;
+  transition: all 0.3s ease;
+}
+
+.settings:hover {
+	transform: rotate(90deg);
+  opacity: 1;
+}
+
 .language {
   background-image: url("../assets/svg/united-kingdom-flag-icon.svg");
   background-position: center center;
@@ -443,23 +483,6 @@ body {
 
 .language-ru {
   background-image: url("../assets/svg/russia-flag-icon.svg");
-}
-
-.settings-wrapper,
-.social-wrapper {
-  display: flex;
-	gap: 20px;
-	right: 20px;
-	bottom: 20px;
-	align-items: center;
-}
-
-.settings-wrapper {
-  min-width: 140px;
-}
-
-.social-wrapper img {
-  display: block;
 }
 
 
