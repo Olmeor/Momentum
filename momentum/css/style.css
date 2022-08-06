@@ -289,12 +289,12 @@ body {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  align-items: flex-start;
+  /* align-items: flex-start; */
   row-gap: 5px;
   width: 180px;
   min-height: 180px;
   height: 268px; /* need resize observer*/
-  text-align: left;
+  /* text-align: left; */
   position: relative;
   opacity: .8;
 }
@@ -313,6 +313,12 @@ body {
 
 .weather-icon {
   font-size: 80px;
+}
+
+.weather-temperature,
+.weather-wind,
+.weather-humidity {
+  display: flex;
 }
 
 .city {
@@ -459,8 +465,8 @@ body {
   background-position: center center;
   background-repeat: no-repeat;
   background-color: transparent;
-  width: 35px;
-  height: 35px;
+  width: 30px;
+  height: 30px;
   border: 0;
   opacity: 0.8;
   transition: all 0.3s ease;
