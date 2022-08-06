@@ -1,3 +1,52 @@
+// Translation
+
+const langButton = document.querySelector(".language");
+let currentLang = localStorage.getItem('language') ?? 'en';
+const translation = {
+  en: {
+    placeholder: "[Enter name]",
+    night: "Good night,",
+    morning: "Good morning,",
+    afternoon: "Good afternoon,",
+    evening: "Good evening,",
+    temperature: "Temperature",
+    windSpeed: "Wind speed",
+    windSpeedUnit: "m/s",
+    humidity: "Humidity",
+    dataLanguage: "en-EN",
+    defaultCity: "Minsk",
+  },
+  ru: {
+    placeholder: "[Введите имя]",
+    night: "Доброй ночи,",
+    morning: "Доброе утро,",
+    afternoon: "Добрый день,",
+    evening: "Добрый вечер,",
+    temperature: "Температура",
+    windSpeed: "Скорость верта",
+    windSpeedUnit: "м/с",
+    humidity: "Влажность",
+    dataLanguage: "ru-RU",
+    defaultCity: "Минск",
+  },
+};
+
+function translate() {
+  if (currentLang == 'en') {
+    langButton.classList.add('language-ru');
+    currentLang = 'ru';
+  } else {
+    langButton.classList.remove('language-ru');
+    currentLang = 'en';
+  }
+  getQuotes();
+  getWeather();
+  setPlaceholder();
+  setCity();
+}
+
+langButton.addEventListener('click', translate);
+
 // Clock and calendar
 
 const time = document.querySelector('.time');
@@ -14,13 +63,10 @@ function showTime() {
 
 function showDate() {
   let dateValue = new Date();
-  // const options = {weekday: 'long', month: 'long', day: 'numeric', /* year: 'numeric', hour: 'numeric', minute: 'numeric', timeZone: 'UTC'*/};
-  // const currentDate = dateValue.toLocaleDateString('ru-Ru', options);
   const options = {weekday: 'long', month: 'long', day: 'numeric', /* year: 'numeric', hour: 'numeric', minute: 'numeric', timeZone: 'UTC'*/};
-  const currentDate = dateValue.toLocaleDateString('en-US', options);
+  const currentDate = dateValue.toLocaleDateString(translation[currentLang].dataLanguage, options);
   date.textContent = currentDate;
 }
-
 
 showTime();
 showDate();
@@ -30,7 +76,6 @@ showDate();
 const greeting = document.querySelector('.greeting');
 
 function getTimeOfDay() {
-  // const listTimeOfDay = ['Спокойной ночи', 'Доброе утро', 'Добрый день', 'Добрый вечер'];
   const listTimeOfDay = ['night', 'morning', 'afternoon', 'evening'];
   const dateValue = new Date();
   const hour = dateValue.getHours();
@@ -39,19 +84,23 @@ function getTimeOfDay() {
 
 function showGreeting() {
   const timeOfDay = getTimeOfDay();
-  const greetingText = `Good ${timeOfDay},`;
+  const greetingText = `${translation[currentLang][timeOfDay]}`;
   greeting.textContent = greetingText;
 }
 
 showGreeting();
 
-// Input name
+// Input name, Local Storage
 
 const forename = document.querySelector('.name');
 
 function setLocalStorage() {
   localStorage.setItem('name', forename.value);
-  localStorage.setItem('city', city.value ?? 'Minsk');
+  // city.value = (!localStorage.getItem('city')) ? city.value = translation[currentLang].defaultCity : city.value = localStorage.getItem('city');
+  if (city.value != translation[currentLang].defaultCity) {
+    localStorage.setItem('city', city.value); // ?? translation[currentLang].defaultCity
+  }
+  localStorage.setItem('language', currentLang);
 }
 
 function getLocalStorage() {
@@ -61,8 +110,17 @@ function getLocalStorage() {
   if (localStorage.getItem('city')) {
     city.value = localStorage.getItem('city');
   }
+  if (localStorage.getItem('language')) {
+    currentLang = localStorage.getItem('language');
+    (currentLang == 'en') || langButton.classList.add('language-ru');
+  }
 }
 
+function setPlaceholder() {
+  forename.placeholder = `${translation[currentLang].placeholder}`;
+}
+
+setPlaceholder();
 window.addEventListener('beforeunload', setLocalStorage);
 window.addEventListener('load', getLocalStorage);
 
@@ -110,24 +168,26 @@ const weatherWind = document.querySelector('.wind');
 const weatherHumidity = document.querySelector('.humidity');
 const weatherError = document.querySelector('.weather-error');
 let city = document.querySelector('.city');
-city.value = (!localStorage.getItem('city')) ? city.value = 'Minsk' : city.value = localStorage.getItem('city');
+
+
+function setCity() {
+  city.value = (!localStorage.getItem('city')) ? city.value = translation[currentLang].defaultCity : city.value = localStorage.getItem('city');
+}
 
 async function getWeather() {
-
   try {
-    const url = `https://api.openweathermap.org/data/2.5/weather?q=${city.value}&lang=en&appid=7153241524dddce83603c2b94a1ad19c&units=metric`;
+    const url = `https://api.openweathermap.org/data/2.5/weather?q=${city.value}&lang=${currentLang}&appid=7153241524dddce83603c2b94a1ad19c&units=metric`;
     const res = await fetch(url);
     const data = await res.json();
-    // console.log(data.weather[0].id, data.weather[0].description, data.main.temp, city.value);
     weatherError.textContent = ``;
     weatherIcon.className = 'weather-icon owf';
     weatherIcon.classList.add(`owf-${data.weather[0].id}`);
-    weatherTemperature.textContent = `Temperature: ${Math.round(data.main.temp)}°C`;
-    weatherWind.textContent = `Wind speed: ${Math.round(data.wind.speed)} m/s`;
-    weatherHumidity.textContent = `Humidity: ${Math.round(data.main.humidity)}%`;
+    weatherTemperature.textContent = `${translation[currentLang].temperature}: ${Math.round(data.main.temp)}°C`;
+    weatherWind.textContent = `${translation[currentLang].windSpeed}: ${Math.round(data.wind.speed)} ${translation[currentLang].windSpeedUnit}`;
+    weatherHumidity.textContent = `${translation[currentLang].humidity}: ${Math.round(data.main.humidity)}%`;
     weatherDescription.textContent = data.weather[0].description;
   } catch {
-    const url = `https://api.openweathermap.org/data/2.5/weather?q=${city.value}&lang=en&appid=7153241524dddce83603c2b94a1ad19c&units=metric`;
+    const url = `https://api.openweathermap.org/data/2.5/weather?q=${city.value}&lang=${currentLang}&appid=7153241524dddce83603c2b94a1ad19c&units=metric`;
     const res = await fetch(url);
     const data = await res.json();
     weatherIcon.className = '';
@@ -143,6 +203,7 @@ async function getWeather() {
   }
 }
 
+setCity();
 getWeather();
 city.addEventListener('change', getWeather);
 
@@ -152,8 +213,8 @@ const quoteButton = document.querySelector('.change-quote');
 const quoteText = document.querySelector('.quote');
 const quoteAuthor = document.querySelector('.author');
 
-async function changeQuotes() {  
-  const quotes = './assets/quotes/quotes-eng.json';
+async function changeQuotes() {
+  const quotes = `./assets/quotes/quotes-${currentLang}.json`;
   const res = await fetch(quotes);
   const data = await res.json();
   quoteText.innerHTML = `"${data[getRandomNum(data.length)].text}"`;
@@ -341,6 +402,9 @@ audioProgress.oninput = function() {
   audio.removeEventListener('timeupdate', renewProgress);
 }
 
+
+
 // Import
 
 import playList from './playList.js';
+

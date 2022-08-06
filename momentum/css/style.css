@@ -14,7 +14,8 @@ button,
 html input[type="button"],
 input[type="reset"],
 input[type="submit"],
-input[type="range"] {
+input[type="range"],
+input[type="text"] {
   cursor: pointer;
   overflow: visible;
 }
@@ -57,7 +58,7 @@ body {
 
 .player::before,
 .weather::before {
-  display: block;
+  	display: block;
 	content: "";
 	position: absolute;
 	left: -20px;
@@ -65,7 +66,7 @@ body {
 	width: calc(100% + 40px);
 	height: calc(100% + 40px);
 	background-color: #FFFFFF10;
-	/* z-index: -1; */
+	z-index: -1;
 }
 
 .player::before {
@@ -325,12 +326,7 @@ body {
   outline: 0;
   border-bottom: 1px solid #fff;
   background-color: transparent;
-}
-
-.city::placeholder {  
-  font-size: 20px;
-  color: #fff;
-  opacity: .6;
+  z-index: 1;
 }
 
 /* Background slider*/
@@ -412,13 +408,14 @@ body {
 
 .footer {
   display: flex;
-  flex-direction: column;
-  justify-content: flex-end;
-  align-items: center;
+  /* flex-direction: column; */
+  justify-content: space-between;
+  align-items: flex-end;
   width: 100%;
   height: 30vh;
   min-height: 160px;  
   padding: 20px;
+  gap: 30px;
 }
 
 .change-quote {
@@ -433,6 +430,38 @@ body {
 .author {
   min-height: 20px;
 }
+
+.language {
+  background-image: url("../assets/svg/united-kingdom-flag-icon.svg");
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-color: transparent;
+  width: 45px;
+  height: 30px;
+  border: 0;
+}
+
+.language-ru {
+  background-image: url("../assets/svg/russia-flag-icon.svg");
+}
+
+.settings-wrapper,
+.social-wrapper {
+  display: flex;
+	gap: 20px;
+	right: 20px;
+	bottom: 20px;
+	align-items: center;
+}
+
+.settings-wrapper {
+  min-width: 140px;
+}
+
+.social-wrapper img {
+  display: block;
+}
+
 
 @media (max-width: 768px) {
   .time {
