@@ -47,77 +47,76 @@
       <button class="slide-prev slider-icon"></button>
       <button class="slide-next slider-icon"></button>
     </div>
-    <time class="time"></time>
+    <time class="time timeBlock"></time>
     <date class="date"></date>
     <div class="greeting-container">
       <span class="greeting"></span>
       <input type="text" class="name" />
     </div>
-    <div class="settings-container">
-      <!-- ----------------------------------------------- -->
+    <form name="form" class="settings-form" action="#">
       <div class="settings-content">
         <div class="settings-block">
-          <b class="setting-time">Часы</b>
-          <i>
-            <input type="checkbox" id="switch-time" checked="">
+          <p class="setting-lang">Язык</p>
+          <span class="input-checkbox">
+            <input checked type="checkbox" class="checkbox" id="switch-lang">
+            <label for="switch-lang" class="toggler toggle-lang"></label>
+          </span>
+        </div>
+        <div class="settings-block">
+          <p class="setting-time">Время</p>
+          <span class="input-checkbox">
+            <input checked type="checkbox" class="checkbox" id="switch-time" name="timeBlock">
             <label for="switch-time" class="toggler toggle-time"></label>
-          </i>
+          </span>
         </div>
         <div class="settings-block">
-          <b class="setting-date">Дата</b>
-          <i>
-            <input type="checkbox" id="switch-date" checked="">
+          <p class="setting-date">Дата</p>
+          <span class="input-checkbox">
+            <input checked type="checkbox" class="checkbox" id="switch-date" name="dateBlock">
             <label for="switch-date" class="toggler toggle-date"></label>
-          </i>
+          </span>
         </div>
         <div class="settings-block">
-          <b class="setting-greeting">Приветствие</b>
-          <i>
-            <input type="checkbox" id="switch-greeting" checked="">
+          <p class="setting-greeting">Приветствие</p>
+          <span class="input-checkbox">
+            <input checked type="checkbox" class="checkbox" id="switch-greeting" name="greetingBlock">
             <label for="switch-greeting" class="toggler toggle-greeting"></label>
-          </i>
+          </span>
         </div>
         <div class="settings-block">
-          <b class="setting-quote">Цитаты</b>
-          <i>
-            <input type="checkbox" id="switch-quote" checked="">
+          <p class="setting-quotes">Цитаты</p>
+          <span class="input-checkbox">
+            <input checked type="checkbox" class="checkbox" id="switch-quote" name="quotesBlock">
             <label for="switch-quote" class="toggler toggle-quote"></label>
-          </i>
+          </span>
         </div>
         <div class="settings-block">
-          <b class="setting-weather">Погода</b>
-          <i>
-            <input type="checkbox" id="switch-weather" checked="">
-            <label for="switch-weather" class="toggler toggle-weather"></label>
-          </i>
-        </div>
-        <div class="settings-block">
-          <b class="setting-audio">Аудио плеер</b>
-          <i>
-            <input type="checkbox" id="switch-audio" checked="">
+          <p class="setting-audio">Аудио плеер</p>
+          <span class="input-checkbox">
+            <input checked type="checkbox" class="checkbox" id="switch-audio" name="playerBlock">
             <label for="switch-audio" class="toggler toggle-audio"></label>
-          </i>
+          </span>
         </div>
         <div class="settings-block">
-          <b class="setting-bg">Бэкграунд</b>
+          <p class="setting-weather">Погода</p>
+          <span class="input-checkbox">
+            <input checked type="checkbox" class="checkbox" id="switch-weather" name="weatherBlock">
+            <label for="switch-weather" class="toggler toggle-weather"></label>
+          </span>
+        </div>
+        <div class="settings-block">
+          <p class="setting-bg">Бэкграунд</p>
           <div class="setting-bg-container">
             <select class="setting-bg-select">
-              <option value="0">Github</option>
+              <option value="0" selected>Github</option>
               <option value="1">Unsplash API</option>
               <option value="2">Flickr API</option>
             </select>
-            <!-- <input type="text" placeholder="tag" class="setting-bg-tag"> -->
           </div>
         </div>
-        <div class="settings-block">
-          <b class="setting-lang">Язык</b>
-          <i>
-            <input type="checkbox" id="switch-lang">
-            <label for="switch-lang" class="toggler toggle-lang"></label>
-          </i>
-        </div>
+        <!-- <input type="text" placeholder="theme" class="setting-bg-tag"> -->
       </div>
-    </div>
+    </form>
   </main>
   <footer class="footer">
     <div class="settings-wrapper">
@@ -150,16 +149,24 @@
 const translation = {
   en: {
     placeholder: "[Enter name]",
-    night: "Good night",
-    morning: "Good morning",
-    afternoon: "Good afternoon",
-    evening: "Good evening",
+    night: "Good night,",
+    morning: "Good morning,",
+    afternoon: "Good afternoon,",
+    evening: "Good evening,",
     temperature: "Temperature",
     windSpeed: "Wind speed",
     windSpeedUnit: "m/s",
     humidity: "Humidity",
     dataLanguage: "en-EN",
     defaultCity: "Minsk",
+    language: "Language",
+    time: "Time",
+    date: "Date",
+    greeting: "Greeting",
+    quotes: "Quotes",
+    weather: "Weather",
+    audioPlayer: "Audio player",
+    background: "Background",
   },
   ru: {
     placeholder: "[Введите имя]",
@@ -173,6 +180,14 @@ const translation = {
     humidity: "Влажность",
     dataLanguage: "ru-RU",
     defaultCity: "Минск",
+    language: "Язык",
+    time: "Время",
+    date: "Дата",
+    greeting: "Приветствие",
+    quotes: "Цитаты",
+    weather: "Погода",
+    audioPlayer: "Аудио плеер",
+    background: "Background",
   },
 };
  -->

@@ -15,6 +15,14 @@ const translation = {
     humidity: "Humidity",
     dataLanguage: "en-EN",
     defaultCity: "Minsk",
+    language: "Language",
+    time: "Time",
+    date: "Date",
+    greeting: "Greeting",
+    quotes: "Quotes",
+    weather: "Weather",
+    audioPlayer: "Audio player",
+    background: "Background",
   },
   ru: {
     placeholder: "[Введите имя]",
@@ -28,6 +36,14 @@ const translation = {
     humidity: "Влажность",
     dataLanguage: "ru-RU",
     defaultCity: "Минск",
+    language: "Язык",
+    time: "Время",
+    date: "Дата",
+    greeting: "Приветствие",
+    quotes: "Цитаты",
+    weather: "Погода",
+    audioPlayer: "Аудио плеер",
+    background: "Фон",
   },
 };
 
@@ -43,6 +59,7 @@ function translate() {
   getWeather();
   setPlaceholder();
   setCity();
+  setSettingLang();
 }
 
 langButton.addEventListener('click', translate);
@@ -402,7 +419,87 @@ audioProgress.oninput = function() {
   audio.removeEventListener('timeupdate', renewProgress);
 }
 
+// Settings menu
+const settingsButton = document.querySelector('.settings');
+const settingsForm = document.querySelector('.settings-form');
+const mainForm = document.forms.form;
+const timeBlock = document.querySelector('.time');
+const dateBlock = document.querySelector('.date');
+const greetingBlock = document.querySelector('.greeting-container');
+const quotesBlock = document.querySelector('.quote-wrapper');
+const playerBlock = document.querySelector('.player');
+const weatherBlock = document.querySelector('.weather');
+let objChecked = {
+  timeBlock: 1,
+  dateBlock: 1,
+  greetingBlock: 1,
+  quotesBlock: 1,
+  playerBlock: 1,
+  weatherBlock: 1,
+}
 
+settingsButton.addEventListener('click', e => {
+  e.stopPropagation();
+  settingsForm.classList.toggle('settings-open');
+});
+
+document.addEventListener('click', e => {
+	let element = e.target;
+	let settingCheck = element == settingsForm;
+	if (settingsForm.classList.contains('settings-open') && !settingCheck) {
+		settingsForm.classList.remove('settings-open');
+	}
+});
+
+// for (let key in objChecked) console.log (key, objChecked[key], mainForm[key].checked);
+
+function toggleSettings() {
+  for (let key in objChecked) {
+    if (mainForm[key].checked != Boolean(objChecked[key])) {
+      objChecked[key] = Math.abs(objChecked[key] - 1);
+      toggleSettingBlock(key);
+    }
+  }
+}
+
+function toggleSettingBlock(key) {
+  console.log(key, typeof(key));
+  switch(key) {
+    case 0:
+      //
+    case 'timeBlock':
+      timeBlock.classList.toggle('hidden-block');
+      break;
+    case 'dateBlock':
+      dateBlock.classList.toggle('hidden-block');
+      break;
+    case 'greetingBlock':
+      greetingBlock.classList.toggle('hidden-block');
+      break;
+    case 'quotesBlock':
+      quotesBlock.classList.toggle('hidden-block');
+      break;
+    case 'playerBlock':
+      playerBlock.classList.toggle('hidden-block');
+      break;
+    case 'weatherBlock':
+      weatherBlock.classList.toggle('hidden-block');
+      break;
+  }
+}
+
+function setSettingLang() {
+  document.querySelector('.setting-lang').textContent = `${translation[currentLang].language}`;
+  document.querySelector('.setting-time').textContent = `${translation[currentLang].time}`;
+  document.querySelector('.setting-date').textContent = `${translation[currentLang].date}`;
+  document.querySelector('.setting-greeting').textContent= `${translation[currentLang].greeting}`;
+  document.querySelector('.setting-quotes').textContent= `${translation[currentLang].quotes}`;
+  document.querySelector('.setting-weather').textContent = `${translation[currentLang].weather}`;
+  document.querySelector('.setting-audio').textContent = `${translation[currentLang].audioPlayer}`;
+  document.querySelector('.setting-bg').textContent = `${translation[currentLang].background}`;
+}
+setSettingLang();
+mainForm.addEventListener("change", toggleSettings);
 
 // Import
 
