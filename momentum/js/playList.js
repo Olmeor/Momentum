@@ -19,6 +19,11 @@ const playList = [
     src: './assets/sounds/Summer Wind.mp3',
     duration: 110,
   },
+  {
+    title: 'The X-Files',
+    src: './assets/sounds/The X-Files.mp3',
+    duration: 41,
+  },
 ];
 
 export default playList;
