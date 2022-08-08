@@ -422,6 +422,7 @@ audioProgress.oninput = function() {
 // Settings menu
 const settingsButton = document.querySelector('.settings');
 const settingsForm = document.querySelector('.settings-form');
+const settingsMenu = document.querySelector('.settings-wrapper');
 const mainForm = document.forms.form;
 const timeBlock = document.querySelector('.time');
 const dateBlock = document.querySelector('.date');
@@ -438,18 +439,17 @@ let objChecked = {
   weatherBlock: 1,
 }
 
-settingsButton.addEventListener('click', e => {
-  e.stopPropagation();
+function toggleSettingsMenu() {
   settingsForm.classList.toggle('settings-open');
-});
+  settingsMenu.classList.toggle('settings-menu-shadow');
+}
 
-document.addEventListener('click', e => {
-	let element = e.target;
-	let settingCheck = element == settingsForm;
-	if (settingsForm.classList.contains('settings-open') && !settingCheck) {
-		settingsForm.classList.remove('settings-open');
-	}
-});
+settingsButton.addEventListener('click', toggleSettingsMenu);
+settingsMenu.addEventListener('click', (e) => {
+  if (e.target === settingsMenu) {
+    toggleSettingsMenu();
+  }
+})
 
 // for (let key in objChecked) console.log (key, objChecked[key], mainForm[key].checked);
 
