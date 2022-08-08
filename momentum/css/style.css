@@ -112,7 +112,7 @@ body {
   /* padding-left: 20px; */
   list-style: none;
   opacity: .8;
-  transition: .3s;
+  /* transition: .3s; */
   display: flex;
   justify-content: space-between;
   width: 200px;
@@ -501,20 +501,6 @@ body {
   opacity: 1;
 }
 
-.language {
-  background-image: url("../assets/svg/united-kingdom-flag-icon.svg");
-  background-position: center center;
-  background-repeat: no-repeat;
-  background-color: transparent;
-  width: 45px;
-  height: 30px;
-  border: 0;
-}
-
-.language-ru {
-  background-image: url("../assets/svg/russia-flag-icon.svg");
-}
-
 /* Settings */
 
 .settings-form {
@@ -534,24 +520,20 @@ body {
   z-index: 3;
   width: 100%;
   height: 100%;
-  /* transition: all 0.3s; */
   background-color: rgba(0, 0, 0, .3);
   left: 0;
   bottom: 0;
 }
 
 .settings-content {
-	padding: 20px;
-	/* position: absolute; */
-	/* left: -240px; */
-	/* bottom: 80px; */
-	box-sizing: border-box;
 	display: flex;
 	flex-direction: column;
+  padding: 20px;
+  width: 270px;
+	box-sizing: border-box;
 	gap: 15px;
 	background-color: #FFFFFF20;
 	border-radius: 20px;
-	/* color: rgb(255 255 255); */
 	transition: all 0.4s ease;
 }
 
@@ -569,6 +551,10 @@ body {
 	user-select: none;
 	/* font-weight: normal; */
 	line-height: 20px;
+}
+
+.setting-lang {
+  padding-top: 7px;
 }
 
 /* label */
@@ -612,11 +598,11 @@ input + .toggle-lang {
 	border-radius: 0;
   /* width: 30px; */
   height: 27px;
-	background: url("../assets/svg/russia-flag-icon.svg");
+	background: url("../assets/svg/united-kingdom-flag-icon.svg");
 }
 
 input:checked + .toggle-lang {
-	background: url("../assets/svg/united-kingdom-flag-icon.svg");
+	background: url("../assets/svg/russia-flag-icon.svg");
 	/* background-position-y: 1.2px; */
 }
 

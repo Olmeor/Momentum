@@ -1,6 +1,5 @@
 // Translation
 
-const langButton = document.querySelector(".language");
 let currentLang = localStorage.getItem('language') ?? 'en';
 const translation = {
   en: {
@@ -15,7 +14,7 @@ const translation = {
     humidity: "Humidity",
     dataLanguage: "en-EN",
     defaultCity: "Minsk",
-    language: "Language",
+    language: "Change language",
     time: "Time",
     date: "Date",
     greeting: "Greeting",
@@ -36,7 +35,7 @@ const translation = {
     humidity: "Влажность",
     dataLanguage: "ru-RU",
     defaultCity: "Минск",
-    language: "Язык",
+    language: "Изменить язык",
     time: "Время",
     date: "Дата",
     greeting: "Приветствие",
@@ -48,24 +47,24 @@ const translation = {
 };
 
 function translate() {
-  if (currentLang == 'en') {
-    langButton.classList.add('language-ru');
-    currentLang = 'ru';
-  } else {
-    langButton.classList.remove('language-ru');
-    currentLang = 'en';
-  }
+  // if (currentLang == 'en') {
+  //   langButton.classList.add('language-ru');
+  //   currentLang = 'ru';
+  // } else {
+  //   langButton.classList.remove('language-ru');
+  //   currentLang = 'en';
+  // }
+  (currentLang == 'en') ? currentLang = 'ru' : currentLang = 'en';
   getQuotes();
   getWeather();
   setPlaceholder();
   setCity();
-  setSettingLang();
+  // setSettingLang();
 }
 
-langButton.addEventListener('click', translate);
+// langButton.addEventListener('click', translate);
 
 // Clock and calendar
-
 const time = document.querySelector('.time');
 const date = document.querySelector('.date');
 
@@ -104,7 +103,6 @@ function showGreeting() {
   const greetingText = `${translation[currentLang][timeOfDay]}`;
   greeting.textContent = greetingText;
 }
-
 showGreeting();
 
 // Input name, Local Storage
@@ -113,11 +111,11 @@ const forename = document.querySelector('.name');
 
 function setLocalStorage() {
   localStorage.setItem('name', forename.value);
-  // city.value = (!localStorage.getItem('city')) ? city.value = translation[currentLang].defaultCity : city.value = localStorage.getItem('city');
   if (city.value != translation[currentLang].defaultCity) {
-    localStorage.setItem('city', city.value); // ?? translation[currentLang].defaultCity
+    localStorage.setItem('city', city.value);
   }
-  localStorage.setItem('language', currentLang);
+  // localStorage.setItem('language', currentLang);
+  localStorage.setItem('settings', JSON.stringify(objChecked));
 }
 
 function getLocalStorage() {
@@ -127,10 +125,10 @@ function getLocalStorage() {
   if (localStorage.getItem('city')) {
     city.value = localStorage.getItem('city');
   }
-  if (localStorage.getItem('language')) {
-    currentLang = localStorage.getItem('language');
-    (currentLang == 'en') || langButton.classList.add('language-ru');
-  }
+  // if (localStorage.getItem('language')) {
+  //   currentLang = localStorage.getItem('language');
+  // }
+  objChecked = JSON.parse(localStorage.getItem('settings'));
 }
 
 function setPlaceholder() {
@@ -420,6 +418,7 @@ audioProgress.oninput = function() {
 }
 
 // Settings menu
+
 const settingsButton = document.querySelector('.settings');
 const settingsForm = document.querySelector('.settings-form');
 const settingsMenu = document.querySelector('.settings-wrapper');
@@ -430,43 +429,43 @@ const greetingBlock = document.querySelector('.greeting-container');
 const quotesBlock = document.querySelector('.quote-wrapper');
 const playerBlock = document.querySelector('.player');
 const weatherBlock = document.querySelector('.weather');
-let objChecked = {
-  timeBlock: 1,
-  dateBlock: 1,
-  greetingBlock: 1,
-  quotesBlock: 1,
-  playerBlock: 1,
-  weatherBlock: 1,
+
+let userSettings = {
+  languageButton: false,
+  // languageButton: true,
+  timeBlock: true,
+  dateBlock: true,
+  greetingBlock: true,
+  quotesBlock: true,
+  playerBlock: true,
+  weatherBlock: true,
 }
+
+let objChecked = JSON.parse(localStorage.getItem('settings')) ?? userSettings;
 
 function toggleSettingsMenu() {
   settingsForm.classList.toggle('settings-open');
   settingsMenu.classList.toggle('settings-menu-shadow');
 }
 
-settingsButton.addEventListener('click', toggleSettingsMenu);
-settingsMenu.addEventListener('click', (e) => {
-  if (e.target === settingsMenu) {
-    toggleSettingsMenu();
-  }
-})
-
 // for (let key in objChecked) console.log (key, objChecked[key], mainForm[key].checked);
 
 function toggleSettings() {
   for (let key in objChecked) {
-    if (mainForm[key].checked != Boolean(objChecked[key])) {
-      objChecked[key] = Math.abs(objChecked[key] - 1);
+    if (mainForm[key].checked != objChecked[key]) {
+      objChecked[key] = !objChecked[key];
+      // console.log(objChecked[key], !objChecked[key]);
       toggleSettingBlock(key);
     }
   }
 }
 
 function toggleSettingBlock(key) {
-  console.log(key, typeof(key));
   switch(key) {
-    case 0:
-      //
+    case 'languageButton':
+      translate();
+      setSettingLang();
+      break;
     case 'timeBlock':
       timeBlock.classList.toggle('hidden-block');
       break;
@@ -487,7 +486,6 @@ function toggleSettingBlock(key) {
       break;
   }
 }
-
 function setSettingLang() {
   document.querySelector('.setting-lang').textContent = `${translation[currentLang].language}`;
   document.querySelector('.setting-time').textContent = `${translation[currentLang].time}`;
@@ -498,8 +496,26 @@ function setSettingLang() {
   document.querySelector('.setting-audio').textContent = `${translation[currentLang].audioPlayer}`;
   document.querySelector('.setting-bg').textContent = `${translation[currentLang].background}`;
 }
+
+function setCheckedSettings() {
+  for (let key in objChecked) {
+    // console.log(key, mainForm[key].checked, objChecked[key]);
+    mainForm[key].checked = objChecked[key];
+    if (!mainForm[key].checked) toggleSettingBlock(key);
+  }
+}
+
+setCheckedSettings();
 setSettingLang();
+settingsButton.addEventListener('click', toggleSettingsMenu);
+settingsMenu.addEventListener('click', (e) => {
+  if (e.target === settingsMenu) {
+    toggleSettingsMenu();
+  }
+})
+
 mainForm.addEventListener("change", toggleSettings);
+
 
 // Import
 
