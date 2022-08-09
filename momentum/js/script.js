@@ -22,6 +22,7 @@ const translation = {
     weather: "Weather",
     audioPlayer: "Audio player",
     background: "Background",
+    bgPlaceholder: "Enter the theme",
   },
   ru: {
     placeholder: "[Введите имя]",
@@ -30,7 +31,7 @@ const translation = {
     afternoon: "Добрый день,",
     evening: "Добрый вечер,",
     temperature: "Температура",
-    windSpeed: "Скорость верта",
+    windSpeed: "Скорость ветра",
     windSpeedUnit: "м/с",
     humidity: "Влажность",
     dataLanguage: "ru-RU",
@@ -43,6 +44,7 @@ const translation = {
     weather: "Погода",
     audioPlayer: "Аудио плеер",
     background: "Фон",
+    bgPlaceholder: "Введите тему",
   },
 };
 
@@ -59,6 +61,7 @@ function translate() {
   getWeather();
   setPlaceholder();
   setCity();
+  setBgPlaceholder();
   // setSettingLang();
 }
 
@@ -114,7 +117,6 @@ function setLocalStorage() {
   if (city.value != translation[currentLang].defaultCity) {
     localStorage.setItem('city', city.value);
   }
-  // localStorage.setItem('language', currentLang);
   localStorage.setItem('settings', JSON.stringify(objChecked));
 }
 
@@ -125,9 +127,6 @@ function getLocalStorage() {
   if (localStorage.getItem('city')) {
     city.value = localStorage.getItem('city');
   }
-  // if (localStorage.getItem('language')) {
-  //   currentLang = localStorage.getItem('language');
-  // }
   objChecked = JSON.parse(localStorage.getItem('settings'));
 }
 
@@ -194,17 +193,15 @@ async function setBgFlickr() {
 
 function getSlideNext() {
   (randomNum == 20) ? randomNum = 1 : randomNum++;
-  setBgGithub(randomNum);
+  toggleBackground();
 }
 
 function getSlidePrev() {
   (randomNum == 1) ? randomNum = 20 : randomNum--;
-  setBgGithub(randomNum);
+  toggleBackground();
 }
 
 setBgGithub(randomNum);
-// setBgUnsplash();
-// setBgFlickr();
 slideNext.addEventListener('click', getSlideNext);
 slidePrev.addEventListener('click', getSlidePrev);
 
@@ -466,7 +463,6 @@ const weatherBlock = document.querySelector('.weather');
 
 let userSettings = {
   languageButton: false,
-  // languageButton: true,
   timeBlock: true,
   dateBlock: true,
   greetingBlock: true,
@@ -482,14 +478,14 @@ function toggleSettingsMenu() {
   settingsMenu.classList.toggle('settings-menu-shadow');
 }
 
-// for (let key in objChecked) console.log (key, objChecked[key], mainForm[key].checked);
+// for (let key in userSettings) console.log (key, objChecked[key], mainForm[key].checked);
 
 function toggleSettings() {
   for (let key in objChecked) {
     if (mainForm[key].checked != objChecked[key]) {
       objChecked[key] = !objChecked[key];
-      // console.log(objChecked[key], !objChecked[key]);
       toggleSettingBlock(key);
+      console.log(key);
     }
   }
 }
@@ -548,8 +544,91 @@ settingsMenu.addEventListener('click', (e) => {
   }
 })
 
-mainForm.addEventListener("change", toggleSettings);
+mainForm.addEventListener("change", () => {
+  console.log('пип настройки');
+  toggleSettings();
+})
 
+// mainForm.addEventListener("change", toggleSettings);
+// bgBlock.addEventListener("change", toggleSettings);
+
+// Change background
+
+const bgBlock = mainForm.backgroundBlock;
+const bgThemeBlock = mainForm.backgroundThemeBlock;
+let bgLink;
+
+let bgSettings = {
+  background: 'Github',
+  theme: 'nature',
+}
+console.log(bgBlock)
+console.log(bgBlock.options[bgBlock.selectedIndex].text);
+
+// function toggleBackground() {
+//   bgLink = bgBlock.options[bgBlock.selectedIndex].text;
+//   console.log(bgLink);
+//   setBackgroundLink(bgLink);
+// }
+
+function toggleBackground() {
+  // let backgroundLink = localStorage.getItem('link');
+  bgLink = bgBlock.options[bgBlock.selectedIndex].text;
+  console.log(bgLink);
+  switch(bgLink) {
+    case 'Github': 
+      setBgGithub();
+      break;
+    case 'Unsplash API': 
+      setBgUnsplash();
+      break;
+    case 'Flickr API':
+      setBgFlickr();
+      break;
+  }
+}
+
+function setBgPlaceholder() {
+  const bgThemeBlock = mainForm.backgroundThemeBlock;
+  bgThemeBlock.placeholder = `${translation[currentLang].bgPlaceholder}`;
+}
+
+setBgPlaceholder();
+
+bgBlock.addEventListener("change", () => {
+  console.log('пип фон');
+  toggleBackground();
+})
+
+/*
+console.log(mainForm);
+console.log(mainForm[7], mainForm[8]);
+console.log(mainForm.backgroundBlock, mainForm.bgThemeBlock);
+// const bgThemeBlock = mainForm.bgThemeBlock;
+console.log(bgThemeBlock);
+console.log(bgThemeBlock.value);
+bgThemeBlock.value = "Новый фон";
+console.log(bgThemeBlock.value);
+
+
+// Получить все options
+console.log(bgBlock.options);
+// Получить индекс выбранного option
+const bgBlockIndex = bgBlock.selectedIndex;
+console.log(bgBlockIndex);
+// Получить значение выбранного option
+const bgBlockValue = bgBlock.value;
+console.log(bgBlockValue);
+// Получить текст выбранного option
+const bgBlockText = bgBlock.options[bgBlockIndex].text;
+console.log(bgBlockText);
+console.log(mainForm.backgroundBlock.selectedIndex)
+
+// Выбрать некий option
+// bgBlock.options[1].selected = true;
+// bgBlock.selectedIndex = 1;
+// bgBlock.value = 2;
+*/
 
 // Import
 

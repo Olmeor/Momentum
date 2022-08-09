@@ -1,7 +1,7 @@
 @font-face {
   font-family: 'Arial-MT';
   src: url("../assets/fonts/Arial-MT.woff"); /* Путь к файлу со шрифтом */
- }
+}
 
 * {
   box-sizing: border-box;
@@ -26,11 +26,11 @@ html input[disabled] {
 }
 
 body {
-  display: flex;
+  /* display: flex;
   flex-direction: column;
   justify-content: space-between;
   height: 100%;
-  width: 100%;
+  width: 100%; */
   min-width: 480px;
   min-height: 100vh;
   font-family: 'Arial', sans-serif;
@@ -40,7 +40,6 @@ body {
   background-blend-mode: multiply;
   transition: background-image 1s ease-in-out;
   background-size: cover;
-  /* background-size: auto 100%; */
   overflow: hidden;
 }
 
@@ -114,10 +113,8 @@ body {
 .play-item {
   position: relative;
   padding: 5px 15px 5px 20px;
-  /* padding-left: 20px; */
   list-style: none;
   opacity: .8;
-  /* transition: .3s; */
   display: flex;
   justify-content: space-between;
   width: 200px;
@@ -165,12 +162,21 @@ body {
   opacity: 1;
 }
 
+.set-theme-button,
 .player-icon:active,
 .slider-icon:active,
 .change-quote:active {
   border: 0;
   outline: 0;  
   transform: scale(1.1);
+}
+
+.change-quote:hover {
+  transform: rotate(90deg);
+}
+
+.change-quote:active {
+  transform: rotate(-90deg);
 }
 
 .play {
@@ -311,12 +317,10 @@ body {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  /* align-items: flex-start; */
   row-gap: 5px;
   width: 180px;
   min-height: 180px;
   height: 268px; /* need resize observer*/
-  /* text-align: left; */
   position: relative;
   opacity: .8;
   transition: .3s;
@@ -543,8 +547,8 @@ body {
 }
 
 .settings-block {
-	white-space: nowrap;
 	display: flex;
+	white-space: nowrap;
   /* position: relative; */
 	justify-content: space-between;
 	align-items: flex-start;
@@ -554,12 +558,43 @@ body {
 
 .settings-block p {
 	user-select: none;
-	/* font-weight: normal; */
 	line-height: 20px;
 }
 
 .setting-lang {
   padding-top: 7px;
+}
+
+.switch-background {
+  cursor: pointer;
+}
+
+.set-theme-button {
+  width: 20px;
+  height: 20px;
+  border-radius: 10px;
+  border: 0;
+  background: url("../assets/svg/set-theme.svg");
+  background-size: 20px 20px;
+  opacity: .8;
+}
+
+.set-theme-button:hover {
+  opacity: 1;
+}
+
+.set-theme-button:active {
+  border: 0;
+  outline: 0;  
+  transform: scale(1.3);
+}
+
+.switch-background-theme {
+  border-radius: 100px;
+  border: 0;
+  padding: 0 10px;
+  line-height: 20px;
+  /* width: 150px; */
 }
 
 /* label */
@@ -572,12 +607,13 @@ input[type="checkbox"] {
 }
 
 label {
+	display: block;
+  position: relative;
 	cursor: pointer;
-	text-indent: -9999px;
+	text-indent: -100px;
 	width: 40px;
 	height: 20px;
 	background: grey;
-	display: block;
 	border-radius: 100px;
 	position: relative;
 }
@@ -608,13 +644,7 @@ input + .toggle-lang {
 
 input:checked + .toggle-lang {
 	background: url("../assets/svg/russia-flag-icon.svg");
-	/* background-position-y: 1.2px; */
 }
-
-/* input + .toggle-lang {
-	box-shadow: inset 0 0 3px rgba(0, 0, 0, 0.8);
-	background-blend-mode: multiply;
-} */
 
 input:checked + label:after {
 	left: calc(100% - 5px);
@@ -632,9 +662,6 @@ input + .toggle-lang::after {
 	position: absolute;
 	left: 0 !important;
 	top: 0;
-	/* background-color: #FFF; */
-	/* border-radius: 20px; */
-	/* z-index: 0; */
 	opacity: 0.1;
   transform: none !important;
 }

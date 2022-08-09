@@ -60,62 +60,67 @@
             <p class="setting-lang">Изменить язык</p>
             <span class="input-checkbox">
               <input type="checkbox" class="checkbox" id="switch-lang" name="languageButton">
-              <label for="switch-lang" class="toggler toggle-lang"></label>
+              <label for="switch-lang" class="toggle-lang"></label>
             </span>
           </div>
           <div class="settings-block">
             <p class="setting-time">Время</p>
             <span class="input-checkbox">
               <input type="checkbox" class="checkbox" id="switch-time" name="timeBlock">
-              <label for="switch-time" class="toggler toggle-time"></label>
+              <label for="switch-time"></label>
             </span>
           </div>
           <div class="settings-block">
             <p class="setting-date">Дата</p>
             <span class="input-checkbox">
               <input type="checkbox" class="checkbox" id="switch-date" name="dateBlock">
-              <label for="switch-date" class="toggler toggle-date"></label>
+              <label for="switch-date"></label>
             </span>
           </div>
           <div class="settings-block">
             <p class="setting-greeting">Приветствие</p>
             <span class="input-checkbox">
               <input type="checkbox" class="checkbox" id="switch-greeting" name="greetingBlock">
-              <label for="switch-greeting" class="toggler toggle-greeting"></label>
+              <label for="switch-greeting"></label>
             </span>
           </div>
           <div class="settings-block">
             <p class="setting-quotes">Цитаты</p>
             <span class="input-checkbox">
               <input type="checkbox" class="checkbox" id="switch-quote" name="quotesBlock">
-              <label for="switch-quote" class="toggler toggle-quote"></label>
+              <label for="switch-quote"></label>
             </span>
           </div>
           <div class="settings-block">
             <p class="setting-audio">Аудио плеер</p>
             <span class="input-checkbox">
               <input type="checkbox" class="checkbox" id="switch-audio" name="playerBlock">
-              <label for="switch-audio" class="toggler toggle-audio"></label>
+              <label for="switch-audio"></label>
             </span>
           </div>
           <div class="settings-block">
             <p class="setting-weather">Погода</p>
             <span class="input-checkbox">
               <input type="checkbox" class="checkbox" id="switch-weather" name="weatherBlock">
-              <label for="switch-weather" class="toggler toggle-weather"></label>
+              <label for="switch-weather"></label>
             </span>
           </div>
           <div class="settings-block">
             <p class="setting-bg">Бэкграунд</p>
             <div class="setting-bg-container">
-              <select class="setting-bg-select">
-                <option value="0" selected>Github</option>
-                <option value="1">Unsplash API</option>
-                <option value="2">Flickr API</option>
+              <!-- <label for="switch-background"></label> -->
+              <select class="switch-background" id="switch-background" name="backgroundBlock">
+                <option value="1" selected>Github</option>
+                <option value="2">Unsplash API</option>
+                <option value="3">Flickr API</option>
               </select>
             </div>
           </div>
-          <!-- <input type="text" placeholder="theme" class="setting-bg-tag"> -->
+          <div class="settings-block">
+            <input type="text" placeholder="Введите тему" class="switch-background-theme" id="switch-bg-theme" name="backgroundThemeBlock">
+            <button class="set-theme-button"></button>
+          </div>
+          <!-- <textarea tabindex="1" id="switch-bg-theme" type="text" name="bgThemeBlock" class="setting-bg-theme" placeholder="Введите тему фона" autocomplete="off"></textarea> -->
         </div>
       </form>
     </div>
@@ -123,7 +128,6 @@
   <footer class="footer">
     <div class="settings-wrapper">
       <button class="settings"></button>
-      <!-- <button class="language"></button> -->
     </div>
     <div class="quote-wrapper">
       <button class="change-quote"></button>
