@@ -150,7 +150,7 @@ function getRandomNum(num = 20) { // num - количество картинок
   return Math.floor(Math.random() * num + 1);
 }
 
-function setBg() {  
+function setBgGithub() {  
   const img = new Image();
   const bgNum = randomNum.toString().padStart(2, "0");
   img.src = `https://raw.githubusercontent.com/olmeor/momentum-backgrounds/main/${getTimeOfDay()}/${bgNum}.jpg`;
@@ -160,17 +160,51 @@ function setBg() {
   };
 }
 
+async function setBgUnsplash() {
+  // const keywords = localStorage.getItem('keywords').replace(/[,]/g, '+');
+  let keywords = 'nature';
+  const img = new Image();
+  const screenWidth = window.screen.availWidth;
+  const screenHeight = window.screen.availHeight;
+  const apiKey = '5_cu-PhTl04g5fxrPnaoSP5Qch_SC8ayif3cS-3G5Pw';
+  const url = `https://api.unsplash.com/photos/random?orientation=landscape&query=${keywords}&client_id=${apiKey}`;
+  const res = await fetch(url);
+  const data = await res.json();
+  img.src = data.urls.raw + `&h=${screenHeight}`;
+  // img.src = data.urls.raw + `&w=${screenWidth}&h=${screenHeight}`;
+  img.onload = () => {
+      body.style.background = `url(${img.src})`;
+  }
+}
+
+async function setBgFlickr() {
+  // const keywords = localStorage.getItem('keywords').replace(/[,]/g, '+');
+  let keywords = 'nature';
+  const img = new Image();
+  const apiKey = '50923158ad5431f62ff0ef2cee01c12a';
+  const url = `https://www.flickr.com/services/rest/?method=flickr.photos.search&api_key=${apiKey}&tags=${keywords}&extras=url_l&format=json&nojsoncallback=1`;
+  const res = await fetch(url);
+  const data = await res.json();
+  img.src = data.photos.photo[getRandomNum(100)].url_l;
+
+  img.onload = () => {
+      body.style.background = `center / cover url(${img.src})`;
+  }
+}
+
 function getSlideNext() {
   (randomNum == 20) ? randomNum = 1 : randomNum++;
-  setBg(randomNum);
+  setBgGithub(randomNum);
 }
 
 function getSlidePrev() {
   (randomNum == 1) ? randomNum = 20 : randomNum--;
-  setBg(randomNum);
+  setBgGithub(randomNum);
 }
 
-setBg(randomNum);
+setBgGithub(randomNum);
+// setBgUnsplash();
+// setBgFlickr();
 slideNext.addEventListener('click', getSlideNext);
 slidePrev.addEventListener('click', getSlidePrev);
 

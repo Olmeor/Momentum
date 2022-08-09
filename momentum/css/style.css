@@ -26,16 +26,21 @@ html input[disabled] {
 }
 
 body {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
+  width: 100%;
   min-width: 480px;
   min-height: 100vh;
   font-family: 'Arial', sans-serif;
   font-size: 16px;
   color: #fff;
   text-align: center;
-  /* background: url("../assets/img/bg.jpg") center/cover, rgba(0, 0, 0, 0.5); */
   background-blend-mode: multiply;
   transition: background-image 1s ease-in-out;
   background-size: cover;
+  /* background-size: auto 100%; */
   overflow: hidden;
 }
 
