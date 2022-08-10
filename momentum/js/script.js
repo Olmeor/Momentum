@@ -49,25 +49,39 @@ const translation = {
 };
 
 function translate() {
-  // if (currentLang == 'en') {
-  //   langButton.classList.add('language-ru');
-  //   currentLang = 'ru';
-  // } else {
-  //   langButton.classList.remove('language-ru');
-  //   currentLang = 'en';
-  // }
   (currentLang == 'en') ? currentLang = 'ru' : currentLang = 'en';
   getQuotes();
   getWeather();
   setPlaceholder();
   setCity();
   setBgPlaceholder();
-  // setSettingLang();
 }
 
-// langButton.addEventListener('click', translate);
+// Local Storage
+
+function setLocalStorage() {
+  localStorage.setItem('name', forename.value);
+  if (city.value != translation[currentLang].defaultCity) {
+    localStorage.setItem('city', city.value);
+  }
+  localStorage.setItem('settings', JSON.stringify(objChecked));
+}
+
+function getLocalStorage() {
+  if (localStorage.getItem('name')) {
+    forename.value = localStorage.getItem('name');
+  }
+  if (localStorage.getItem('city')) {
+    city.value = localStorage.getItem('city');
+  }
+  objChecked = JSON.parse(localStorage.getItem('settings'));
+}
+
+window.addEventListener('beforeunload', setLocalStorage);
+window.addEventListener('load', getLocalStorage);
 
 // Clock and calendar
+
 const time = document.querySelector('.time');
 const date = document.querySelector('.date');
 
@@ -108,26 +122,12 @@ function showGreeting() {
 }
 showGreeting();
 
-// Input name, Local Storage
+// Input name
 
 const forename = document.querySelector('.name');
 
-function setLocalStorage() {
-  localStorage.setItem('name', forename.value);
-  if (city.value != translation[currentLang].defaultCity) {
-    localStorage.setItem('city', city.value);
-  }
-  localStorage.setItem('settings', JSON.stringify(objChecked));
-}
-
-function getLocalStorage() {
-  if (localStorage.getItem('name')) {
-    forename.value = localStorage.getItem('name');
-  }
-  if (localStorage.getItem('city')) {
-    city.value = localStorage.getItem('city');
-  }
-  objChecked = JSON.parse(localStorage.getItem('settings'));
+function setName() {
+  if (localStorage.getItem('name')) forename.value = localStorage.getItem('name');
 }
 
 function setPlaceholder() {
@@ -135,8 +135,7 @@ function setPlaceholder() {
 }
 
 setPlaceholder();
-window.addEventListener('beforeunload', setLocalStorage);
-window.addEventListener('load', getLocalStorage);
+setName();
 
 // Background slider
 
@@ -144,6 +143,19 @@ let randomNum = getRandomNum();
 const body = document.body;
 const slideNext = document.querySelector('.slide-next');
 const slidePrev = document.querySelector('.slide-prev');
+const bgBlock = document.querySelector('.switch-background');
+const bgTheme = document.querySelector('.switch-background-theme');
+const bgThemeButton = document.querySelector('.set-theme-button');
+// let bgLink;
+
+let bgSettings = {
+  background: 'Github',
+  theme: 'nature',
+}
+
+console.log(bgBlock)
+console.log(bgBlock.options[bgBlock.selectedIndex].text);
+console.log(bgTheme.value)
 
 function getRandomNum(num = 20) { // num - количество картинок
   return Math.floor(Math.random() * num + 1);
@@ -160,7 +172,6 @@ function setBgGithub() {
 }
 
 async function setBgUnsplash() {
-  // const keywords = localStorage.getItem('keywords').replace(/[,]/g, '+');
   let keywords = 'nature';
   const img = new Image();
   const screenWidth = window.screen.availWidth;
@@ -170,14 +181,13 @@ async function setBgUnsplash() {
   const res = await fetch(url);
   const data = await res.json();
   img.src = data.urls.raw + `&h=${screenHeight}`;
-  // img.src = data.urls.raw + `&w=${screenWidth}&h=${screenHeight}`;
+
   img.onload = () => {
-      body.style.background = `url(${img.src})`;
+      body.style.background = `center / cover url(${img.src})`;
   }
 }
 
 async function setBgFlickr() {
-  // const keywords = localStorage.getItem('keywords').replace(/[,]/g, '+');
   let keywords = 'nature';
   const img = new Image();
   const apiKey = '50923158ad5431f62ff0ef2cee01c12a';
@@ -201,9 +211,58 @@ function getSlidePrev() {
   toggleBackground();
 }
 
-setBgGithub(randomNum);
+function toggleBackground() {
+  // let backgroundLink = localStorage.getItem('link');
+  const bgThemeBlock = document.querySelector('.bgThemeBlock')
+  let bgLink = bgBlock.options[bgBlock.selectedIndex].text;
+  // let bgLinkTheme = bgTheme.
+  console.log(bgLink);
+  switch(bgLink) {
+    case 'Github': 
+      setBgGithub();
+      if(!bgThemeBlock.classList.contains('disable-block')) bgThemeBlock.classList.add('disable-block');
+      break;
+    case 'Unsplash API': 
+      setBgUnsplash();
+      if (bgThemeBlock.classList.contains('disable-block')) bgThemeBlock.classList.remove('disable-block');
+      break;
+    case 'Flickr API':
+      setBgFlickr();
+      if (bgThemeBlock.classList.contains('disable-block')) bgThemeBlock.classList.remove('disable-block');
+      break;
+  }
+}
+
+function setBgPlaceholder() {
+  bgTheme.placeholder = `${translation[currentLang].bgPlaceholder}`;
+}
+
+// setBgPlaceholder();
+toggleBackground();
 slideNext.addEventListener('click', getSlideNext);
 slidePrev.addEventListener('click', getSlidePrev);
+
+bgBlock.addEventListener("change", (e) => {
+  // e.stopPropagation();
+  console.log('пип фон');
+  toggleBackground();
+  // openThemeTextInput();
+})
+
+bgTheme.addEventListener("change", (e) => {
+  // e.stopPropagation();
+  console.log('пип тема');
+  toggleBackground();
+})
+
+// mainForm.addEventListener("change", toggleSettings);
+// bgBlock.addEventListener("change", toggleSettings);
+
+// bgThemeButton.addEventListener("click", (e) => {
+//   // e.stopPropagation();
+//   console.log('пип кнопка');
+//   toggleBackground();
+// })
 
 // Weather
 
@@ -461,6 +520,7 @@ const quotesBlock = document.querySelector('.quote-wrapper');
 const playerBlock = document.querySelector('.player');
 const weatherBlock = document.querySelector('.weather');
 
+
 let userSettings = {
   languageButton: false,
   timeBlock: true,
@@ -516,6 +576,7 @@ function toggleSettingBlock(key) {
       break;
   }
 }
+
 function setSettingLang() {
   document.querySelector('.setting-lang').textContent = `${translation[currentLang].language}`;
   document.querySelector('.setting-time').textContent = `${translation[currentLang].time}`;
@@ -539,66 +600,20 @@ setCheckedSettings();
 setSettingLang();
 settingsButton.addEventListener('click', toggleSettingsMenu);
 settingsMenu.addEventListener('click', (e) => {
+  e.preventDefault();
   if (e.target === settingsMenu) {
     toggleSettingsMenu();
   }
 })
 
-mainForm.addEventListener("change", () => {
+mainForm.addEventListener("change", (e) => {
   console.log('пип настройки');
   toggleSettings();
 })
 
-// mainForm.addEventListener("change", toggleSettings);
-// bgBlock.addEventListener("change", toggleSettings);
+
 
 // Change background
-
-const bgBlock = mainForm.backgroundBlock;
-const bgThemeBlock = mainForm.backgroundThemeBlock;
-let bgLink;
-
-let bgSettings = {
-  background: 'Github',
-  theme: 'nature',
-}
-console.log(bgBlock)
-console.log(bgBlock.options[bgBlock.selectedIndex].text);
-
-// function toggleBackground() {
-//   bgLink = bgBlock.options[bgBlock.selectedIndex].text;
-//   console.log(bgLink);
-//   setBackgroundLink(bgLink);
-// }
-
-function toggleBackground() {
-  // let backgroundLink = localStorage.getItem('link');
-  bgLink = bgBlock.options[bgBlock.selectedIndex].text;
-  console.log(bgLink);
-  switch(bgLink) {
-    case 'Github': 
-      setBgGithub();
-      break;
-    case 'Unsplash API': 
-      setBgUnsplash();
-      break;
-    case 'Flickr API':
-      setBgFlickr();
-      break;
-  }
-}
-
-function setBgPlaceholder() {
-  const bgThemeBlock = mainForm.backgroundThemeBlock;
-  bgThemeBlock.placeholder = `${translation[currentLang].bgPlaceholder}`;
-}
-
-setBgPlaceholder();
-
-bgBlock.addEventListener("change", () => {
-  console.log('пип фон');
-  toggleBackground();
-})
 
 /*
 console.log(mainForm);
