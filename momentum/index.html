@@ -6,6 +6,7 @@
   <link href="assets/favicon.ico" rel="shortcut icon" />
   <link rel="stylesheet" href="css/owfont-regular.css" />
   <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="css/simple-todo-list.css" />
   <title>Momentum</title>
 </head>
 <body>
@@ -122,6 +123,18 @@
           </div>
           </div>
       </div>
+    </div>
+    <div class="todo hidden-block">
+      <div class="todo__input">
+        <input class="todo__text" type="text">
+        <span class="todo__add"></span>
+      </div>
+      <select class="todo__options">
+        <option value="active">активные</option>
+        <option value="completed">завершённые</option>
+        <option value="deleted">удалённые</option>
+      </select>
+      <ul class="todo__items" data-todo-option="active"></ul>
     </div>
   </main>
   <footer class="footer">
