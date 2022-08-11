@@ -161,7 +161,7 @@ bgBlock.selectedIndex = bgLink;
 let keywords = 'nature';
 
 function getRandomNum(num = 20) { // num - количество картинок
-  return Math.floor(Math.random() * num);
+  return Math.floor(Math.random() * num + 1);
 }
 
 function setBgGithub() {  
@@ -313,7 +313,7 @@ async function changeQuotes() {
   const quotes = `./assets/quotes/quotes-${currentLang}.json`;
   const res = await fetch(quotes);
   const data = await res.json();
-  let randomQuoteNum = getRandomNum(data.length);
+  let randomQuoteNum = Math.floor(Math.random() * data.length);
   quoteText.innerHTML = `"${data[randomQuoteNum].text}"`;
   quoteAuthor.innerHTML = data[randomQuoteNum].author;
 }
