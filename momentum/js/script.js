@@ -65,6 +65,8 @@ function setLocalStorage() {
     localStorage.setItem('city', city.value);
   }
   localStorage.setItem('settings', JSON.stringify(objChecked));
+  localStorage.setItem('theme', bgTheme.value);
+  localStorage.setItem('bgApi', bgBlock.selectedIndex);
 }
 
 function getLocalStorage() {
@@ -75,6 +77,12 @@ function getLocalStorage() {
     city.value = localStorage.getItem('city');
   }
   objChecked = JSON.parse(localStorage.getItem('settings'));
+  if (localStorage.getItem('theme')) {
+    bgTheme.value = localStorage.getItem('theme');
+  }
+  if (localStorage.getItem('bgApi')) {
+    bgBlock.selectedIndex = localStorage.getItem('bgApi');
+  }
 }
 
 window.addEventListener('beforeunload', setLocalStorage);
@@ -144,21 +152,16 @@ const body = document.body;
 const slideNext = document.querySelector('.slide-next');
 const slidePrev = document.querySelector('.slide-prev');
 const bgBlock = document.querySelector('.switch-background');
+const bgThemeBlock = document.querySelector('.bgThemeBlock');
 const bgTheme = document.querySelector('.switch-background-theme');
 const bgThemeButton = document.querySelector('.set-theme-button');
-// let bgLink;
-
-let bgSettings = {
-  background: 'Github',
-  theme: 'nature',
-}
-
-// console.log(bgBlock)
-// console.log(bgBlock.options[bgBlock.selectedIndex].text);
-// console.log(bgTheme.value)
+let bgLink = (localStorage.getItem('bgApi')) ? +localStorage.getItem('bgApi') : 0;
+bgTheme.value = localStorage.getItem('theme') ?? 'nature';
+bgBlock.selectedIndex = bgLink;
+let keywords = 'nature';
 
 function getRandomNum(num = 20) { // num - количество картинок
-  return Math.floor(Math.random() * num + 1);
+  return Math.floor(Math.random() * num);
 }
 
 function setBgGithub() {  
@@ -172,12 +175,14 @@ function setBgGithub() {
 }
 
 async function setBgUnsplash() {
-  let keywords = 'nature';
+  keywords = (bgTheme.value) ? bgTheme.value : 'nature';
+  // console.log ('АПИ Unsplash = ', keywords, Boolean(keywords)); //проверка API
   const img = new Image();
   const screenWidth = window.screen.availWidth;
   const screenHeight = window.screen.availHeight;
   const apiKey = '5_cu-PhTl04g5fxrPnaoSP5Qch_SC8ayif3cS-3G5Pw';
-  const url = `https://api.unsplash.com/photos/random?orientation=landscape&query=${keywords}&client_id=${apiKey}`;
+  const url = `https://api.unsplash.com/photos/random?orientation=landscape&query=${keywords ?? 'nature'}&client_id=${apiKey}`;
+  // const url = `https://api.unsplash.com/photos/random?orientation=landscape&query=nature&client_id=5_cu-PhTl04g5fxrPnaoSP5Qch_SC8ayif3cS-3G5Pw`;
   const res = await fetch(url);
   const data = await res.json();
   img.src = data.urls.raw + `&h=${screenHeight}`;
@@ -188,10 +193,12 @@ async function setBgUnsplash() {
 }
 
 async function setBgFlickr() {
-  let keywords = 'nature';
+  keywords = (bgTheme.value) ? bgTheme.value : 'nature';
+  // console.log ('АПИ Flickr = ', keywords, Boolean(keywords)); //проверка API
   const img = new Image();
   const apiKey = '50923158ad5431f62ff0ef2cee01c12a';
   const url = `https://www.flickr.com/services/rest/?method=flickr.photos.search&api_key=${apiKey}&tags=${keywords}&extras=url_l&format=json&nojsoncallback=1`;
+  // const url = `https://www.flickr.com/services/rest/?method=flickr.photos.search&api_key=50923158ad5431f62ff0ef2cee01c12a&tags=nature&extras=url_l&format=json&nojsoncallback=1`;
   const res = await fetch(url);
   const data = await res.json();
   img.src = data.photos.photo[getRandomNum(100)].url_l;
@@ -212,21 +219,18 @@ function getSlidePrev() {
 }
 
 function toggleBackground() {
-  // let backgroundLink = localStorage.getItem('link');
-  const bgThemeBlock = document.querySelector('.bgThemeBlock')
-  let bgLink = bgBlock.options[bgBlock.selectedIndex].text;
-  // let bgLinkTheme = bgTheme.
-  // console.log(bgLink);
+  bgLink = bgBlock.selectedIndex;
+  // console.log('выбран', bgLink, 'переключаю', bgBlock.options[bgBlock.selectedIndex].text); // проверка темы фона
   switch(bgLink) {
-    case 'Github': 
+    case 0: //'Github': 
       setBgGithub();
       if(!bgThemeBlock.classList.contains('disable-block')) bgThemeBlock.classList.add('disable-block');
       break;
-    case 'Unsplash API': 
+    case 1: //'Unsplash API': 
       setBgUnsplash();
       if (bgThemeBlock.classList.contains('disable-block')) bgThemeBlock.classList.remove('disable-block');
       break;
-    case 'Flickr API':
+    case 2: //'Flickr API':
       setBgFlickr();
       if (bgThemeBlock.classList.contains('disable-block')) bgThemeBlock.classList.remove('disable-block');
       break;
@@ -242,15 +246,16 @@ slideNext.addEventListener('click', getSlideNext);
 slidePrev.addEventListener('click', getSlidePrev);
 
 bgBlock.addEventListener("change", (e) => {
-  console.log('пип фон');
+  // console.log('пип фон'); // проверка фона
   toggleBackground();
 })
 
 bgTheme.addEventListener("change", (e) => {
-  // e.stopPropagation();
-  console.log('пип тема');
+  // console.log('пип тема фона'); // проверка темы фона
   toggleBackground();
 })
+
+// Weather
 
 const weatherIcon = document.querySelector('.weather-icon');
 const weatherTemperature = document.querySelector('.temperature');
@@ -308,8 +313,9 @@ async function changeQuotes() {
   const quotes = `./assets/quotes/quotes-${currentLang}.json`;
   const res = await fetch(quotes);
   const data = await res.json();
-  quoteText.innerHTML = `"${data[getRandomNum(data.length)].text}"`;
-  quoteAuthor.innerHTML = data[getRandomNum(data.length)].author;
+  let randomQuoteNum = getRandomNum(data.length);
+  quoteText.innerHTML = `"${data[randomQuoteNum].text}"`;
+  quoteAuthor.innerHTML = data[randomQuoteNum].author;
 }
 
 function getQuotes() {
@@ -498,7 +504,6 @@ audioProgress.oninput = function() {
 const settingsButton = document.querySelector('.settings');
 const settingsForm = document.querySelector('.settings-form');
 const settingsMenu = document.querySelector('.settings-wrapper');
-// const mainForm = document.forms.form;
 const mainForm = document.querySelectorAll('.checkbox');
 const timeBlock = document.querySelector('.time');
 const dateBlock = document.querySelector('.date');
@@ -525,16 +530,13 @@ function toggleSettingsMenu() {
   settingsMenu.classList.toggle('settings-menu-shadow');
 }
 
-// for (let key = 0; key < 7; key++) {
-//   console.log(key, mainForm[key].name, mainForm[key].checked, objChecked[mainForm[key].name]);
-// }
 
 function toggleSettings() {
   for (let key = 0; key < 7; key++) {
     if(mainForm[key].checked != objChecked[mainForm[key].name]) {
       objChecked[mainForm[key].name] = !objChecked[mainForm[key].name];
       toggleSettingBlock(mainForm[key].name);
-      console.log(mainForm[key].name, objChecked[mainForm[key].name])
+      // console.log(mainForm[key].name, objChecked[mainForm[key].name]); проверка чеков настроек
     }
   }
 }
@@ -586,19 +588,17 @@ function setCheckedSettings() {
   }
 }
 
-
 setCheckedSettings();
 setSettingLang();
+
 settingsButton.addEventListener('click', toggleSettingsMenu);
 settingsMenu.addEventListener('click', (e) => {
-  // e.preventDefault();
   if (e.target === settingsMenu) {
     toggleSettingsMenu();
   }
 })
-
 settingsForm.addEventListener("change", (e) => {
-  console.log('пип настройки');
+  // console.log('пип настройки'); // проверка окна настроек
   toggleSettings();
 })
 
