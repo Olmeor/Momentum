@@ -2,9 +2,10 @@
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
-  max-width: 400px;
+  max-width: 390px;
   margin: 15px auto;
   position: fixed;
+  transition: .3s;
 }
 
 .todo__input {

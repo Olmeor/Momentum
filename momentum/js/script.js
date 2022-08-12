@@ -501,7 +501,7 @@ audioProgress.oninput = function() {
 
 // Settings menu
 
-const settingsButton = document.querySelector('.settings');
+const settingsButton = document.querySelector('.settings-button');
 const settingsForm = document.querySelector('.settings-form');
 const settingsMenu = document.querySelector('.settings-wrapper');
 const mainForm = document.querySelectorAll('.checkbox');
@@ -511,6 +511,8 @@ const greetingBlock = document.querySelector('.greeting-container');
 const quotesBlock = document.querySelector('.quote-wrapper');
 const playerBlock = document.querySelector('.player');
 const weatherBlock = document.querySelector('.weather');
+const todoMenu = document.querySelector('.todo');
+const todoButton = document.querySelector('.todo-button');
 
 
 let userSettings = {
@@ -530,6 +532,10 @@ function toggleSettingsMenu() {
   settingsMenu.classList.toggle('settings-menu-shadow');
 }
 
+function toggleTodoMenu() {
+  todoMenu.classList.toggle('hidden-block'); //disable-block
+  // settingsMenu.classList.toggle('settings-menu-shadow');
+}
 
 function toggleSettings() {
   for (let key = 0; key < 7; key++) {
@@ -592,6 +598,7 @@ setCheckedSettings();
 setSettingLang();
 
 settingsButton.addEventListener('click', toggleSettingsMenu);
+todoButton.addEventListener('click', toggleTodoMenu);
 settingsMenu.addEventListener('click', (e) => {
   if (e.target === settingsMenu) {
     toggleSettingsMenu();

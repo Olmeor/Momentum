@@ -27,7 +27,6 @@ html input[disabled] {
 body {
   min-width: 390px;
   min-height: 100vh;
-  max-width: 1920px;
   margin: 0 auto;
   font-family: 'Arial', sans-serif;
   font-size: 16px;
@@ -369,7 +368,6 @@ body {
   align-items: center;
   width: 100%;
   height: 40vh;
-  min-height: 260px;  
   padding: 20px;
 }
 
@@ -492,7 +490,7 @@ body {
   display: block;
 }
 
-.settings {
+.settings-button {
   background-image: url("../assets/svg/settings.svg");
   background-position: center center;
   background-repeat: no-repeat;
@@ -504,9 +502,30 @@ body {
   transition: all 0.3s ease;
 }
 
-.settings:hover {
+.settings-button:hover {
 	transform: rotate(90deg);
   opacity: 1;
+}
+
+.todo-button {
+  background-image: url("../assets/svg/todo.svg");
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-color: transparent;
+  width: 30px;
+  height: 30px;
+  border: 0;
+  opacity: 0.7;
+  transition: all 0.3s ease;
+}
+
+.todo-button:hover {
+  opacity: 1;
+
+}
+
+.todo-button:active {
+  transform: scale(1.3);
 }
 
 /* Settings */
@@ -698,6 +717,7 @@ input + .toggle-lang::after {
 }
 
 @media (max-width: 768px) {
+
   .player,
   .weather {
 		width: 140px;
@@ -715,6 +735,7 @@ input + .toggle-lang::after {
 	.city {
 		font-size: 18px;
 		padding: 0;
+    width: 140px;
 	}
 
 	.time {
@@ -746,17 +767,6 @@ input + .toggle-lang::after {
 		align-self: stretch;
 	}
 
-	.footer {
-		position: fixed;
-		bottom: 25px;
-	}
-
-	.settings-button {
-		margin-left: 10px;
-		margin-bottom: 10px;
-		width: 20px;
-		height: 20px;
-	}
 
   .player-icon:hover,
 	.slider-icon:hover,
@@ -773,11 +783,6 @@ input + .toggle-lang::after {
 	.social-container img {
 		width: 20px;
 		height: 20px;
-	}
-
-  .rs-logo {
-		height: 16px !important;
-		width: 50px !important;
 	}
 
   .wind,
@@ -798,8 +803,13 @@ input + .toggle-lang::after {
     position: absolute;
     padding-bottom: 40px;
     padding-right: 30px;
-    z-index: -1;
+    /* z-index: -1; */
     font-size: 12px;
+  }
+
+  .settings-wrapper,
+  .social-wrapper {
+    z-index: 10;
   }
 }
 
@@ -813,7 +823,10 @@ input + .toggle-lang::after {
   .main,
   .footer {
     padding: 10px;
-    display: ;
+  }
+  
+  .main {
+    height: 32vh;
   }
 
   .time,
@@ -830,18 +843,15 @@ input + .toggle-lang::after {
     margin-bottom: 5px;
   }
 
-  .quote-wrapper {
-    width: 330px;
-    top: -10px;
-    padding-bottom: 0;
-  }
-
   .player, .weather {
     width: 120px;
     font-size: 12px;
     max-height: 200px;
   }
 
+  .city {
+    width: 120px;
+  }
   .date,
   .greeting-container {
     font-size: 20px;
@@ -865,19 +875,9 @@ input + .toggle-lang::after {
 
   .weather-icon {
     font-size: 60px;
-}
+  }
 
   .vol-controls {
     width: 120px;
-  }
-
-  .settings-wrapper,
-  .social-wrapper {
-    position: absolute;
-    top: 45px;
-  }
-
-  .social-wrapper {
-    right: 55px;
   }
 }
