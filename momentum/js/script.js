@@ -156,9 +156,10 @@ const bgThemeBlock = document.querySelector('.bgThemeBlock');
 const bgTheme = document.querySelector('.switch-background-theme');
 const bgThemeButton = document.querySelector('.set-theme-button');
 let bgLink = (localStorage.getItem('bgApi')) ? +localStorage.getItem('bgApi') : 0;
-bgTheme.value = localStorage.getItem('theme') ?? 'nature';
+const timeOfDay = getTimeOfDay();
+bgTheme.value = localStorage.getItem('theme') ?? timeOfDay;
 bgBlock.selectedIndex = bgLink;
-let keywords = 'nature';
+let keywords = timeOfDay;
 
 function getRandomNum(num = 20) { // num - количество картинок
   return Math.floor(Math.random() * num + 1);
@@ -175,13 +176,13 @@ function setBgGithub() {
 }
 
 async function setBgUnsplash() {
-  keywords = (bgTheme.value) ? bgTheme.value : 'nature';
-  // console.log ('АПИ Unsplash = ', keywords, Boolean(keywords)); //проверка API
+  keywords = (bgTheme.value) ? bgTheme.value : timeOfDay;
+  // keywords = ((bgTheme.value) ? bgTheme.value : timeOfDay).replace(/[^0-9a-zа-яё]/gi, ',');
   const img = new Image();
   const screenWidth = window.screen.availWidth;
   const screenHeight = window.screen.availHeight;
   const apiKey = '5_cu-PhTl04g5fxrPnaoSP5Qch_SC8ayif3cS-3G5Pw';
-  const url = `https://api.unsplash.com/photos/random?orientation=landscape&query=${keywords ?? 'nature'}&client_id=${apiKey}`;
+  const url = `https://api.unsplash.com/photos/random?orientation=landscape&query=${keywords ?? timeOfDay}&tag_mode=all&client_id=${apiKey}`;
   // const url = `https://api.unsplash.com/photos/random?orientation=landscape&query=nature&client_id=5_cu-PhTl04g5fxrPnaoSP5Qch_SC8ayif3cS-3G5Pw`;
   const res = await fetch(url);
   const data = await res.json();
@@ -193,8 +194,7 @@ async function setBgUnsplash() {
 }
 
 async function setBgFlickr() {
-  keywords = (bgTheme.value) ? bgTheme.value : 'nature';
-  // console.log ('АПИ Flickr = ', keywords, Boolean(keywords)); //проверка API
+  keywords = ((bgTheme.value) ? bgTheme.value : timeOfDay).replace(/[^0-9a-zа-яё]/gi, ',');
   const img = new Image();
   const apiKey = '50923158ad5431f62ff0ef2cee01c12a';
   const url = `https://www.flickr.com/services/rest/?method=flickr.photos.search&api_key=${apiKey}&tags=${keywords}&extras=url_l&format=json&nojsoncallback=1`;

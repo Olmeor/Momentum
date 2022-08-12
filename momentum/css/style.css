@@ -778,6 +778,7 @@ input + .toggle-lang::after {
 }
 
 @media (max-width: 390px) {
+
   .quote-wrapper {
     position: absolute;
     padding-bottom: 40px;
@@ -817,6 +818,14 @@ input + .toggle-lang::after {
     min-height: 40px;
     font-size: 48px;
   }
+  .quote-wrapper {
+    padding-right: 10px;
+  }
+
+  .social-wrapper {
+    gap: 10px;
+  }
+
   .quote,
   .change-quote {
     margin-bottom: 5px;
