@@ -1,5 +1,5 @@
 // Translation
-console.log(2);
+console.log(3);
 
 let currentLang = localStorage.getItem('language') ?? 'en';
 const translation = {
