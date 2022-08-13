@@ -1,5 +1,5 @@
 // Translation
-console.log(0);
+console.log(1);
 
 let currentLang = localStorage.getItem('language') ?? 'en';
 const translation = {
@@ -78,18 +78,11 @@ function getLocalStorage() {
     city.value = localStorage.getItem('city');
   }
   
-  objChecked = JSON.parse(localStorage.getItem('settings'));
-  /*
   if (JSON.parse(localStorage.getItem('settings'))) {
     objChecked = JSON.parse(localStorage.getItem('settings'));
   }
-  */
-  /*
-  if (String(localStorage.getItem('settings')) != 'null' && localStorage.getItem('settings')) {
-    objChecked = JSON.parse(localStorage.getItem('settings'));
-  }
-  */
-  objChecked = JSON.parse(localStorage.getItem('settings'));
+  // objChecked = JSON.parse(localStorage.getItem('settings'));
+  
   if (localStorage.getItem('theme')) {
     bgTheme.value = localStorage.getItem('theme');
   }
@@ -535,16 +528,16 @@ let userSettings = {
   weatherBlock: true,
 }
 
-// let objChecked = JSON.parse(localStorage.getItem('settings')) ?? userSettings;
+let objChecked = JSON.parse(localStorage.getItem('settings')) ?? userSettings;
 
-  if (String(localStorage.getItem('settings')) != 'null' && localStorage.getItem('settings')) {
-    console.log('хранилище');
-    objChecked = JSON.parse(localStorage.getItem('settings'));
-  } else {
-    objChecked = userSettings;
-    console.log('юзер');
-    localStorage.setItem('settings', JSON.stringify(objChecked));
-  }
+if (String(localStorage.getItem('settings')) != 'null' && localStorage.getItem('settings')) {
+  console.log('хранилище');
+  objChecked = JSON.parse(localStorage.getItem('settings'));
+} else {
+  objChecked = userSettings;
+  console.log('юзер');
+  localStorage.setItem('settings', JSON.stringify(objChecked));
+}
 
 function toggleSettingsMenu() {
   settingsForm.classList.toggle('settings-open');
