@@ -1,5 +1,4 @@
 // Translation
-console.log(1);
 
 let currentLang = localStorage.getItem('language') ?? 'en';
 const translation = {
@@ -193,7 +192,7 @@ async function setBgUnsplash() {
   img.src = data.urls.raw + `&h=${screenHeight}`;
 
   img.onload = () => {
-      body.style.background = `url(${img.src})`;
+      body.style.background = `center/cover rgba(0, 0, 0, 0.5) url(${img.src})`;
   }
 }
 
@@ -208,7 +207,7 @@ async function setBgFlickr() {
   img.src = data.photos.photo[getRandomNum(100)].url_l;
 
   img.onload = () => {
-      body.style.background = `url(${img.src})`;
+      body.style.background = `center/cover rgba(0, 0, 0, 0.5) url(${img.src})`;
   }
 }
 
@@ -374,7 +373,7 @@ function playAudio() {
   setSoundName(playList[playNum].title);
 }
 
-function playChoosenAudio() {
+function playChosenAudio() {
   for (let i = 0; i < playListItem.length; i++) {        
     playListItem[i].addEventListener('click', function() {
       if (i == playNum && isPlay) {
@@ -432,7 +431,7 @@ function createPlayList() {
   });
   activeSong = document.querySelectorAll('.play-item');
   playListItem = document.querySelectorAll('.play-item-btn');
-  playChoosenAudio();
+  playChosenAudio();
 }
 
 function setSoundName(title) {
@@ -525,21 +524,13 @@ let userSettings = {
   playerBlock: true,
   weatherBlock: true,
 }
-console.log(localStorage.getItem('settings'), typeof(localStorage.getItem('settings')));
-// localStorage.setItem('settings', JSON.stringify( userSettings));
-// let objChecked = JSON.parse(localStorage.getItem('settings')) ?? userSettings;
 
-if (localStorage.getItem('settings') != 'null' &&
-    localStorage.getItem('settings') != 'undefine' && 
-    localStorage.getItem('settings')) {
-  console.log('хранилище');
+if (localStorage.getItem('settings')) {
   objChecked = JSON.parse(localStorage.getItem('settings'));
 } else {
   objChecked = userSettings;
-  console.log('юзер');
   localStorage.setItem('settings', JSON.stringify(objChecked));
 }
-
 
 function toggleSettingsMenu() {
   settingsForm.classList.toggle('settings-open');
@@ -547,13 +538,13 @@ function toggleSettingsMenu() {
 }
 
 function toggleSettings() {
-  console.log(localStorage.getItem('settings'), 'тип', typeof(localStorage.getItem('settings')))
-  console.log(objChecked, 'тип', typeof(objChecked));
+  // console.log(localStorage.getItem('settings'), 'тип', typeof(localStorage.getItem('settings')))
+  // console.log(objChecked, 'тип', typeof(objChecked));
   for (let key = 0; key < 7; key++) {
-    console.log(mainForm[key].name);
-    console.log("mainForm", mainForm[key].checked);
-    console.log("objChecked", objChecked[mainForm[key].name]);
-    console.log(mainForm[key].name, mainForm[key].checked, objChecked[mainForm[key].name]);
+    // console.log(mainForm[key].name);
+    // console.log("mainForm", mainForm[key].checked);
+    // console.log("objChecked", objChecked[mainForm[key].name]);
+    // console.log(mainForm[key].name, mainForm[key].checked, objChecked[mainForm[key].name]);
     if(mainForm[key].checked != objChecked[mainForm[key].name]) {
       objChecked[mainForm[key].name] = !objChecked[mainForm[key].name];
       toggleSettingBlock(mainForm[key].name);
@@ -601,7 +592,7 @@ function setSettingLang() {
 }
 
 function setCheckedSettings() {
-  localStorage.setItem('settings', JSON.stringify(objChecked))
+  // localStorage.setItem('settings', JSON.stringify(objChecked))
   for (let key = 0; key < 7; key++) {
     mainForm[key].checked = objChecked[mainForm[key].name];
     if (!mainForm[key].checked) {
