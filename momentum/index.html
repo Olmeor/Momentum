@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link href="assets/favicon.ico" rel="shortcut icon" />
+  <link rel="stylesheet" href="css/owfont-regular.css" />
+  <link rel="stylesheet" href="css/style.css" />
+  <title>Momentum</title>
+</head>
+<body>
+  <header class="header">
+    <div class="player">
+      <div class="player-controls">
+        <button class="play-prev player-icon"></button>
+        <button class="play player-icon"></button>
+        <button class="play-next player-icon"></button>
+      </div>
+      <div class="vol-controls">
+        <button class="vol-mute player-icon"></button>
+        <input class="vol-line progress-style" type="range" min="0" max="100" value="10" >
+      </div>
+      <div class="play-title"><br></div>
+      <input class="progress-bar progress-style" type="range" min="0" max="100" value="0">
+      <div class="play-time">
+        <div class="play-current-time">00:00</div>
+        <div class="play-duration-time">00:00</div>
+      </div>
+      <ul class="play-list"></ul>
+    </div>
+    <div class="weather">
+      <input type="text" class="city" />
+      <i class="weather-icon owf"></i>
+      <div class="weather-error"></div>
+      <div class="description-container">
+        <span class="weather-description"></span>
+      </div>
+      <div class="weather-temperature temperature"></div>
+      <div class="weather-wind wind"></div>
+      <div class="weather-humidity humidity"></div>
+    </div>
+  </header>
+  <main class="main">
+    <div class="slider-icons">
+      <button class="slide-prev slider-icon"></button>
+      <button class="slide-next slider-icon"></button>
+    </div>
+    <time class="time timeBlock"></time>
+    <date class="date"></date>
+    <div class="greeting-container">
+      <span class="greeting"></span>
+      <input type="text" class="name" />
+    </div>
+    <div class="settings-wrapper">
+      <div name="form" class="settings-form">
+        <div class="settings-content">
+          <div class="settings-block">
+            <p class="setting-lang">Изменить язык</p>
+            <span class="input-checkbox">
+              <input type="checkbox" class="checkbox" id="switch-lang" name="languageButton">
+              <label for="switch-lang" class="toggle-lang"></label>
+            </span>
+          </div>
+          <div class="settings-block">
+            <p class="setting-time">Время</p>
+            <span class="input-checkbox">
+              <input type="checkbox" class="checkbox" id="switch-time" name="timeBlock">
+              <label for="switch-time"></label>
+            </span>
+          </div>
+          <div class="settings-block">
+            <p class="setting-date">Дата</p>
+            <span class="input-checkbox">
+              <input type="checkbox" class="checkbox" id="switch-date" name="dateBlock">
+              <label for="switch-date"></label>
+            </span>
+          </div>
+          <div class="settings-block">
+            <p class="setting-greeting">Приветствие</p>
+            <span class="input-checkbox">
+              <input type="checkbox" class="checkbox" id="switch-greeting" name="greetingBlock">
+              <label for="switch-greeting"></label>
+            </span>
+          </div>
+          <div class="settings-block">
+            <p class="setting-quotes">Цитаты</p>
+            <span class="input-checkbox">
+              <input type="checkbox" class="checkbox" id="switch-quote" name="quotesBlock">
+              <label for="switch-quote"></label>
+            </span>
+          </div>
+          <div class="settings-block">
+            <p class="setting-audio">Аудио плеер</p>
+            <span class="input-checkbox">
+              <input type="checkbox" class="checkbox" id="switch-audio" name="playerBlock">
+              <label for="switch-audio"></label>
+            </span>
+          </div>
+          <div class="settings-block">
+            <p class="setting-weather">Погода</p>
+            <span class="input-checkbox">
+              <input type="checkbox" class="checkbox" id="switch-weather" name="weatherBlock">
+              <label for="switch-weather"></label>
+            </span>
+          </div>
+          
+          <div class="settings-block">
+            <p class="setting-bg">Бэкграунд</p>
+            <div class="setting-bg-container">
+              <select class="switch-background" id="switch-background" name="backgroundBlock">
+                <option value="0">Github</option>
+                <option value="1">Unsplash API</option>
+                <option value="2">Flickr API</option>
+              </select>
+            </div>
+          </div>
+          <div class="settings-block bgThemeBlock disable-block">
+            <input type="text" placeholder="Введите тему" class="switch-background-theme" id="switch-bg-theme" name="backgroundTheme">
+            <button class="set-theme-button"></button>
+          </div>
+          </div>
+      </div>
+    </div>
+  </main>
+  <footer class="footer">
+    <div class="settings-wrapper">
+      <button class="settings-button"></button>
+    </div>
+    <div class="quote-wrapper">
+      <button class="change-quote"></button>
+      <div>
+        <div class="quote"></div>
+        <div class="author"></div>
+      </div>
+    </div>
+    <div class="social-wrapper">
+      <a class="social-item rs-logo" href="https://rs.school/js-stage0/" target="_blank">
+        <img src="./assets/svg/rs_school.svg" class="rs-logo" alt="RS School" width="80" height="30">
+      </a>
+      <a class="social-item" href="https://github.com/Olmeor" target="_blank">
+        <img src="./assets/svg/github.svg" alt="GitHub" width="40" height="40">
+      </a>
+    </div>
+  </footer>
+  <script type="module" src="js/index.js"></script>
+  <script type="module" src="js/script.js"></script>
+</body>
+</html>
