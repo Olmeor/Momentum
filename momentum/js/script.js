@@ -1,5 +1,5 @@
 // Translation
-console.log(3);
+console.log(0);
 
 let currentLang = localStorage.getItem('language') ?? 'en';
 const translation = {
@@ -532,11 +532,11 @@ let userSettings = {
 // let objChecked = JSON.parse(localStorage.getItem('settings')) ?? userSettings;
 
   if (String(localStorage.getItem('settings')) != 'null' && localStorage.getItem('settings')) {
-    console.log('хранилище')ж
+    console.log('хранилище');
     objChecked = JSON.parse(localStorage.getItem('settings'));
   } else {
     objChecked = userSettings;
-    console.log('юзер')
+    console.log('юзер');
   }
 
 function toggleSettingsMenu() {
