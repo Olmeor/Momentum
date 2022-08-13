@@ -76,7 +76,10 @@ function getLocalStorage() {
   if (localStorage.getItem('city')) {
     city.value = localStorage.getItem('city');
   }
-  objChecked = JSON.parse(localStorage.getItem('settings'));
+  if (localStorage.getItem('settings')) {
+    objChecked = JSON.parse(localStorage.getItem('settings'));
+  }
+//   objChecked = JSON.parse(localStorage.getItem('settings'));
   if (localStorage.getItem('theme')) {
     bgTheme.value = localStorage.getItem('theme');
   }
@@ -189,7 +192,7 @@ async function setBgUnsplash() {
   img.src = data.urls.raw + `&h=${screenHeight}`;
 
   img.onload = () => {
-      body.style.background = `url(${img.src})`;
+      body.style.background = `center/cover rgba(0, 0, 0, 0.5) url(${img.src})`;
   }
 }
 
@@ -204,7 +207,7 @@ async function setBgFlickr() {
   img.src = data.photos.photo[getRandomNum(100)].url_l;
 
   img.onload = () => {
-      body.style.background = `url(${img.src})`;
+      body.style.background = `center/cover rgba(0, 0, 0, 0.5) url(${img.src})`;
   }
 }
 
@@ -370,7 +373,7 @@ function playAudio() {
   setSoundName(playList[playNum].title);
 }
 
-function playChoosenAudio() {
+function playChosenAudio() {
   for (let i = 0; i < playListItem.length; i++) {        
     playListItem[i].addEventListener('click', function() {
       if (i == playNum && isPlay) {
@@ -428,7 +431,7 @@ function createPlayList() {
   });
   activeSong = document.querySelectorAll('.play-item');
   playListItem = document.querySelectorAll('.play-item-btn');
-  playChoosenAudio();
+  playChosenAudio();
 }
 
 function setSoundName(title) {
@@ -511,7 +514,7 @@ const greetingBlock = document.querySelector('.greeting-container');
 const quotesBlock = document.querySelector('.quote-wrapper');
 const playerBlock = document.querySelector('.player');
 const weatherBlock = document.querySelector('.weather');
-
+let objChecked;
 let userSettings = {
   languageButton: false,
   timeBlock: true,
@@ -522,7 +525,12 @@ let userSettings = {
   weatherBlock: true,
 }
 
-let objChecked = JSON.parse(localStorage.getItem('settings')) ?? userSettings;
+if (localStorage.getItem('settings')) {
+  objChecked = JSON.parse(localStorage.getItem('settings'));
+} else {
+  objChecked = userSettings;
+  localStorage.setItem('settings', JSON.stringify(objChecked));
+}
 
 function toggleSettingsMenu() {
   settingsForm.classList.toggle('settings-open');
@@ -530,7 +538,13 @@ function toggleSettingsMenu() {
 }
 
 function toggleSettings() {
+  // console.log(localStorage.getItem('settings'), 'тип', typeof(localStorage.getItem('settings')))
+  // console.log(objChecked, 'тип', typeof(objChecked));
   for (let key = 0; key < 7; key++) {
+    // console.log(mainForm[key].name);
+    // console.log("mainForm", mainForm[key].checked);
+    // console.log("objChecked", objChecked[mainForm[key].name]);
+    // console.log(mainForm[key].name, mainForm[key].checked, objChecked[mainForm[key].name]);
     if(mainForm[key].checked != objChecked[mainForm[key].name]) {
       objChecked[mainForm[key].name] = !objChecked[mainForm[key].name];
       toggleSettingBlock(mainForm[key].name);
@@ -578,12 +592,14 @@ function setSettingLang() {
 }
 
 function setCheckedSettings() {
+  // localStorage.setItem('settings', JSON.stringify(objChecked))
   for (let key = 0; key < 7; key++) {
     mainForm[key].checked = objChecked[mainForm[key].name];
     if (!mainForm[key].checked) {
       toggleSettingBlock(mainForm[key].name);
     }
   }
+  localStorage.setItem('settings', JSON.stringify(objChecked));
 }
 
 setCheckedSettings();
