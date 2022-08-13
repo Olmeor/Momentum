@@ -1,5 +1,5 @@
 // Translation
-console.log(0);
+console.log(1);
 
 let currentLang = localStorage.getItem('language') ?? 'en';
 const translation = {
@@ -79,7 +79,7 @@ function getLocalStorage() {
   }
   
   
-  if (localStorage.getItem('settings') != 'null' && localStorage.getItem('settings')) {
+  if (String(localStorage.getItem('settings')) != 'null' && localStorage.getItem('settings')) {
     objChecked = JSON.parse(localStorage.getItem('settings'));
   }
   
@@ -531,7 +531,7 @@ let userSettings = {
 
 // let objChecked = JSON.parse(localStorage.getItem('settings')) ?? userSettings;
 
-  if (localStorage.getItem('settings') != 'null' && localStorage.getItem('settings')) {
+  if (String(localStorage.getItem('settings')) != 'null' && localStorage.getItem('settings')) {
     objChecked = JSON.parse(localStorage.getItem('settings'));
   } else {
     objChecked = userSettings;
