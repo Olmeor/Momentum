@@ -79,7 +79,6 @@ function getLocalStorage() {
   if (localStorage.getItem('settings')) {
     objChecked = JSON.parse(localStorage.getItem('settings'));
   }
-//   objChecked = JSON.parse(localStorage.getItem('settings'));
   if (localStorage.getItem('theme')) {
     bgTheme.value = localStorage.getItem('theme');
   }
@@ -164,7 +163,7 @@ bgTheme.value = localStorage.getItem('theme') ?? timeOfDay;
 bgBlock.selectedIndex = bgLink;
 let keywords = timeOfDay;
 
-function getRandomNum(num = 20) { // num - количество картинок
+function getRandomNum(num = 20) {
   return Math.floor(Math.random() * num + 1);
 }
 
@@ -180,7 +179,6 @@ function setBgGithub() {
 
 async function setBgUnsplash() {
   keywords = (bgTheme.value) ? bgTheme.value : timeOfDay;
-  // keywords = ((bgTheme.value) ? bgTheme.value : timeOfDay).replace(/[^0-9a-zа-яё]/gi, ',');
   const img = new Image();
   const screenWidth = window.screen.availWidth;
   const screenHeight = window.screen.availHeight;
@@ -223,7 +221,6 @@ function getSlidePrev() {
 
 function toggleBackground() {
   bgLink = bgBlock.selectedIndex;
-  // console.log('выбран', bgLink, 'переключаю', bgBlock.options[bgBlock.selectedIndex].text); // проверка темы фона
   switch(bgLink) {
     case 0: //'Github': 
       setBgGithub();
@@ -249,12 +246,10 @@ slideNext.addEventListener('click', getSlideNext);
 slidePrev.addEventListener('click', getSlidePrev);
 
 bgBlock.addEventListener("change", (e) => {
-  // console.log('пип фон'); // проверка фона
   toggleBackground();
 })
 
 bgTheme.addEventListener("change", (e) => {
-  // console.log('пип тема фона'); // проверка темы фона
   toggleBackground();
 })
 
@@ -525,30 +520,16 @@ let userSettings = {
   weatherBlock: true,
 }
 
-if (localStorage.getItem('settings')) {
-  objChecked = JSON.parse(localStorage.getItem('settings'));
-} else {
-  objChecked = userSettings;
-  localStorage.setItem('settings', JSON.stringify(objChecked));
-}
-
 function toggleSettingsMenu() {
   settingsForm.classList.toggle('settings-open');
   settingsMenu.classList.toggle('settings-menu-shadow');
 }
 
 function toggleSettings() {
-  // console.log(localStorage.getItem('settings'), 'тип', typeof(localStorage.getItem('settings')))
-  // console.log(objChecked, 'тип', typeof(objChecked));
   for (let key = 0; key < 7; key++) {
-    // console.log(mainForm[key].name);
-    // console.log("mainForm", mainForm[key].checked);
-    // console.log("objChecked", objChecked[mainForm[key].name]);
-    // console.log(mainForm[key].name, mainForm[key].checked, objChecked[mainForm[key].name]);
     if(mainForm[key].checked != objChecked[mainForm[key].name]) {
       objChecked[mainForm[key].name] = !objChecked[mainForm[key].name];
       toggleSettingBlock(mainForm[key].name);
-      // console.log(mainForm[key].name, objChecked[mainForm[key].name]); проверка чеков настроек
     }
   }
 }
@@ -592,7 +573,15 @@ function setSettingLang() {
 }
 
 function setCheckedSettings() {
-  // localStorage.setItem('settings', JSON.stringify(objChecked))
+  if (localStorage.getItem('settings')== 'null' || localStorage.getItem('settings'== 'undefined')) {
+    localStorage.setItem('settings', JSON.stringify(userSettings))
+  }
+  if (localStorage.getItem('settings')) {
+    objChecked = JSON.parse(localStorage.getItem('settings'));
+  } else {
+    objChecked = userSettings;
+    localStorage.setItem('settings', JSON.stringify(objChecked));
+  }
   for (let key = 0; key < 7; key++) {
     mainForm[key].checked = objChecked[mainForm[key].name];
     if (!mainForm[key].checked) {
@@ -612,11 +601,9 @@ settingsMenu.addEventListener('click', (e) => {
   }
 })
 settingsForm.addEventListener("change", (e) => {
-  // console.log('пип настройки'); // проверка окна настроек
   toggleSettings();
 })
 
 // Import
 
 import playList from './playList.js';
-
