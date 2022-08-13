@@ -517,7 +517,7 @@ const greetingBlock = document.querySelector('.greeting-container');
 const quotesBlock = document.querySelector('.quote-wrapper');
 const playerBlock = document.querySelector('.player');
 const weatherBlock = document.querySelector('.weather');
-
+let objChecked;
 let userSettings = {
   languageButton: false,
   timeBlock: true,
