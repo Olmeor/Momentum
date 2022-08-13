@@ -573,7 +573,7 @@ function setSettingLang() {
 }
 
 function setCheckedSettings() {
-  if (localStorage.getItem('settings')== 'null' || localStorage.getItem('settings'== 'undefined')) {
+  if (localStorage.getItem('settings') == 'null' || localStorage.getItem('settings') == 'undefined') {
     localStorage.setItem('settings', JSON.stringify(userSettings))
   }
   if (localStorage.getItem('settings')) {
