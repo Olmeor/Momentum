@@ -76,6 +76,12 @@ function getLocalStorage() {
   if (localStorage.getItem('city')) {
     city.value = localStorage.getItem('city');
   }
+  
+  
+  if (localStorage.getItem('settings') != 'null' && localStorage.getItem('settings')) {
+    objChecked = JSON.parse(localStorage.getItem('settings'));
+  }
+  
   objChecked = JSON.parse(localStorage.getItem('settings'));
   if (localStorage.getItem('theme')) {
     bgTheme.value = localStorage.getItem('theme');
