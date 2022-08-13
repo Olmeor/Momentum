@@ -531,6 +531,9 @@ function toggleSettingsMenu() {
 
 function toggleSettings() {
   for (let key = 0; key < 7; key++) {
+    console.log(mainForm[key].name);
+    console.log("mainForm", mainForm[key].checked);
+    console.log("objChecked", objChecked[mainForm[key].name]);
     console.log(mainForm[key].name, mainForm[key].checked, objChecked[mainForm[key].name]);
     if(mainForm[key].checked != objChecked[mainForm[key].name]) {
       objChecked[mainForm[key].name] = !objChecked[mainForm[key].name];
