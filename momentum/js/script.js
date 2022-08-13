@@ -1,5 +1,5 @@
 // Translation
-console.log(0);
+console.log(1);
 
 let currentLang = localStorage.getItem('language') ?? 'en';
 const translation = {
@@ -525,7 +525,7 @@ let userSettings = {
   playerBlock: true,
   weatherBlock: true,
 }
-
+console.log(localStorage.getItem('settings'), typeof(localStorage.getItem('settings'));
 // localStorage.setItem('settings', JSON.stringify( userSettings));
 // let objChecked = JSON.parse(localStorage.getItem('settings')) ?? userSettings;
 
