@@ -1,5 +1,5 @@
 // Translation
-console.log(3);
+console.log(1);
 
 let currentLang = localStorage.getItem('language') ?? 'en';
 const translation = {
@@ -77,19 +77,10 @@ function getLocalStorage() {
   if (localStorage.getItem('city')) {
     city.value = localStorage.getItem('city');
   }
-  
-  objChecked = JSON.parse(localStorage.getItem('settings'));
-  /*
-  if (JSON.parse(localStorage.getItem('settings'))) {
+  if (localStorage.getItem('settings')) {
     objChecked = JSON.parse(localStorage.getItem('settings'));
   }
-  */
-  /*
-  if (String(localStorage.getItem('settings')) != 'null' && localStorage.getItem('settings')) {
-    objChecked = JSON.parse(localStorage.getItem('settings'));
-  }
-  */
-  objChecked = JSON.parse(localStorage.getItem('settings'));
+//   objChecked = JSON.parse(localStorage.getItem('settings'));
   if (localStorage.getItem('theme')) {
     bgTheme.value = localStorage.getItem('theme');
   }
@@ -534,7 +525,7 @@ let userSettings = {
   playerBlock: true,
   weatherBlock: true,
 }
-
+localStorage.setItem('settings', JSON.stringify(objChecked));
 // let objChecked = JSON.parse(localStorage.getItem('settings')) ?? userSettings;
 
   if (String(localStorage.getItem('settings')) != 'null' && localStorage.getItem('settings')) {
