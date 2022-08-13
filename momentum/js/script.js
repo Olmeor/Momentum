@@ -528,7 +528,12 @@ let userSettings = {
   weatherBlock: true,
 }
 
-let objChecked = JSON.parse(localStorage.getItem('settings')) ?? userSettings;
+// let objChecked = JSON.parse(localStorage.getItem('settings')) ?? userSettings;
+
+  if (localStorage.getItem('settings') != 'null' && localStorage.getItem('settings')) {
+    objChecked = JSON.parse(localStorage.getItem('settings'));
+  } else {
+    objChecked = userSettings;
 
 function toggleSettingsMenu() {
   settingsForm.classList.toggle('settings-open');
@@ -536,6 +541,8 @@ function toggleSettingsMenu() {
 }
 
 function toggleSettings() {
+  console.log(localStorage.getItem('settings'))
+  console.log(objChecked);
   for (let key = 0; key < 7; key++) {
     console.log(mainForm[key].name);
     console.log("mainForm", mainForm[key].checked);
