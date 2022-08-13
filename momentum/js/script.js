@@ -542,8 +542,8 @@ function toggleSettingsMenu() {
 }
 
 function toggleSettings() {
-  console.log(localStorage.getItem('settings'))
-  console.log(objChecked);
+  console.log(localStorage.getItem('settings'), 'тип', localStorage.getItem('settings'))
+  console.log(objChecked, 'тип', objChecked);
   for (let key = 0; key < 7; key++) {
     console.log(mainForm[key].name);
     console.log("mainForm", mainForm[key].checked);
