@@ -525,7 +525,7 @@ let userSettings = {
   playerBlock: true,
   weatherBlock: true,
 }
-console.log(localStorage.getItem('settings'), typeof(localStorage.getItem('settings'));
+console.log(localStorage.getItem('settings'), typeof(localStorage.getItem('settings')));
 // localStorage.setItem('settings', JSON.stringify( userSettings));
 // let objChecked = JSON.parse(localStorage.getItem('settings')) ?? userSettings;
 
