@@ -1,5 +1,5 @@
 // Translation
-console.log(0);
+console.log(3);
 
 let currentLang = localStorage.getItem('language') ?? 'en';
 const translation = {
@@ -78,11 +78,17 @@ function getLocalStorage() {
     city.value = localStorage.getItem('city');
   }
   
-  
+  objChecked = JSON.parse(localStorage.getItem('settings'));
+  /*
+  if (JSON.parse(localStorage.getItem('settings'))) {
+    objChecked = JSON.parse(localStorage.getItem('settings'));
+  }
+  */
+  /*
   if (String(localStorage.getItem('settings')) != 'null' && localStorage.getItem('settings')) {
     objChecked = JSON.parse(localStorage.getItem('settings'));
   }
-  
+  */
   objChecked = JSON.parse(localStorage.getItem('settings'));
   if (localStorage.getItem('theme')) {
     bgTheme.value = localStorage.getItem('theme');
@@ -537,6 +543,7 @@ let userSettings = {
   } else {
     objChecked = userSettings;
     console.log('юзер');
+    localStorage.setItem('settings', JSON.stringify(objChecked));
   }
 
 function toggleSettingsMenu() {
