@@ -534,6 +534,7 @@ let userSettings = {
     objChecked = JSON.parse(localStorage.getItem('settings'));
   } else {
     objChecked = userSettings;
+  }
 
 function toggleSettingsMenu() {
   settingsForm.classList.toggle('settings-open');
