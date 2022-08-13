@@ -189,7 +189,7 @@ async function setBgUnsplash() {
   img.src = data.urls.raw + `&h=${screenHeight}`;
 
   img.onload = () => {
-      body.style.background = `center / cover url(${img.src})`;
+      body.style.background = `url(${img.src})`;
   }
 }
 
@@ -204,7 +204,7 @@ async function setBgFlickr() {
   img.src = data.photos.photo[getRandomNum(100)].url_l;
 
   img.onload = () => {
-      body.style.background = `center / cover url(${img.src})`;
+      body.style.background = `url(${img.src})`;
   }
 }
 
