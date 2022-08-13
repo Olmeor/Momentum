@@ -1,5 +1,5 @@
 // Translation
-console.log(1);
+console.log(0);
 
 let currentLang = localStorage.getItem('language') ?? 'en';
 const translation = {
@@ -77,12 +77,10 @@ function getLocalStorage() {
   if (localStorage.getItem('city')) {
     city.value = localStorage.getItem('city');
   }
-  
-  if (JSON.parse(localStorage.getItem('settings'))) {
+  if (localStorage.getItem('settings')) {
     objChecked = JSON.parse(localStorage.getItem('settings'));
   }
-  // objChecked = JSON.parse(localStorage.getItem('settings'));
-  
+//   objChecked = JSON.parse(localStorage.getItem('settings'));
   if (localStorage.getItem('theme')) {
     bgTheme.value = localStorage.getItem('theme');
   }
@@ -528,9 +526,12 @@ let userSettings = {
   weatherBlock: true,
 }
 
-let objChecked = JSON.parse(localStorage.getItem('settings')) ?? userSettings;
+// localStorage.setItem('settings', JSON.stringify( userSettings));
+// let objChecked = JSON.parse(localStorage.getItem('settings')) ?? userSettings;
 
-if (String(localStorage.getItem('settings')) != 'null' && localStorage.getItem('settings')) {
+if (localStorage.getItem('settings') != 'null' &&
+    localStorage.getItem('settings') != 'undefine' && 
+    localStorage.getItem('settings')) {
   console.log('хранилище');
   objChecked = JSON.parse(localStorage.getItem('settings'));
 } else {
@@ -538,6 +539,7 @@ if (String(localStorage.getItem('settings')) != 'null' && localStorage.getItem('
   console.log('юзер');
   localStorage.setItem('settings', JSON.stringify(objChecked));
 }
+
 
 function toggleSettingsMenu() {
   settingsForm.classList.toggle('settings-open');
@@ -599,12 +601,14 @@ function setSettingLang() {
 }
 
 function setCheckedSettings() {
+  localStorage.setItem('settings', JSON.stringify(objChecked))
   for (let key = 0; key < 7; key++) {
     mainForm[key].checked = objChecked[mainForm[key].name];
     if (!mainForm[key].checked) {
       toggleSettingBlock(mainForm[key].name);
     }
   }
+  localStorage.setItem('settings', JSON.stringify(objChecked));
 }
 
 setCheckedSettings();
@@ -624,3 +628,4 @@ settingsForm.addEventListener("change", (e) => {
 // Import
 
 import playList from './playList.js';
+
