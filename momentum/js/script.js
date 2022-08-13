@@ -1,4 +1,5 @@
 // Translation
+console.log(0);
 
 let currentLang = localStorage.getItem('language') ?? 'en';
 const translation = {
@@ -542,8 +543,8 @@ function toggleSettingsMenu() {
 }
 
 function toggleSettings() {
-  console.log(localStorage.getItem('settings'), 'тип', localStorage.getItem('settings'))
-  console.log(objChecked, 'тип', objChecked);
+  console.log(localStorage.getItem('settings'), 'тип', typeof(localStorage.getItem('settings')))
+  console.log(objChecked, 'тип', typeof(objChecked));
   for (let key = 0; key < 7; key++) {
     console.log(mainForm[key].name);
     console.log("mainForm", mainForm[key].checked);
