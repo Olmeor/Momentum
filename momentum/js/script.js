@@ -92,10 +92,8 @@ window.addEventListener('load', getLocalStorage);
 
 // Clock and calendar
 
-const time = document.querySelector('.time');
-const date = document.querySelector('.date');
-
 function showTime() {
+  const time = document.querySelector('.time');
   let date = new Date();
   const currentTime = date.toLocaleTimeString();
   time.textContent = currentTime;
@@ -105,6 +103,7 @@ function showTime() {
 }
 
 function showDate() {
+  const date = document.querySelector('.date');
   let dateValue = new Date();
   const options = {weekday: 'long', month: 'long', day: 'numeric', /* year: 'numeric', hour: 'numeric', minute: 'numeric', timeZone: 'UTC'*/};
   const currentDate = dateValue.toLocaleDateString(translation[currentLang].dataLanguage, options);
