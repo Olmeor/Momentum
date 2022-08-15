@@ -500,6 +500,11 @@ body {
   border: 0;
   opacity: 0.8;
   transition: all 0.3s ease;
+  z-index: 10;
+}
+
+.social-item {
+  z-index: 10;
 }
 
 .settings-button:hover {
@@ -737,6 +742,7 @@ input + .toggle-lang::after {
     position: absolute;
     padding-bottom: 40px;
     width: calc(100% - 40px);
+    z-index: 0;
   }
 	.quote {
 		margin-bottom: 20px;
