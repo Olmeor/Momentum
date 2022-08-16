@@ -1,6 +1,9 @@
-// Local Storage
-/*
-function setLocalStorage() {
+import { forename } from "./script.js";
+import { city } from "./script.js";
+import { objChecked } from "./script.js";
+
+
+export function setLocalStorage() {
   localStorage.setItem('name', forename.value);
   if (city.value != translation[currentLang].defaultCity) {
     localStorage.setItem('city', city.value);
@@ -10,7 +13,7 @@ function setLocalStorage() {
   localStorage.setItem('bgApi', bgBlock.selectedIndex);
 }
 
-function getLocalStorage() {
+export function getLocalStorage() {
   if (localStorage.getItem('name')) {
     forename.value = localStorage.getItem('name');
   }
@@ -27,45 +30,3 @@ function getLocalStorage() {
     bgBlock.selectedIndex = localStorage.getItem('bgApi');
   }
 }
-*/
-
-// window.addEventListener('beforeunload', setLocalStorage);
-// window.addEventListener('load', getLocalStorage);
-
-// Clock and calendar
-
-import showTime from './time.js';
-showTime();
-
-import showDate from './date.js';
-showDate();
-
-// Greeting and name
-
-import {initGreeting, getTimeOfDay} from './greeting.js';
-initGreeting();
-
-// Background slider
-
-import initSlider from './slider.js';
-initSlider();
-
-// Weather
-
-import { initWeather } from './weather.js';
-initWeather();
-
-// Quotes
-
-// import getQuotes from './quotes.js';
-// getQuotes();
-
-// Audio Player
-
-import initAudio from './player.js';
-initAudio();
-
-// Settings
-
-import initSettings from './settings.js';
-initSettings();
