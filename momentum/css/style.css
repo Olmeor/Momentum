@@ -700,6 +700,22 @@ input + .toggle-lang::after {
   transition: .3s;
 }
 
+@media (max-width: 991px) {
+
+  .header {
+    height: 45vh;
+  }
+
+  .main {
+    height: 25vh;
+  }
+
+  .time,
+  .date {
+    margin-bottom: 0;
+  }
+}
+
 @media (max-width: 768px) {
 
   .player,
@@ -755,6 +771,7 @@ input + .toggle-lang::after {
 		padding: 5px;
 		box-sizing: border-box;
 		align-self: stretch;
+    flex: none;
 	}
 
 
