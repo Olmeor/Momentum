@@ -5,7 +5,6 @@ const quoteAuthor = document.querySelector('.author');
 const quoteButton = document.querySelector('.change-quote');
 
 async function changeQuotes() {
-  console.log(currentLang);
   const quotes = `./assets/quotes/quotes-${currentLang}.json`;
   const res = await fetch(quotes);
   const data = await res.json();
