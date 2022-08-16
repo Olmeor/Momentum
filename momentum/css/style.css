@@ -702,6 +702,14 @@ input + .toggle-lang::after {
 
 @media (max-width: 768px) {
 
+  .header {
+    height: 37vh;
+  }
+
+  .main {
+    height: 33vh;
+  }
+
   .player,
   .weather {
 		width: 140px;
@@ -725,8 +733,12 @@ input + .toggle-lang::after {
 	.time {
 		min-height: 80px;
 		font-size: 70px;
+    margin-bottom: 0;
 	}
 
+  .date {
+    margin-bottom: 0;
+  }
 	.greeting-container {
 		width: 100%;
 		flex-direction: column;
