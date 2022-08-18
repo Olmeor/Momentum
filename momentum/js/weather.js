@@ -25,6 +25,7 @@ export async function getWeather() {
   const weatherWind = document.querySelector('.wind');
   const weatherHumidity = document.querySelector('.humidity');
   const weatherError = document.querySelector('.weather-error');
+  localStorage.setItem('city', city.value);
 
   try {
     const url = `https://api.openweathermap.org/data/2.5/weather?q=${city.value}&lang=${currentLang}&appid=7153241524dddce83603c2b94a1ad19c&units=metric`;

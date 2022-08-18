@@ -55,6 +55,7 @@ body {
   width: 200px;
   position: relative;
   transition: .3s;
+  user-select: none;
 }
 
 .player::before,
@@ -320,6 +321,7 @@ body {
   position: relative;
   opacity: .8;
   transition: .3s;
+  user-select: none;
 }
 
 .weather-error {
@@ -394,6 +396,7 @@ body {
   font-size: 100px;
   letter-spacing: -4px;
   transition: .3s;
+  user-select: none;
 }
 
 .date {
@@ -401,6 +404,7 @@ body {
   font-size: 24px;
   margin-bottom: 20px;
   transition: .3s;
+  user-select: none;
 }
 
 .greeting-container {
@@ -418,6 +422,7 @@ body {
   flex: 1;  
   padding: 10px;
   text-align: right;
+  user-select: none;
 }
 
 .name {
@@ -454,6 +459,7 @@ body {
 .quote-wrapper {
   display: block;
   transition: .3s;
+  user-select: none;
 }
 
 .change-quote {
@@ -508,6 +514,28 @@ body {
   opacity: 1;
 }
 
+.todo-button {
+  background-image: url("../assets/svg/todo.svg");
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-color: transparent;
+  width: 30px;
+  height: 30px;
+  border: 0;
+  opacity: 0.8;
+  transition: all 0.3s ease;
+  z-index: 10;
+}
+
+.todo-button:hover {
+  opacity: 1;
+
+}
+
+.todo-button:active {
+  transform: scale(1.3);
+}
+
 .social-item {
   z-index: 9;
 }
@@ -517,6 +545,7 @@ body {
   background-size: 80px 30px;
   width: 80px;
   height: 30px;
+  opacity: 0.8;
   z-index: 10;
 }
 
@@ -526,6 +555,7 @@ body {
   background-repeat: no-repeat;
   width: 40px;
   height: 40px;
+  opacity: 0.8;
   z-index: 10;
 }
 
@@ -926,3 +956,63 @@ input + .toggle-lang::after {
     width: 120px;
   }
 }
+
+.todo {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  max-width: 390px;
+  margin: 15px auto;
+  position: fixed;
+  transition: .3s;
+  position: fixed;
+	right: 30px;
+	bottom: 80px;
+	z-index: 3;
+}
+
+.todo-close {
+  right: -400px;
+}
+
+.todo-content {
+  padding: 20px;
+  background-color: #00000070;
+  border-radius: 20px;
+}
+
+.todo__input {
+  position: relative;
+}
+
+.todo__text {
+  width: 225px;
+  padding: 6px 34px 6px 10px;
+  font-size: inherit;
+  font-family: inherit;
+  line-height: inherit;
+  border: 1px solid #e0e0e0;
+  border-radius: 4px;
+  outline: none;
+}
+
+.todo__text:focus {
+  border-color: #dcedc8;
+}
+
+.todo__add {
+  position: absolute;
+  top: 50%;
+  right: 5px;
+  width: 26px;
+  height: 26px;
+  background-color: #8bc34a;
+  transform: translateY(-50%);
+  cursor: pointer;
+  transition: background-color 0.15s ease-in;
+}
+
+.todo__add:hover {
+  background-color: #689f38;
+}
+

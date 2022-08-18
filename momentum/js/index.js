@@ -42,3 +42,14 @@ initAudio();
 
 import initSettings from './settings.js';
 initSettings();
+
+const todoMenu = document.querySelector('.todo');
+const todoButton = document.querySelector('.todo-button');
+
+function toggleTodoMenu() {
+  todoMenu.classList.toggle('todo-close'); //disable-block
+  // settingsMenu.classList.toggle('settings-menu-shadow');
+}
+
+todoButton.addEventListener('click', toggleTodoMenu);
+
