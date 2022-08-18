@@ -1,6 +1,6 @@
-import { forename } from "./script.js";
-import { city } from "./script.js";
-import { objChecked } from "./script.js";
+import { forename } from "./index.js";
+import { city } from "./index.js";
+import { objChecked } from "./index.js";
 
 
 export function setLocalStorage() {
