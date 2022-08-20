@@ -1006,6 +1006,14 @@ input + .toggle-lang::after {
   font-size: 22px;
   text-align: left;
   user-select: none;
+  border: 0;
+	border-radius: 20px;
+	box-sizing: border-box;
+	outline: none;
+  /* padding-left: 10px; */
+  background-color: #333;
+  color: #fff;
+  opacity: .8;
 }
 
 .todo-close-button {

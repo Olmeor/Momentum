@@ -28,7 +28,9 @@ export const translation = {
     audioPlayer: "Audio player",
     background: "Background",
     bgPlaceholder: "Enter the theme",
-    todoList: "ToDo List",
+    todoActive: "Active",
+    todoCompleted: "Completed",
+    todoDeleted: "Deleted",
     todoPlaceholder: "New todo",
   },
   ru: {
@@ -52,7 +54,9 @@ export const translation = {
     audioPlayer: "Аудио плеер",
     background: "Фон",
     bgPlaceholder: "Введите тему",
-    todoList: "Список дел",
+    todoActive: "Список дел",
+    todoCompleted: "Завершенные",
+    todoDeleted: "Удаленные",
     todoPlaceholder: "Новая задача",
   },
 };
