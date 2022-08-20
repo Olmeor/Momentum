@@ -2,6 +2,7 @@ import getQuotes from './quotes.js';
 import { getWeather, setCity } from "./weather.js";
 import { setPlaceholder } from "./greeting.js";
 import { setBgPlaceholder } from "./slider.js";
+import { setTodoLang } from './todo.js';
 
 export let currentLang = localStorage.getItem('language') ?? 'en';
 
@@ -27,6 +28,8 @@ export const translation = {
     audioPlayer: "Audio player",
     background: "Background",
     bgPlaceholder: "Enter the theme",
+    todoList: "ToDo List",
+    todoPlaceholder: "New todo",
   },
   ru: {
     placeholder: "[Введите имя]",
@@ -49,6 +52,8 @@ export const translation = {
     audioPlayer: "Аудио плеер",
     background: "Фон",
     bgPlaceholder: "Введите тему",
+    todoList: "Список дел",
+    todoPlaceholder: "Новая задача",
   },
 };
 
@@ -59,4 +64,5 @@ export function translate() {
   setPlaceholder();
   setCity();
   setBgPlaceholder();
+  setTodoLang();
 }

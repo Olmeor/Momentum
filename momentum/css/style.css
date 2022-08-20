@@ -988,10 +988,11 @@ input + .toggle-lang::after {
   background-color: #333;
   border-radius: 10px;
   width: 390px;
-  height: 280px;
+  max-height: 256px;
   min-height: 100%;
   display: flex;
   flex-direction: column;
+  gap: 10px;
 }
 
 .todo-input-wrapper,
@@ -1005,7 +1006,6 @@ input + .toggle-lang::after {
   font-size: 22px;
   text-align: left;
   user-select: none;
-  margin-bottom: 10px;
 }
 
 .todo-close-button {
@@ -1024,7 +1024,24 @@ input + .toggle-lang::after {
   flex: 1 1 auto;
   text-align: left;
   /* height: auto; */
-  font-size: 18px
+  min-height: 50px;
+  font-size: 18px;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+.todo-list::-webkit-scrollbar {
+  width: 6px;
+}
+
+.todo-list::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.5);
+  border-radius: 3px;
+}
+
+.todo-list::-webkit-scrollbar-thumb {
+  background-color: white;
+  border-radius: 20px;
 }
 
 .todo-input-wrapper {
@@ -1041,18 +1058,13 @@ input + .toggle-lang::after {
   background-color: transparent;
 }
 
-/* .todo-input::placeholder {
-  opacity: .6;
-} */
-
 .todo-item {
   display: flex;
   align-items: baseline;
   justify-content: space-between;
-  padding: 5px;
+  padding: 5px 10px 5px 0;
   opacity: 1;
   transition: .3s;
-  /* cursor: pointer; */
   gap: 5px;
   overflow-wrap: break-word;
 }
