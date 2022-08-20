@@ -9,6 +9,7 @@ const todoList = document.querySelector('.todo-list');
 const todoHeader = document.querySelector('.todo-header');
 let editId = false;
 let todos = JSON.parse(localStorage.getItem('todos')) ?? [];
+const todoStatus = ['active', 'completed', 'deleted'];
 
 function toggleTodoMenu() {
   todoMenu.classList.toggle('todo-close');
@@ -90,7 +91,7 @@ function renderTodo() {
   let todoItem = '';
 
   todos.forEach(todo => {
-    if (todoHeader.options[todoHeader.selectedIndex].text.toLowerCase() == todo.status) {
+      if (todoStatus[todoHeader.selectedIndex] == todo.status) {  
       todoItem += `
         <div class="todo-item">
           <input id="${todo.id}" type="checkbox" class="todoCheckbox" value="active">
