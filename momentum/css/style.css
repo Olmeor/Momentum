@@ -618,7 +618,8 @@ body {
   cursor: pointer;
 }
 
-.set-theme-button {
+.set-theme-button,
+.todo-input-button {
   width: 20px;
   height: 20px;
   border-radius: 10px;
@@ -628,11 +629,16 @@ body {
   opacity: .8;
 }
 
-.set-theme-button:hover {
+.todo-input-button {
+  padding-bottom: 4px;
+}
+.set-theme-button:hover,
+.todo-input-button:hover {
   opacity: 1;
 }
 
-.set-theme-button:active {
+.set-theme-button:active,
+.todo-input-button:active {
   border: 0;
   outline: 0;  
   transform: scale(1.3);
@@ -647,7 +653,8 @@ body {
 
 /* label */
 
-input[type="checkbox"] {
+/* input[type="checkbox"] { */
+.checkbox {
 	height: 0;
 	width: 0;
 	visibility: hidden;
@@ -685,7 +692,6 @@ input:checked + label {
 
 input + .toggle-lang {
 	border-radius: 0;
-  /* width: 30px; */
   height: 27px;
 	background: url("../assets/svg/united-kingdom-flag-icon.svg");
 }
@@ -957,18 +963,20 @@ input + .toggle-lang::after {
   }
 }
 
-.todo {
-  display: flex;
+/* Todo */
+
+.todo-wrapper {
+  /* display: flex;
   flex-wrap: wrap;
-  justify-content: space-between;
+  justify-content: space-between; */
   max-width: 390px;
-  margin: 15px auto;
   position: fixed;
   transition: .3s;
   position: fixed;
 	right: 30px;
 	bottom: 80px;
 	z-index: 3;
+
 }
 
 .todo-close {
@@ -977,42 +985,142 @@ input + .toggle-lang::after {
 
 .todo-content {
   padding: 20px;
-  background-color: #00000070;
-  border-radius: 20px;
+  background-color: #333;
+  border-radius: 10px;
+  width: 390px;
+  height: 280px;
+  min-height: 100%;
+  display: flex;
+  flex-direction: column;
 }
 
-.todo__input {
-  position: relative;
+.todo-input-wrapper,
+.todo-header-wrapper {
+  display: flex;
+  justify-content: space-between;
+
 }
 
-.todo__text {
-  width: 225px;
-  padding: 6px 34px 6px 10px;
-  font-size: inherit;
-  font-family: inherit;
-  line-height: inherit;
-  border: 1px solid #e0e0e0;
-  border-radius: 4px;
+.todo-header {
+  font-size: 22px;
+  text-align: left;
+  user-select: none;
+  margin-bottom: 10px;
+}
+
+.todo-close-button {
+  width: 22px;
+  height: 22px;
+  border: 0;
+  background: url("../assets/svg/close-todo.svg");
+  background-size: 22px 22px;
+}
+
+.todo-close-button:hover {
+  transform: scale(1.2);
+}
+
+.todo-list {
+  flex: 1 1 auto;
+  text-align: left;
+  /* height: auto; */
+  font-size: 18px
+}
+
+.todo-input-wrapper {
+  text-align: left;
+}
+
+.todo-input {
+  width: 80%;
+  height: 20px;
+  font-size: 20px;
+  color: #fff;
+  border: 0;
+  outline: 0;
+  background-color: transparent;
+}
+
+/* .todo-input::placeholder {
+  opacity: .6;
+} */
+
+.todo-item {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  padding: 5px;
+  opacity: 1;
+  transition: .3s;
+  /* cursor: pointer; */
+  gap: 5px;
+  overflow-wrap: break-word;
+}
+
+.todo-item>span {
+  display: block;
+  width: 250px;
   outline: none;
 }
 
-.todo__text:focus {
-  border-color: #dcedc8;
+.userTodo-done {
+  text-decoration: line-through;
+  opacity: .6;
 }
 
-.todo__add {
-  position: absolute;
-  top: 50%;
-  right: 5px;
-  width: 26px;
-  height: 26px;
-  background-color: #8bc34a;
-  transform: translateY(-50%);
+.todo-item-done,
+.todo-item-delete,
+.todo-item-edit {
+  padding-right: 10px;
   cursor: pointer;
-  transition: background-color 0.15s ease-in;
+  transition: all .3s;
+  opacity: 0.7;
 }
 
-.todo__add:hover {
-  background-color: #689f38;
+.todoCheckbox {
+  position: relative;
+  top:3px;
+  width: 20px;
+  height: 20px;
+  background-size: 20px 20px;
 }
+
+.todo-item-done,
+.todo-item-delete,
+.todo-item-edit {
+  position: relative;
+  top:3px;
+  width: 20px;
+  height: 20px;
+  background-size: 20px 20px;
+  border: 0;
+  outline: 0;
+  background-color: #333;
+}
+
+.todo-item-done {
+  background-image: url(../assets/svg/done.svg);
+}
+
+.todo-item-edit {
+  background-image: url(../assets/svg/edit.svg);
+}
+
+.todo-item-delete {
+  background-image: url(../assets/svg/delete.svg);
+}
+
+.todo-item-done:hover,
+.todo-item-delete:hover,
+.todo-item-edit:hover {
+  transform: scale(1.2);
+}
+
+.todo-item-done:active,
+.todo-item-delete:active,
+.todo-item-edit:active {
+  transform: scale(1.2);
+  opacity: 1;
+}
+
 
