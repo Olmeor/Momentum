@@ -5,5 +5,12 @@
     "ayif",
     "Pnao",
     "todos"
+  ],
+  "liveServer.settings.ignoreFiles": [
+  
+    ".vscode/**",
+    "**/*.scss",
+    "**/*.sass",
+    "**/*.ts"
   ]
 }

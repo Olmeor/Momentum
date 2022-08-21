@@ -25,8 +25,8 @@ initSlider();
 
 // Weather
 
-import initWeather from './weather.js';
-initWeather();
+// import initWeather from './weather.js';
+// initWeather();
 
 // Quotes
 

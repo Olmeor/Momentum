@@ -25,24 +25,20 @@ export async function getWeather() {
   const weatherWind = document.querySelector('.wind');
   const weatherHumidity = document.querySelector('.humidity');
   const weatherError = document.querySelector('.weather-error');
-  localStorage.setItem('city', city.value);
+  const url = `https://api.openweathermap.org/data/2.5/weather?q=${city.value}&lang=${currentLang}&appid=7153241524dddce83603c2b94a1ad19c&units=metric`;
+  const res = await fetch(url);
+  const data = await res.json();
 
   try {
-    const url = `https://api.openweathermap.org/data/2.5/weather?q=${city.value}&lang=${currentLang}&appid=7153241524dddce83603c2b94a1ad19c&units=metric`;
-    const res = await fetch(url);
-    const data = await res.json();
-    weatherError.textContent = ``;
+    if (weatherError) weatherError.textContent = ``;
     weatherIcon.className = 'weather-icon owf';
     weatherIcon.classList.add(`owf-${data.weather[0].id}`);
     weatherTemperature.textContent = `${translation[currentLang].temperature}: ${Math.round(data.main.temp)}°C`;
     weatherWind.textContent = `${translation[currentLang].windSpeed}: ${Math.round(data.wind.speed)} ${translation[currentLang].windSpeedUnit}`;
     weatherHumidity.textContent = `${translation[currentLang].humidity}: ${Math.round(data.main.humidity)}%`;
     weatherDescription.textContent = data.weather[0].description;
-  } catch {
-    const url = `https://api.openweathermap.org/data/2.5/weather?q=${city.value}&lang=${currentLang}&appid=7153241524dddce83603c2b94a1ad19c&units=metric`;
-    const res = await fetch(url);
-    const data = await res.json();
-    weatherIcon.className = '';
+  } catch /*(e) */{
+    weatherIcon.textContent = '';
     weatherTemperature.textContent = ``;
     weatherWind.textContent = ``;
     weatherHumidity.textContent = ``;
@@ -51,14 +47,17 @@ export async function getWeather() {
       weatherError.textContent = `Error! City not found!`;
     } else if (data.cod == 400) {
       weatherError.textContent = `Nothing to geocode!`;
+    // } else {
+      // throw e;
+      // console.error(e);
     }
   }
-  window.addEventListener('beforeunload', setLocalStorage);
-  window.addEventListener('load', getLocalStorage);
 }
 
+city.addEventListener('change', getWeather);
+window.addEventListener('beforeunload', setLocalStorage);
+window.addEventListener('load', getLocalStorage);
 export default function initWeather() {
   setCity();
   getWeather();
-  city.addEventListener('change', getWeather);
 }

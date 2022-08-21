@@ -1,5 +1,5 @@
 import getQuotes from './quotes.js';
-import initWeather from './weather.js';
+import { getWeather, setCity } from "./weather.js";
 import { setPlaceholder } from "./greeting.js";
 import { setBgPlaceholder } from "./slider.js";
 import { setTodoLang } from './todo.js';
@@ -64,8 +64,9 @@ export const translation = {
 export function translate() {
   (currentLang == 'en') ? currentLang = 'ru' : currentLang = 'en';
   getQuotes();
-  initWeather();
   setPlaceholder();
   setBgPlaceholder();
   setTodoLang();
+  setCity();
+  getWeather();
 }
