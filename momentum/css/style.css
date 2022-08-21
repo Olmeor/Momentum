@@ -1008,11 +1008,14 @@ input + .toggle-lang::after {
 	border-radius: 20px;
 	box-sizing: border-box;
 	outline: none;
-  /* padding-left: 10px; */
-  background-color: #101010;
+  background-color: #00000000;
   color: #fff;
   opacity: .8;
   padding-left: 10px;
+}
+
+.todo-header-list {
+  background-color: #101010;
 }
 
 .todo-close-button {
