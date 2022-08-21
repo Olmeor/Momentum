@@ -626,11 +626,11 @@ body {
   border: 0;
   background: url("../assets/svg/set-theme.svg");
   background-size: 20px 20px;
-  opacity: .8;
 }
 
 .todo-input-button {
   padding-bottom: 4px;
+  opacity: .8;
 }
 .set-theme-button:hover,
 .todo-input-button:hover {
@@ -966,9 +966,7 @@ input + .toggle-lang::after {
 /* Todo */
 
 .todo-wrapper {
-  /* display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between; */
+
   max-width: 390px;
   position: fixed;
   transition: .3s;
@@ -985,7 +983,7 @@ input + .toggle-lang::after {
 
 .todo-content {
   padding: 20px;
-  background-color: #333;
+  background-color: #00000090;
   border-radius: 10px;
   width: 390px;
   max-height: 256px;
@@ -1011,9 +1009,10 @@ input + .toggle-lang::after {
 	box-sizing: border-box;
 	outline: none;
   /* padding-left: 10px; */
-  background-color: #333;
+  background-color: #101010;
   color: #fff;
   opacity: .8;
+  padding-left: 10px;
 }
 
 .todo-close-button {
@@ -1064,6 +1063,7 @@ input + .toggle-lang::after {
   border: 0;
   outline: 0;
   background-color: transparent;
+  padding-left: 10px;
 }
 
 .todo-item {
@@ -1115,7 +1115,7 @@ input + .toggle-lang::after {
   background-size: 20px 20px;
   border: 0;
   outline: 0;
-  background-color: #333;
+  background-color: #00000090;
 }
 
 .todo-item-done {

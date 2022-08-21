@@ -57,7 +57,7 @@ export async function getWeather() {
   window.addEventListener('load', getLocalStorage);
 }
 
-export function initWeather() {
+export default function initWeather() {
   setCity();
   getWeather();
   city.addEventListener('change', getWeather);
