@@ -1,5 +1,5 @@
-import '../css/owfont-regular.css'
-import '../css/style.css'
+// import '../css/owfont-regular.css'
+// import '../css/style.css'
 
 // Translate
 

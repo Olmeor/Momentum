@@ -24,6 +24,7 @@ let userSettings = {
 
 function toggleSettingsMenu() {
   settingsForm.classList.toggle('settings-open');
+  settingsForm.classList.toggle('hidden-block');
   settingsMenu.classList.toggle('settings-menu-shadow');
 }
 

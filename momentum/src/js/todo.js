@@ -7,12 +7,13 @@ const todoInputButton = document.querySelector('.todo-input-button');
 const todoInput = document.querySelector('.todo-input');
 const todoList = document.querySelector('.todo-list');
 const todoHeader = document.querySelector('.todo-header');
-let editId = false;
+let editId = 'false';
 let todos = JSON.parse(localStorage.getItem('todos')) ?? [];
 const todoStatus = ['active', 'completed', 'deleted'];
 
 function toggleTodoMenu() {
   todoMenu.classList.toggle('todo-close');
+  todoMenu.classList.toggle('hidden-block');
 }
 
 todoButton.addEventListener('click', toggleTodoMenu);
@@ -36,12 +37,18 @@ function checkKeypressEnter(event) {
 }
 
 function addTodo() {
-  if (editId) {
+  if (editId != 'false' && todos[editId].text == todoInput.value) {
+    todos.splice(editId, 1);
+    editId = 'false';
+  }
+
+  if (editId != 'false') {
     todos[editId].text = todoInput.value;
-    editId = false;
+    editId = 'false';
     renderTodo();
     return;
   }
+
   const text = todoInput.value;
   const todo = {
     text,
@@ -80,6 +87,7 @@ function editTodo(id) {
     if (todos[i].id === id) {
       editId = i;
       todoInput.value = todos[i].text;
+      todos[i].status = 'active';
       todoInput.focus();
       return;
     }
@@ -94,11 +102,13 @@ function renderTodo() {
       if (todoStatus[todoHeader.selectedIndex] == todo.status) {  
       todoItem += `
         <div class="todo-item">
-          <input id="${todo.id}" type="checkbox" class="todoCheckbox" value="active">
-          <span class="userTodo" contentEditable="false">${todo.text}</span>
-          <button class="todo-item-done"></button>
-          <button class="todo-item-edit"></button>
-          <button  class="todo-item-delete"></button>
+          <input id="${todo.id}" type="checkbox" class="todoCheckbox disable-block" value="active">
+          <span class="todo-text" contentEditable="false">${todo.text}</span>
+          <div class="todo-buttons-wrapper">
+            <button class="todo-item-done"></button>
+            <button class="todo-item-edit"></button>
+            <button  class="todo-item-delete"></button>
+          </div>
         </div>
       `;
     }
@@ -116,17 +126,17 @@ todoHeader.addEventListener('change', (event) => {
 
 todoList.addEventListener('click', (event) => {
   if (event.target.classList.contains("todo-item-delete")) {
-    const id = event.target.parentNode.firstElementChild.id;
+    const id = event.target.parentNode.parentNode.firstElementChild.id;
     deleteTodo(id);
   }
 
   if (event.target.classList.contains("todo-item-done")) {
-    const id = event.target.parentNode.firstElementChild.id;
+    const id = event.target.parentNode.parentNode.firstElementChild.id;
     completeTodo(id);
   }
 
   if (event.target.classList.contains("todo-item-edit")) {
-    const id = event.target.parentNode.firstElementChild.id;
+    const id = event.target.parentNode.parentNode.firstElementChild.id;
     editTodo(id);
   }
 })
