@@ -5,7 +5,7 @@ const time = document.querySelector('.time');
 
 function showTime() {
   let date = new Date();
-  const currentTime = date.toLocaleTimeString();
+  const currentTime = date.toLocaleTimeString('en-GB');
   time.textContent = currentTime;
   setTimeout(showTime, 1000);
   setTimeout(showDate, 1000);
