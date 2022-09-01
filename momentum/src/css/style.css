@@ -118,6 +118,15 @@ body {
   cursor: pointer;
 }
 
+.play-item-text {
+  width: 165px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+}
+
 .play-item:hover {
   opacity: 1;
 }
@@ -344,6 +353,7 @@ body {
 .weather-wind,
 .weather-humidity {
   display: flex;
+  margin-right: -10px;
 }
 
 .city {
@@ -978,6 +988,10 @@ input + .toggle-lang::after {
     width: 140px;
   }
 
+  .play-item-text {
+    width: 105px;
+  }
+
   .vol-controls {
     width: 140px;
   }
@@ -1107,7 +1121,7 @@ input + .toggle-lang::after {
   }
 
   .footer {
-    height: 30vh;
+    height: 32vh;
   }
 
   .time,
@@ -1152,6 +1166,10 @@ input + .toggle-lang::after {
     width: 110px;
     overflow: hidden;
     padding-right: 0;
+  }
+
+  .play-item-text {
+    width: 90px;
   }
 
   .vol-controls {

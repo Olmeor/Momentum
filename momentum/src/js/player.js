@@ -92,7 +92,10 @@ function createPlayList() {
   playList.forEach(song => {
     const li = document.createElement('li');
     li.classList.add('play-item');
-    li.textContent = song.title;
+    const text = document.createElement('span');
+    text.classList.add('play-item-text');
+    li.append(text);
+    text.textContent = song.title;
     audioPlayList.append(li);
     const item = document.createElement('span');
     item.classList.add('play');
